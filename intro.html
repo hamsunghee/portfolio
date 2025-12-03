@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio Intro — Mixed (No Curtains)</title>
+  <style>
+    /* Reset & base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      font-family: 'Playfair Display', serif;
+      overflow: hidden;
+      background: #000;
+      cursor: default;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      color: white;
+    }
+
+    button {
+      outline: none;
+      background: none;
+      border: none;
+    }
+
+    /* INTRO */
+    .intro-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: url('img/blur_img.png') no-repeat center center fixed;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 1s ease;
+      z-index: 10;
+    }
+
+    .intro-screen.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* 아나글리프 텍스트 */
+    .anaglyph-text {
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: #fff;
+      position: relative;
+      text-align: center;
+      transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+      line-height: 1.1;
+      margin-bottom: 0.2em;
+    }
+
+    .anaglyph-text.blurred {
+      text-shadow:
+        -4px 0 0 rgba(255, 0, 0, 0.8),
+        4px 0 0 rgba(0, 255, 255, 0.8),
+        -6px 0 10px rgba(255, 0, 0, 0.4),
+        6px 0 10px rgba(0, 255, 255, 0.4);
+      filter: blur(2px);
+    }
+
+    .anaglyph-text.focused {
+      text-shadow: none;
+      filter: blur(0);
+      background: #fff;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      color: rgba(255, 255, 255, 0.6);
+      transition: all 1.5s ease;
+    }
+
+    .subtitle.blurred {
+      filter: blur(3px);
+      opacity: 0.3;
+    }
+
+    .subtitle.focused {
+      filter: blur(0);
+      opacity: 1;
+      color: #fff;
+      margin-bottom: 3rem;
+    }
+
+    /* 3D glasses button */
+    .glasses-container {
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+      margin-bottom: 2rem;
+    }
+
+    .glasses-container:focus {
+      transform: scale(1.05);
+
+    }
+
+    .glasses-icon {
+      width: 120px;
+      height: auto;
+      animation: pulse 2s ease-in-out infinite;
+      display: block;
+      transition: transform 2.5s ease, opacity 2s ease;
+      outline: none;
+      border: none;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: scale(1.05);
+        opacity: 0.9;
+      }
+    }
+
+    .zoomed {
+      transform: translate(-50%, -50%) scale(10) !important;
+      opacity: 0 !important;
+    }
+
+    .click-hint {
+      font-size: 0.9rem;
+      letter-spacing: 0.2em;
+      color: rgba(255, 255, 255, 0.4);
+      animation: blink 2s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 0.4;
+      }
+
+      50% {
+        opacity: 1;
+      }
+    }
+
+    /* FLASH */
+    .flash {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #fff;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    .flash.active {
+      animation: flashEffect 0.5s ease-out;
+    }
+
+    @keyframes flashEffect {
+      0% {
+        opacity: 0;
+      }
+
+      30% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+      }
+    }
+
+    /* Background color transition */
+    .intro-screen.color-transition {
+      background: url('img/section1.png') no-repeat center center fixed;
+      animation: colorFade 3s forwards;
+    }
+
+    @keyframes colorFade {
+      0% {
+        opacity: 0;
+        filter: blur(60px);
+      }
+
+      100% {
+        opacity: 1;
+        filter: blur(0);
+      }
+    }
+
+    /* MAIN */
+    .main-screen {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      /*      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); */
+      opacity: 0;
+      transition: opacity 1s ease;
+      position: relative;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .main-screen.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .welcome-text {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.1em;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 2s ease 1s forwards;
+    }
+
+    .tagline {
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.9);
+      letter-spacing: 0.2em;
+      margin-top: 20px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1s ease 1.1s forwards;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .film-strip {
+      position: absolute;
+      bottom: 50px;
+      width: 100%;
+      height: 80px;
+      background: repeating-linear-gradient(90deg, #000 0px, #000 10px, transparent 10px, transparent 30px);
+      opacity: 0;
+      animation: fadeIn 1s ease 1.3s forwards, slideFilm 20s linear 1.8s infinite;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 0.3;
+      }
+    }
+
+    @keyframes slideFilm {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-200px);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .anaglyph-text {
+        font-size: 2rem;
+      }
+
+      .subtitle {
+        font-size: 1rem;
+      }
+
+      .glasses-icon {
+        width: 90px;
+      }
+
+      .welcome-text {
+        font-size: 2rem;
+      }
+
+      .tagline {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Flash Effect -->
+  <div class="flash" aria-hidden="true"></div>
+
+  <!-- Intro Screen -->
+  <main class="intro-screen" role="main">
+    <!--     <h1 class="anaglyph-text blurred">PUT ON YOUR<br>3D GLASSES</h1> -->
+    <h1 class="anaglyph-text blurred">2022 — 2025<br>PORTFOLIO</h1>
+    <p class="subtitle blurred">2022 — 2025 PORTFOLIO</p>
+
+    <button id="glassesBtn" class="glasses-container" aria-label="Wear 3D glasses">
+      <img src="img/glass.png" alt="3D Glasses" class="glasses-icon" />
+    </button>
+
+    <div class="click-hint">CLICK TO WEAR</div>
+  </main>
+
+  <!-- Main Screen -->
+  <section class="main-screen" aria-hidden="true">
+    <div class="welcome-text">NOW SHOWING<br>HAM SUNGHEE'S PORTFOLIO</div>
+    <div class="tagline">EVERY PIXEL IS A FRAME<br>EVERY PROJECT A NEW GENRE</div>
+    <div class="film-strip" aria-hidden="true"></div>
+  </section>
+  
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const glassesBtn = document.getElementById('glassesBtn');
+      const introScreen = document.querySelector('.intro-screen');
+      const mainScreen = document.querySelector('.main-screen');
+      const flash = document.querySelector('.flash');
+      const anaglyphText = document.querySelector('.anaglyph-text');
+      const subtitle = document.querySelector('.subtitle');
+      const glassesImg = glassesBtn.querySelector('.glasses-icon');
+
+      if (!glassesBtn || !introScreen || !mainScreen) return;
+
+      let isActivated = false;
+
+      function activateIntro() {
+        if (isActivated) return;
+        isActivated = true;
+
+        // Disable button interaction & remove focus style
+        glassesBtn.blur();
+        glassesBtn.style.pointerEvents = 'none';
+
+        // Anaglyph text clear focus
+        anaglyphText.classList.remove('blurred');
+        anaglyphText.classList.add('focused');
+        subtitle.classList.remove('blurred');
+        subtitle.classList.add('focused');
+
+        // Glasses zoom + fade
+        glassesImg.style.transition = 'transform 2.5s ease, opacity 2s ease';
+        glassesImg.style.transform = 'translate(-50%, -50%) scale(10)';
+        glassesImg.style.opacity = '0';
+
+        // Background color transition
+        introScreen.classList.add('color-transition');
+
+        // Flash effect
+        flash.classList.add('active');
+
+        // Enter text appear after background changes
+        setTimeout(() => {
+          const enterText = document.createElement('p');
+          enterText.textContent = "Scroll through the next scene to find out..."; // 화면 전환 후 하단 text 
+          enterText.style.position = 'absolute';
+          enterText.style.bottom = '10%';
+          enterText.style.width = '100%';
+          enterText.style.textAlign = 'center';
+          enterText.style.color = 'white';
+          enterText.style.fontSize = '1.2rem';
+          enterText.style.opacity = '0';
+          enterText.style.transition = 'opacity 2s ease';
+          introScreen.appendChild(enterText);
+          setTimeout(() => enterText.style.opacity = '1', 50);
+        }, 2000);
+
+        // Hide intro and show main screen + anaglyph 텍스트 변경
+        setTimeout(() => {
+          // 텍스트와 스타일 변경
+          anaglyphText.classList.remove('blurred');
+          anaglyphText.classList.add('focused');
+          /*           anaglyphText.innerHTML = '2022    2025<br>PORTFOLIO'; */
+          anaglyphText.innerHTML = '<img src="img/text.png" alt="2022 2025 PORTFOLIO" style="max-width:70%; height:auto;" />';
+          introScreen.classList.add('hidden');
+          mainScreen.classList.add('visible');
+          mainScreen.removeAttribute('aria-hidden');
+          glassesImg.style.display = 'none';
+          const clickHint = introScreen.querySelector('.click-hint');
+          if (clickHint) {
+            clickHint.style.display = 'none';
+          }
+        }, 0);
+
+        // Remove flash effect
+        setTimeout(() => {
+          flash.classList.remove('active');
+        }, 4500);
+      }
+
+      // Events
+      glassesBtn.addEventListener('click', activateIntro);
+      glassesBtn.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          activateIntro();
+        }
+      });
+      glassesBtn.addEventListener('touchstart', e => {
+        e.preventDefault();
+        activateIntro();
+      }, { passive: false });
+
+      // Hover effect
+      glassesBtn.addEventListener('mouseenter', () => {
+        glassesBtn.style.transform = 'scale(1.08) rotate(4deg)';
+      });
+      glassesBtn.addEventListener('mouseleave', () => {
+        glassesBtn.style.transform = '';
+      });
+    });
+  </script>
+</body>
+
+</html>

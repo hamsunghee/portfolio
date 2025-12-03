@@ -1,0 +1,253 @@
+a,
+button,
+input,
+select,
+h1,
+h2,
+h3,
+h4,
+h5,
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: none;
+    text-decoration: none;
+    background: none;
+
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    background: black;
+}
+
+menu,
+ol,
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.section-3,
+.section-3 * {
+    box-sizing: border-box;
+}
+.section-3 {
+    height: 1300px;
+    position: relative;
+    overflow: hidden;
+}
+.vector-17 {
+    width: 429px;
+    height: 439px;
+    position: absolute;
+    left: 1144px;
+    top: 368px;
+    overflow: visible;
+}
+.vector-18 {
+    width: 319.5px;
+    height: 531.61px;
+    position: absolute;
+    left: 1098px;
+    top: 275px;
+    overflow: visible;
+}
+.vector-23 {
+    width: 319px;
+    height: 459px;
+    position: absolute;
+    left: 559.25px;
+    top: 470.61px;
+    overflow: visible;
+}
+.vector-20 {
+    width: 319.5px;
+    height: 531.61px;
+    position: absolute;
+    left: 788px;
+    top: 368px;
+    overflow: visible;
+}
+.vector-16 {
+    width: 429px;
+    height: 439px;
+    position: absolute;
+    left: 906px;
+    top: 397px;
+    overflow: visible;
+}
+.vector-19 {
+    width: 429px;
+    height: 439px;
+    position: absolute;
+    left: 802px;
+    top: 445px;
+    overflow: visible;
+}
+.vector-21 {
+    width: 429px;
+    height: 439px;
+    position: absolute;
+    left: 618px;
+    top: 498px;
+    overflow: visible;
+}
+.vector-22 {
+    width: 429px;
+    height: 439px;
+    position: absolute;
+    left: 450px;
+    top: 587px;
+    overflow: visible;
+}
+.vector-17,
+.vector-18,
+.vector-23,
+.vector-20r,
+.vector-16,
+.vector-19,
+.vector-21,
+.vector-22 {
+    transition: 0.2s;
+}
+.vector-17:hover,
+.vector-18:hover,
+.vector-23:hover,
+.vector-20:hover,
+.vector-16:hover,
+.vector-19:hover,
+.vector-21:hover,
+.vector-22:hover {
+    transform: translateX(150px);
+    z-index: 10;
+}
+
+.frame-13 {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-end;
+    justify-content: flex-start;
+    width: 282px;
+    position: absolute;
+    left: 1573px;
+    top: 900px;
+}
+.frame-10 {
+    background: #000000;
+    border-radius: 50px;
+    border-style: solid;
+    border-color: #ffffff;
+    border-width: 1px;
+    padding: 16px 33px 16px 33px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    height: 68px;
+    position: relative;
+}
+.all-52 {
+    color: #ffffff;
+    text-align: left;
+    font-family: 'Inter-Regular', sans-serif;
+    font-size: 30px;
+    font-weight: 400;
+    position: relative;
+}
+.frame-9 {
+    background: #000000;
+    border-radius: 50px;
+    border-style: solid;
+    border-color: #ffffff;
+    border-width: 1px;
+    padding: 16px 33px 16px 33px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    height: 68px;
+    position: relative;
+}
+.grapic-52 {
+    color: #ffffff;
+    text-align: left;
+    font-family: 'Inter-Regular', sans-serif;
+    font-size: 30px;
+    font-weight: 400;
+    position: relative;
+}
+.frame-11 {
+    background: #000000;
+    border-radius: 50px;
+    border-style: solid;
+    border-color: #ffffff;
+    border-width: 1px;
+    padding: 16px 33px 16px 33px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    height: 68px;
+    position: relative;
+}
+.ux-ui-52 {
+    color: #ffffff;
+    text-align: left;
+    font-family: 'Inter-Regular', sans-serif;
+    font-size: 30px;
+    font-weight: 400;
+    position: relative;
+}
+.frame-12 {
+    background: #000000;
+    border-radius: 50px;
+    border-style: solid;
+    border-color: #ffffff;
+    border-width: 1px;
+    padding: 16px 33px 16px 33px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    height: 68px;
+    position: relative;
+}
+.publishing-52 {
+    color: #ffffff;
+    text-align: left;
+    font-family: 'Inter-Regular', sans-serif;
+    font-size: 30px;
+    font-weight: 400;
+    position: relative;
+}
+.ux-ui {
+    color: #ffffff;
+    text-align: left;
+    font-family: 'Santiago-Regular', sans-serif;
+    font-size: 100px;
+    font-weight: 400;
+    position: absolute;
+    left: 146px;
+    top: 503px;
+    transform-origin: 0 0;
+    transform: rotate(90deg) scale(1, 1);
+}
+.pp {
+    width: 827.5px;
+    height: 600px;
+    position: absolute;
+    left: 58px;
+    top: 616px;
+    overflow: visible;
+}
