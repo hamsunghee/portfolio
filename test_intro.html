@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scroll 3D Glasses Intro</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      font-family: 'Playfair Display', serif;
+      background: #000;
+      color: #fff;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    /* 인트로 전체 레이어 */
+    .intro-screen {
+      position: fixed;
+      inset: 0;
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      z-index: 10;
+      transition: opacity 0.8s ease;
+      background: url('img/blur_img.png') no-repeat center center fixed;/
+    }
+
+    .intro-screen.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* 블러 처리된 타이틀 */
+    .intro-title {
+      font-size: 2.6rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      line-height: 1.1;
+      margin-bottom: 0.6rem;
+      filter: blur(4px);
+      opacity: 0.6;
+      transition: filter 0.15s linear, opacity 0.15s linear;
+    }
+
+    .intro-subtitle {
+      font-size: 1rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.6);
+      margin-bottom: 2.5rem;
+      filter: blur(4px);
+      opacity: 0.4;
+      transition: filter 0.15s linear, opacity 0.15s linear;
+    }
+
+    .scroll-hint {
+      font-size: 0.85rem;
+      letter-spacing: 0.22em;
+      color: rgba(255, 255, 255, 0.5);
+      margin-top: 1.4rem;
+      animation: hintBlink 2s ease-in-out infinite;
+      transition: opacity 0.15s linear;
+    }
+
+    @keyframes hintBlink {
+
+      0%,
+      100% {
+        opacity: 0.4;
+      }
+
+      50% {
+        opacity: 1;
+      }
+    }
+
+    /* 3D 안경: 화면 중앙 기준으로 확대 */
+    .glasses-wrap {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transform-origin: center center;
+    }
+
+    .glasses-img {
+      width: 140px;
+      height: auto;
+      display: block;
+      position: relative;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) scale(1);
+      /* 중앙 기준 */
+      transition: none;
+    }
+
+    /* 플래시 */
+    .flash {
+      position: fixed;
+      inset: 0;
+      background: #fff;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 30;
+    }
+
+    .flash.active {
+      animation: flashEffect 0.5s ease-out;
+    }
+
+    @keyframes flashEffect {
+      0% {
+        opacity: 0;
+      }
+
+      25% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+      }
+    }
+
+    /* 메인 화면: 텍스트 제거 후 빈 상태로 시작 */
+    .main-screen {
+      min-height: 200vh;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+      background: #000;
+    }
+
+    .main-screen.visible {
+      opacity: 1;
+    }
+
+    .film-strip {
+      margin-top: 120px;
+      height: 80px;
+      background: repeating-linear-gradient(90deg, #000 0px, #000 10px, transparent 10px, transparent 30px);
+      opacity: 0.3;
+      animation: slideFilm 18s linear infinite;
+    }
+
+    @keyframes slideFilm {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-240px);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .intro-title {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 인트로 -->
+  <div class="intro-screen">
+    <h1 class="intro-title">
+      2022 — 2025<br />
+      PORTFOLIO
+    </h1>
+    <p class="intro-subtitle">
+      EVERY PIXEL IS A FRAME · EVERY PROJECT A NEW GENRE
+    </p>
+
+    <div class="glasses-wrap">
+      <img src="img/glass.png" alt="3D glasses" class="glasses-img" />
+    </div>
+
+    <div class="scroll-hint">SCROLL DOWN TO WEAR</div>
+  </div>
+
+  <!-- 플래시 -->
+  <div class="flash" aria-hidden="true"></div>
+
+  <!-- 메인(지금은 비워두고, 이후 섹션 추가) -->
+  <main class="main-screen" aria-hidden="true">
+    <div class="film-strip" aria-hidden="true"></div>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const introScreen = document.querySelector('.intro-screen');
+      const mainScreen = document.querySelector('.main-screen');
+      const flash = document.querySelector('.flash');
+      const introTitle = document.querySelector('.intro-title');
+      const introSub = document.querySelector('.intro-subtitle');
+      const glassesImg = document.querySelector('.glasses-img');
+      const scrollHint = document.querySelector('.scroll-hint');
+
+      let isActivated = false;
+      const triggerDistance = 400; // 이만큼 스크롤하면 전환
+
+      function handleScroll() {
+        if (isActivated) return;
+
+        const y = window.scrollY || window.pageYOffset;
+        const progress = Math.min(1, y / triggerDistance);
+
+        // 안경: 화면 중앙 기준으로 크게 확대
+        const scale = 1 + 13 * progress;
+        glassesImg.style.transform =
+          `translate(-50%, -50%) scale(${scale})`;
+        glassesImg.style.opacity = String(1 - progress);
+
+        // 텍스트 블러/투명도 조절
+        const blurVal = 4 * (1 - progress);
+        introTitle.style.filter = `blur(${blurVal}px)`;
+        introTitle.style.opacity = String(0.6 + 0.4 * progress);
+        introSub.style.filter = `blur(${blurVal}px)`;
+        introSub.style.opacity = String(0.4 + 0.6 * progress);
+
+        scrollHint.style.opacity = String(1 - progress);
+
+        if (progress >= 1) {
+          activateIntro();
+        }
+      }
+
+      function activateIntro() {
+        if (isActivated) return;
+        isActivated = true;
+
+        window.removeEventListener('scroll', handleScroll);
+
+        // 안경이 완전히 덮은 상태 고정
+        glassesImg.style.transform =
+          'translate(-50%, -50%) scale(14)';
+        glassesImg.style.opacity = '0';
+
+        introTitle.style.filter = 'blur(0)';
+        introTitle.style.opacity = '1';
+        introSub.style.filter = 'blur(0)';
+        introSub.style.opacity = '1';
+
+        // 플래시 + 인트로 페이드아웃 → 메인 페이드인
+        flash.classList.add('active');
+
+        setTimeout(() => {
+          introScreen.classList.add('hidden');
+          mainScreen.classList.add('visible');
+          mainScreen.removeAttribute('aria-hidden');
+        }, 600);
+
+        setTimeout(() => {
+          flash.classList.remove('active');
+        }, 900);
+      }
+
+      // 스크롤 높이 확보 (데모용)
+      if (document.body.scrollHeight < triggerDistance + window.innerHeight) {
+        const filler = document.createElement('div');
+        filler.style.height = `${triggerDistance + 200}px`;
+        document.body.appendChild(filler);
+      }
+
+      window.addEventListener('scroll', handleScroll, { passive: true });
+    });
+  </script>
+</body>
+
+</html>

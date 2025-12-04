@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Ashfall-like Lab Scroll</title>
+
+  <!-- GSAP & ScrollTrigger CDN -->
+  <script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #05060a;
+      color: #f5f5f5;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    .lab-hero {
+      min-height: 60vh;
+      padding: 12vh 6vw 4vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .lab-hero-label {
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      opacity: 0.6;
+      margin-bottom: 16px;
+    }
+
+    .lab-hero-title {
+      font-size: clamp(42px, 6vw, 64px);
+      line-height: 1;
+      font-weight: 700;
+      margin: 0 0 12px;
+    }
+
+    .lab-hero-desc {
+      max-width: 420px;
+      opacity: 0.7;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .lab {
+      padding: 4vh 6vw 12vh;
+      perspective: 1400px;
+    }
+
+    .lab-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .lab-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 40px;
+      align-items: center;
+      padding: 100px 0;
+      transform-style: preserve-3d;
+    }
+
+    .lab-thumb {
+      aspect-ratio: 16 / 9;
+      border-radius: 24px;
+      overflow: hidden;
+      position: relative;
+      background:
+        radial-gradient(circle at 20% 0%, #6bffbf, transparent 55%),
+        radial-gradient(circle at 80% 100%, #6b7bff, transparent 60%),
+        radial-gradient(circle at 0 100%, #ff7b9b, transparent 55%),
+        #101319;
+    }
+
+    .lab-thumb::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 0, rgba(255, 255, 255, 0.4), transparent 60%);
+      mix-blend-mode: screen;
+      opacity: 0.4;
+    }
+
+    .lab-meta-tag {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.6;
+      margin-bottom: 10px;
+    }
+
+    .lab-meta h2 {
+      font-size: clamp(30px, 3.2vw, 40px);
+      margin: 0 0 12px;
+    }
+
+    .lab-meta p {
+      opacity: 0.7;
+      max-width: 320px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .lab-meta small {
+      display: inline-block;
+      margin-top: 16px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      opacity: 0.5;
+    }
+
+    @media (max-width: 840px) {
+      .lab-item {
+        grid-template-columns: 1fr;
+        padding: 80px 0;
+        gap: 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 상단 인트로 -->
+  <header class="lab-hero">
+    <div class="lab-hero-label">Lab / Experiments</div>
+    <h1 class="lab-hero-title">Explorations in motion &amp; light</h1>
+    <p class="lab-hero-desc">
+      Scroll to move through a series of interactive experiments. Each card steps
+      forward into focus as it reaches the center of your viewport.
+    </p>
+  </header>
+
+  <!-- Ashfall Lab 느낌의 스크롤 갤러리 -->
+  <section class="lab">
+    <div class="lab-inner">
+
+      <article class="lab-item">
+        <div class="lab-thumb"></div>
+        <div class="lab-meta">
+          <div class="lab-meta-tag">01 / kinetic type</div>
+          <h2>Chromatic field typography</h2>
+          <p>
+            Variable-weight type drifting through chromatic noise fields, driven
+            by scroll and cursor proximity.
+          </p>
+          <small>Web · Motion · Prototype</small>
+        </div>
+      </article>
+
+      <article class="lab-item">
+        <div class="lab-thumb"></div>
+        <div class="lab-meta">
+          <div class="lab-meta-tag">02 / 3d gallery</div>
+          <h2>Orbital viewport gallery</h2>
+          <p>
+            A layered gallery orbiting around a central axis, easing forward as
+            you move deeper into the scroll.
+          </p>
+          <small>3D · WebGL style · Concept</small>
+        </div>
+      </article>
+
+      <article class="lab-item">
+        <div class="lab-thumb"></div>
+        <div class="lab-meta">
+          <div class="lab-meta-tag">03 / shader study</div>
+          <h2>Liquid refraction studies</h2>
+          <p>
+            Distorted glass surfaces that refract underlying imagery while
+            responding to scroll velocity.
+          </p>
+          <small>Shader look · R&amp;D</small>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // 인트로 페이드 인
+    gsap.from(".lab-hero-title, .lab-hero-desc", {
+      y: 40,
+      opacity: 0,
+      duration: 1.2,
+      ease: "power3.out",
+      stagger: 0.1
+    });
+
+    // 각 실험 카드 3D 스크롤 애니메이션
+    document.querySelectorAll(".lab-item").forEach((item, index) => {
+      const thumb = item.querySelector(".lab-thumb");
+      const meta = item.querySelector(".lab-meta");
+
+      gsap.set(item, { opacity: 0.15, scale: 0.78, y: 140, rotationX: -18 });
+      gsap.set(thumb, { rotationY: -12, y: 30 });
+      gsap.set(meta, { y: 60, opacity: 0 });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: item,
+          start: "top 80%",     // 아래에서 올라올 때
+          end: "bottom 20%",  // 위로 사라질 때
+          scrub: true
+          // markers: true
+        }
+      });
+
+      // 중앙에 올 때 앞으로 다가오는 듯한 모션
+      tl.to(item, {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        rotationX: 0,
+        ease: "power2.out"
+      })
+        .to(thumb, {
+          rotationY: 0,
+          y: 0,
+          ease: "power2.out"
+        }, "<")
+        .to(meta, {
+          y: 0,
+          opacity: 1,
+          ease: "power2.out"
+        }, "<")
+
+        // 위로 지나가며 다시 멀어지는 느낌
+        .to(item, {
+          opacity: 0.08,
+          scale: 0.7,
+          y: -160,
+          rotationX: 18,
+          ease: "power2.in"
+        });
+    });
+  </script>
+</body>
+
+</html>
