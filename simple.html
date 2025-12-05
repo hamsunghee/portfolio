@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creative Portfolio - Samantha Humphry</title>
+  <link href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Navigation */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      mix-blend-mode: difference;
+    }
+
+    .brand {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-link {
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: opacity 0.3s;
+    }
+
+    .nav-link:hover {
+      opacity: 0.6;
+    }
+
+    .btn {
+      padding: 0.8rem 2rem;
+      background: #fff;
+      color: #000;
+      border: none;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: transform 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 4rem 2rem;
+    }
+
+    .hero-content {
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-image {
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 300px;
+      height: 300px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 20px;
+      transform: rotate(25deg);
+      opacity: 0;
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 10vw, 8rem);
+      font-weight: 700;
+      line-height: 0.9;
+      margin-bottom: 1rem;
+      overflow: hidden;
+    }
+
+    .hero h1 span {
+      display: inline-block;
+      transform: translateY(100%);
+    }
+
+    /* About Section */
+    .section {
+      padding: 8rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .section-intro {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 4rem;
+    }
+
+    .section-intro p {
+      font-size: 1.5rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 5vw, 4rem);
+      text-align: center;
+      margin-bottom: 3rem;
+      overflow: hidden;
+    }
+
+    .section-title span {
+      display: inline-block;
+      transform: translateY(100%);
+    }
+
+    /* Work List */
+    .work-list {
+      margin-top: 4rem;
+    }
+
+    .work-item {
+      display: grid;
+      grid-template-columns: 1fr 200px 200px;
+      align-items: center;
+      padding: 2rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      text-decoration: none;
+      color: #fff;
+      transition: all 0.3s;
+      position: relative;
+      /*      overflow: hidden; */
+    }
+
+    .work-item:hover {
+      padding-left: 2rem;
+    }
+
+    .work-item:hover .work-image {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .work-title {
+      font-size: 2.5rem;
+      font-weight: 600;
+    }
+
+    .work-category {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      opacity: 0.6;
+    }
+
+    .work-image {
+      position: absolute;
+      right: 10%;
+      top: 50%;
+      transform: translateY(-50%) scale(0.8);
+      width: 300px;
+      height: 200px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 10px;
+      opacity: 0;
+      transition: all 0.5s;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    /* Services Grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+
+    .service-card {
+      background: #1a1a1a;
+      padding: 2rem;
+      border-radius: 20px;
+      transition: transform 0.3s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .service-number {
+      font-size: 0.75rem;
+      opacity: 0.5;
+      margin-bottom: 1rem;
+    }
+
+    .service-title {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .service-desc {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      opacity: 0.7;
+    }
+
+    .service-image {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 10px;
+      margin-top: 2rem;
+    }
+
+    /* Testimonials */
+    .testimonials {
+      background: #1a1a1a;
+      padding: 4rem 2rem;
+      border-radius: 30px;
+      margin: 4rem 0;
+      position: relative;
+    }
+
+    .swiper {
+      padding: 2rem 0;
+    }
+
+    .testimonial-slide {
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .testimonial-text {
+      font-size: 1.5rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .author-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .author-name {
+      font-weight: 600;
+    }
+
+    .author-company {
+      opacity: 0.6;
+      font-size: 0.9rem;
+    }
+
+    .swiper-nav {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+
+    .swiper-button {
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s;
+      color: #fff;
+      font-size: 1.2rem;
+    }
+
+    .swiper-button:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* FAQ */
+    .faq-list {
+      margin-top: 4rem;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 2rem 0;
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      gap: 2rem;
+    }
+
+    .faq-number {
+      font-size: 0.75rem;
+      opacity: 0.5;
+      min-width: 50px;
+    }
+
+    .faq-title {
+      font-size: 1.5rem;
+      flex: 1;
+    }
+
+    .faq-icon {
+      font-size: 1.5rem;
+      transition: transform 0.3s;
+    }
+
+    .faq-item.active .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s;
+      padding-left: 70px;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 500px;
+      padding-top: 1rem;
+    }
+
+    .faq-content {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 2rem;
+      border-radius: 15px;
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 8rem 2rem 4rem;
+      text-align: center;
+    }
+
+    .footer-intro {
+      max-width: 800px;
+      margin: 0 auto 4rem;
+    }
+
+    .footer-intro p {
+      font-size: 1.5rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .footer-link {
+      color: #fff;
+      text-decoration: none;
+      opacity: 0.6;
+      transition: opacity 0.3s;
+    }
+
+    .footer-link:hover {
+      opacity: 1;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .work-item {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .work-image {
+        display: none;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .nav-menu {
+        display: none;
+      }
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      20%,
+      50%,
+      80%,
+      100% {
+        transform: translateX(-50%) translateY(0);
+      }
+
+      40% {
+        transform: translateX(-50%) translateY(-10px);
+      }
+
+      60% {
+        transform: translateX(-50%) translateY(-5px);
+      }
+    }
+
+    .scroll-arrow {
+      font-size: 2rem;
+      opacity: 0.5;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <a href="#" class="brand">Portfolio</a>
+    <div class="nav-menu">
+      <a href="#" class="nav-link">Hire me</a>
+      <a href="#" class="btn">Schedule a call</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-image"></div>
+      <h1>
+        <div>
+          <span>S</span><span>a</span><span>m</span><span>a</span><span>n</span><span>t</span><span>h</span><span>a</span>
+        </div>
+        <div><span>H</span><span>u</span><span>m</span><span>p</span><span>h</span><span>r</span><span>y</span></div>
+      </h1>
+    </div>
+    <div class="scroll-indicator">
+      <div class="scroll-arrow">↓</div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="section">
+    <div class="section-intro">
+      <p>With years of experience in the industry, I have worked with businesses of all sizes.</p>
+      <a href="#" class="btn">Explore my story</a>
+    </div>
+    <h2 class="section-title">
+      <span>S</span><span>i</span><span>n</span><span>c</span><span>e</span>
+      <span> </span>
+      <span>2</span><span>0</span><span>1</span><span>4</span>
+    </h2>
+  </section>
+
+  <!-- Work Section -->
+  <section class="section">
+    <div class="section-intro">
+      <p>I have worked with businesses of all sizes to create stunning websites and designs that capture their brand's
+        identity.</p>
+      <a href="#" class="btn">View my portfolio</a>
+    </div>
+
+    <div class="work-list">
+      <a href="#" class="work-item">
+        <h3 class="work-title">Airtable</h3>
+        <div class="work-category">Graphic design</div>
+        <div class="work-image"></div>
+      </a>
+      <a href="#" class="work-item">
+        <h3 class="work-title">Delta Airlines</h3>
+        <div class="work-category">Branding</div>
+        <div class="work-image"></div>
+      </a>
+      <a href="#" class="work-item">
+        <h3 class="work-title">Samsung</h3>
+        <div class="work-category">Interaction design</div>
+        <div class="work-image"></div>
+      </a>
+      <a href="#" class="work-item">
+        <h3 class="work-title">Fovera Health</h3>
+        <div class="work-category">Interaction design</div>
+        <div class="work-image"></div>
+      </a>
+      <a href="#" class="work-item">
+        <h3 class="work-title">McDonalds</h3>
+        <div class="work-category">Strategy</div>
+        <div class="work-image"></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="section">
+    <h2 class="section-title">
+      <span>M</span><span>y</span>
+      <span> </span>
+      <span>S</span><span>e</span><span>r</span><span>v</span><span>i</span><span>c</span><span>e</span>
+    </h2>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-number">001</div>
+        <h3 class="service-title">Web design</h3>
+        <p class="service-desc">This includes creating unique designs that reflect a company's identity and goals, while
+          also taking into account various aspects of page design such as user experience, usability, navigation,
+          content organization and presentation.</p>
+        <div class="service-image"></div>
+      </div>
+      <div class="service-card">
+        <div class="service-number">002</div>
+        <h3 class="service-title">Interaction design</h3>
+        <p class="service-desc">The process involves understanding the client's requirements, analyzing existing
+          solutions, and then designing, coding, and testing the web application.</p>
+        <div class="service-image"></div>
+      </div>
+      <div class="service-card">
+        <div class="service-number">003</div>
+        <h3 class="service-title">Web development</h3>
+        <p class="service-desc">This involves designing user interfaces, such as buttons, menus, forms, and other
+          interactive elements.</p>
+        <div class="service-image"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section">
+    <div class="testimonials">
+      <div class="swiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide testimonial-slide">
+            <p class="testimonial-text">Her custom website designs, coding solutions, branding strategies, graphic
+              design and app design were all top notch.</p>
+            <div class="testimonial-author">
+              <div class="author-avatar"></div>
+              <div>
+                <div class="author-name">Emily Humphry</div>
+                <div class="author-company">Airtable</div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide testimonial-slide">
+            <p class="testimonial-text">I highly recommend her to anyone looking for a creative freelancer who can
+              provide comprehensive services tailored specifically to their needs!</p>
+            <div class="testimonial-author">
+              <div class="author-avatar"></div>
+              <div>
+                <div class="author-name">Molly Wilson</div>
+                <div class="author-company">Facebook</div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide testimonial-slide">
+            <p class="testimonial-text">She provided an incredible package of web design and development services that
+              helped us increase our digital presence by 50%.</p>
+            <div class="testimonial-author">
+              <div class="author-avatar"></div>
+              <div>
+                <div class="author-name">Karla Gordon</div>
+                <div class="author-company">Google</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-nav">
+        <button class="swiper-button swiper-prev">←</button>
+        <button class="swiper-button swiper-next">→</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="section">
+    <h2 class="section-title">
+      <span>Q</span><span>u</span><span>e</span><span>s</span><span>t</span><span>i</span><span>o</span><span>n</span><span>s</span>
+    </h2>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-question">
+          <div class="faq-number">001</div>
+          <h3 class="faq-title">How long do projects typically take?</h3>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-content">
+            This involves creating a custom solution for clients who want an online presence tailored to their specific
+            needs. The process involves understanding the client's requirements, analyzing existing solutions, and then
+            designing, coding, and testing the web application.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">
+          <div class="faq-number">002</div>
+          <h3 class="faq-title">What is your design process?</h3>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-content">
+            This involves creating a custom solution for clients who want an online presence tailored to their specific
+            needs. The process involves understanding the client's requirements, analyzing existing solutions, and then
+            designing, coding, and testing the web application.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">
+          <div class="faq-number">003</div>
+          <h3 class="faq-title">Do you work with international clients?</h3>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-content">
+            This involves creating a custom solution for clients who want an online presence tailored to their specific
+            needs. The process involves understanding the client's requirements, analyzing existing solutions, and then
+            designing, coding, and testing the web application.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-intro">
+      <p>Whether you need design or tweak some code, I have the skills and creativity needed to take your project to the
+        next level.</p>
+      <a href="#" class="btn">Schedule a call</a>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2023 Webflow Template</div>
+      <div class="footer-links">
+        <a href="#" class="footer-link">Home</a>
+        <a href="#" class="footer-link">About</a>
+        <a href="#" class="footer-link">Projects</a>
+        <a href="#" class="footer-link">Contact</a>
+      </div>
+      <div>Created by Tycreated</div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+  <script>
+    // GSAP Setup
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Hero animation
+    gsap.to('.hero h1 span', {
+      y: 0,
+      duration: 1,
+      stagger: 0.05,
+      ease: 'power4.out',
+      delay: 0.5
+    });
+
+    gsap.to('.hero-image', {
+      opacity: 0.3,
+      duration: 1,
+      delay: 1,
+      ease: 'power2.out'
+    });
+
+    // Section intro animations
+    gsap.utils.toArray('.section-intro p').forEach(elem => {
+      gsap.to(elem, {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        scrollTrigger: {
+          trigger: elem,
+          start: 'top 80%'
+        }
+      });
+    });
+
+    // Section title animations
+    gsap.utils.toArray('.section-title').forEach(title => {
+      const spans = title.querySelectorAll('span');
+      gsap.to(spans, {
+        y: 0,
+        duration: 0.8,
+        stagger: 0.03,
+        scrollTrigger: {
+          trigger: title,
+          start: 'top 80%'
+        }
+      });
+    });
+
+    // Work items animation
+    gsap.utils.toArray('.work-item').forEach(item => {
+      gsap.from(item, {
+        opacity: 0,
+        y: 50,
+        duration: 0.8,
+        scrollTrigger: {
+          trigger: item,
+          start: 'top 85%'
+        }
+      });
+    });
+
+    // Service cards animation
+    gsap.utils.toArray('.service-card').forEach((card, i) => {
+      gsap.from(card, {
+        opacity: 0,
+        y: 50,
+        duration: 0.8,
+        delay: i * 0.2,
+        scrollTrigger: {
+          trigger: card,
+          start: 'top 85%'
+        }
+      });
+    });
+
+    // Swiper initialization
+    const swiper = new Swiper('.swiper', {
+      loop: true,
+      speed: 750,
+      autoHeight: true,
+      navigation: {
+        nextEl: '.swiper-next',
+        prevEl: '.swiper-prev',
+      },
+    });
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-question').forEach(question => {
+      question.addEventListener('click', () => {
+        const item = question.parentElement;
+        const isActive = item.classList.contains('active');
+
+        // Close all items
+        document.querySelectorAll('.faq-item').forEach(i => {
+          i.classList.remove('active');
+        });
+
+        // Open clicked item if it wasn't active
+        if (!isActive) {
+          item.classList.add('active');
+        }
+      });
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

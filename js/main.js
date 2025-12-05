@@ -90,8 +90,36 @@ hoverTargets.forEach(el => {
   });
 });
 
+/* section2 그래픽 */
+// section#works 안에서만 패닝
+const gallery = document.getElementById("gallery");
 
+if (gallery) {
+  window.addEventListener("mousemove", (e) => {
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
 
+    const xDecimal = mouseX / window.innerWidth;
+    const yDecimal = mouseY / window.innerHeight;
+
+    const maxX = gallery.offsetWidth - window.innerWidth;
+    const maxY = gallery.offsetHeight - window.innerHeight;
+
+    const panX = maxX * xDecimal * -1;
+    const panY = maxY * yDecimal * -1;
+
+    gallery.animate(
+      {
+        transform: `translate(${panX}px, ${panY}px)`
+      },
+      {
+        duration: 4000,
+        fill: "forwards",
+        easing: "ease"
+      }
+    );
+  });
+}
 /*section5 mouse */
 const hoverBg = document.querySelector('.hover_bg');
 document.querySelectorAll('.project_row').forEach(item => {
