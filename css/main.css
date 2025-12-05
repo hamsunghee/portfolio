@@ -1,7 +1,6 @@
 @import url('https://fonts.cdnfonts.com/css/santiago');
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 * {
-    font-family: 'Santiago';
     /*    box-sizing: border-box; */
 }
 
@@ -12,20 +11,20 @@ body {
 html {
     scroll-behavior: smooth;
 }
-
 header {
-    width: 100%;
-    height: 60px;
     position: fixed;
     top: 0;
     left: 0;
+    width: 100%; /* 화면 전체 폭 */
+    height: 70px;
+    background: #000; /* 풀 블랙 */
     z-index: 100;
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
-    padding: 30px 0 0 0;
-    background: black;
-    font-family: 'pretendard';
+    display: flex;
+    justify-content: center; /* nav를 수평 중앙으로 */
+    align-items: center; /* 수직 중앙 정렬 */
 }
 
+/* nav ul은 가운데 정렬 유지 */
 nav ul {
     display: flex;
     justify-content: center;
@@ -33,6 +32,7 @@ nav ul {
     gap: 60px;
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 nav ul li {
@@ -158,25 +158,28 @@ nav li.active a {
     transform: translate(-50%, -50%) scale(2);
 }
 
-/* section2 그래픽 */
-/* ===== section#works 갤러리 ===== */
-.graphic {
-    position: relative;
+.main {
+    width: 100%;
     height: 100vh;
-    background-color: rgb(10, 10, 10);
+}
+/* section2 */
+.graphic {
+    width: 100%;
+    height: 100vh;
+    position: relative;
     overflow: hidden;
 }
-
-/* 전체 패닝용 큰 캔버스 */
 #gallery {
+    /*     height: 140vmax;
+    width: 140vmax; */
     height: 140vmax;
     width: 140vmax;
     position: absolute;
-    inset: 50% auto auto 50%;
-    transform: translate(-50%, -50%); /* 섹션 가운데 배치 */
+    /* inset/translate 제거 */
+    top: 0;
+    left: 0;
 }
 
-/* 타일 공통 */
 .tile {
     border-radius: 1vmax;
     position: absolute;
@@ -201,7 +204,6 @@ nav li.active a {
     transition: opacity 800ms ease, transform 800ms ease;
 }
 
-/* 각 타일 위치/크기 */
 .tile:nth-child(1) {
     background-color: rgb(255, 238, 88);
     height: 14%;

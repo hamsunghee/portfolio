@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Split Screen Scroll Animation</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #000;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* Split Container */
+    .split-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .split-panel {
+      width: 100%;
+      height: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .split-panel.top {
+      background: #1a1a1a;
+    }
+
+    .split-panel.bottom {
+      background: #0a0a0a;
+    }
+
+    /* Content */
+    .panel-content {
+      text-align: center;
+      padding: 2rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .panel-content h1 {
+      font-size: 4rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .panel-content p {
+      font-size: 1.2rem;
+      opacity: 0.7;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    /* Background Image */
+    .panel-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.3;
+      z-index: 1;
+    }
+
+    /* Scroll Spacer */
+    .scroll-spacer {
+      height: 400vh;
+    }
+
+    /* Next Section */
+    .next-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      color: #000;
+      padding: 4rem 2rem;
+    }
+
+    .next-section h2 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Scroll Indicator */
+    .scroll-indicator {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      opacity: 1;
+      transition: opacity 0.3s;
+    }
+
+    .scroll-indicator.hidden {
+      opacity: 0;
+    }
+
+    .scroll-arrow {
+      width: 30px;
+      height: 50px;
+      border: 2px solid #fff;
+      border-radius: 20px;
+      position: relative;
+    }
+
+    .scroll-arrow::before {
+      content: '';
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 6px;
+      height: 6px;
+      background: #fff;
+      border-radius: 50%;
+      animation: scroll-down 2s infinite;
+    }
+
+    @keyframes scroll-down {
+      0% {
+        top: 10px;
+        opacity: 1;
+      }
+
+      100% {
+        top: 30px;
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .panel-content h1 {
+        font-size: 2.5rem;
+      }
+
+      .panel-content p {
+        font-size: 1rem;
+      }
+
+      .next-section h2 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Split Screen Container -->
+  <div class="split-container">
+    <div class="split-panel top">
+
+      <div class="panel-content">
+        <h1>Publishing</h1>
+      </div>
+    </div>
+
+    <div class="split-panel bottom">
+
+      <div class="panel-content">
+        <h1> Projects </h1>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll Spacer -->
+  <div class="scroll-spacer"></div>
+
+  <!-- Next Section -->
+  <section class="next-section">
+    <div>
+      <h2>Welcome to Our World</h2>
+      <p>Continue scrolling to explore more amazing content...</p>
+    </div>
+  </section>
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Initial state - panels are together
+    gsap.set('.split-panel.top', { y: 0 });
+    gsap.set('.split-panel.bottom', { y: 0 });
+    gsap.set('.panel-content', { opacity: 1, y: 0 });
+
+    // Create timeline
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.scroll-spacer',
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 1,
+        pin: '.split-container',
+      }
+    });
+
+    // Animate panels splitting vertically
+    tl.to('.split-panel.top', {
+      y: '-50%',
+      duration: 1,
+      ease: 'power2.inOut'
+    }, 0)
+      .to('.split-panel.bottom', {
+        y: '50%',
+        duration: 1,
+        ease: 'power2.inOut'
+      }, 0)
+      .to('.panel-content', {
+        opacity: 0,
+        y: -50,
+        duration: 0.5,
+        ease: 'power2.in'
+      }, 0)
+      .to('.panel-bg', {
+        scale: 1.2,
+        duration: 1,
+        ease: 'power2.inOut'
+      }, 0);
+
+
+    // Fade in next section
+    gsap.from('.next-section', {
+      opacity: 0,
+      y: 100,
+      duration: 1,
+      scrollTrigger: {
+        trigger: '.next-section',
+        start: 'top 80%',
+        end: 'top 50%',
+        scrub: 1
+      }
+    });
+  </script>
+
+</body>
+
+</html>
