@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Ham Sunghee – Cinematic Portfolio Intro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #000;
+      color: #fff;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Pretendard", sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* 인트로 슬레이트 */
+    .intro-slate {
+      position: fixed;
+      inset: 0;
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 0 10vw;
+      z-index: 1000;
+      overflow: hidden;
+    }
+
+    .slate-wrap {
+      display: flex;
+      align-items: center;
+      gap: 4vw;
+    }
+
+    .slate-img {
+      width: min(420px, 40vw);
+      height: auto;
+      transform-origin: left bottom;
+      cursor: pointer;
+    }
+
+    .intro-text .years {
+      font-size: 1rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      opacity: 0.9;
+      margin-bottom: 0.75rem;
+    }
+
+    .intro-text .title {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2.6rem, 5vw, 4rem);
+      letter-spacing: 0.1em;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      opacity: 0.7;
+    }
+
+    /* 본문 */
+    .main-content {
+      opacity: 0;
+    }
+
+    body.intro-done .intro-slate {
+      display: none;
+    }
+
+    body.intro-done .main-content {
+      opacity: 1;
+      transition: opacity 0.5s ease;
+    }
+
+    .hero {
+      min-height: 100vh;
+      padding: 120px 10vw 40px;
+      background: #121212;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .hero h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+    }
+
+    .hero p {
+      max-width: 32rem;
+      line-height: 1.6;
+      color: #ccc;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 인트로 슬레이트 -->
+  <section class="intro-slate">
+    <div class="slate-wrap">
+      <!-- 클랩보드 이미지 경로만 네 파일로 교체 -->
+      <img src="img/test01.png" alt="Clapboard" class="slate-img" />
+      <div class="intro-text">
+        <p class="years">2022 — 2025</p>
+        <h1 class="title">PORTFOLIO</h1>
+      </div>
+    </div>
+    <div class="scroll-hint">SCROLL OR CLICK TO CUT</div>
+  </section>
+
+  <!-- 메인 콘텐츠 예시 -->
+  <main class="main-content">
+    <section class="hero" id="home">
+      <h2>Design is my movie.</h2>
+      <p>
+        I create a new genre for every project.<br>
+        Every pixel is a frame, every project a new genre.
+      </p>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const slate = document.querySelector(".intro-slate");
+      const slateImg = document.querySelector(".slate-img");
+      let played = false;
+      const trigger = 60;
+
+      function playCut() {
+        if (played) return;
+        played = true;
+
+        document.body.style.overflow = "hidden";
+
+        const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+        // 컷 모션
+        tl.to(slateImg, {
+          rotation: -12,
+          duration: 0.12,
+          yoyo: true,
+          repeat: 1,
+          transformOrigin: "left top"
+        });
+
+        // 아래로 내려가며 본문 시작
+        tl.to(slate, {
+          y: "100vh",
+          duration: 0.8,
+          ease: "power3.in"
+        }, "+=0.25");
+
+        tl.add(() => {
+          document.body.classList.add("intro-done");
+          document.body.style.overflow = "";
+          window.scrollTo(0, 0);
+        }, "-=0.2");
+      }
+
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > trigger && !played) playCut();
+      }, { passive: true });
+
+      slate.addEventListener("click", playCut);
+      window.addEventListener("keydown", e => {
+        if ((e.key === " " || e.key === "Enter") && !played) {
+          e.preventDefault();
+          playCut();
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
