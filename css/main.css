@@ -52,7 +52,6 @@ nav a {
     opacity: 0.94;
     transition: opacity 0.2s, color 0.2s;
     position: relative;
-    background: black;
 }
 
 nav a:hover,
@@ -441,6 +440,7 @@ ul.project_list:hover li:not(:hover) {
 /* con4 */
 .con4 .mainTextBox {
     position: relative;
+    padding-top: 500px;
 }
 .con4 .mainTextBox span {
     position: absolute;
@@ -451,7 +451,6 @@ ul.project_list:hover li:not(:hover) {
     font-size: 120px;
     line-height: 1;
     letter-spacing: -5px;
-    overflow: hidden;
 }
 .con4 .mainTextBox .title i {
     display: block;
@@ -492,7 +491,7 @@ ul.project_list:hover li:not(:hover) {
     font-weight: normal;
     letter-spacing: -2px;
     padding-bottom: 20px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #555;
     grid-column: 1 / 3;
     margin-bottom: 100px;
 }
@@ -507,21 +506,26 @@ ul.project_list:hover li:not(:hover) {
     line-height: 1.4;
 }
 .con4 .listBox .box .text h4 {
+    font-weight: 600;
+    font-size: 50px;
     margin-bottom: 20px;
     line-height: 1.2;
 }
 .con4 .listBox .box .text p {
     opacity: 0.5;
 }
-.con4 .listBox .box.a h3 {
-    color: #ffb84f;
+
+/* .con4 .listBox .box:nth-child(1) h3 {
+    color: #ff4f4f;
 }
-.con4 .listBox .box.b h3 {
+.con4 .listBox .box:nth-child(2) h3 {
     color: #90c3cd;
 }
-.con4 .listBox .box.c h3 {
+
+.con4 .listBox .box:nth-child(3) h3 {
     color: #47b172;
 }
+ */
 
 .con4 .subTextBox {
     display: grid;
@@ -538,7 +542,8 @@ ul.project_list:hover li:not(:hover) {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+    background: linear-gradient(135deg, #000 0%, #000 100%);
+    font-family: 'Santiago';
 }
 
 .profile_container {
@@ -809,8 +814,9 @@ ul.project_list:hover li:not(:hover) {
     font-weight: 500;
     background: var(--color-bg);
     overflow: hidden;
+    margin: 0px 10px;
 }
-.footer .contact-typo {
+.footer .contact_typo {
     font-size: 10vw;
     font-weight: 500;
     white-space: nowrap;
@@ -818,22 +824,22 @@ ul.project_list:hover li:not(:hover) {
     letter-spacing: -0.02em;
     font-family: 'Santiago';
 }
-.footer .footer-info {
+.footer .footer_info {
     position: relative;
     display: flex;
     justify-content: flex-start;
     padding-top: 40px;
     border-top: 1px solid #fff;
 }
-.footer .footer-info .title {
+.footer .footer_info .title {
     width: auto;
     margin-right: 100px;
 }
-.footer .footer-info .content {
+.footer .footer_info .content {
     width: 100%;
 }
-.footer .footer-info .title p,
-.footer .footer-info ul li {
+.footer .footer_info .title p,
+.footer .footer_info ul li {
     margin: 14px 0;
 }
 .footer .footer-bottom {
@@ -841,6 +847,7 @@ ul.project_list:hover li:not(:hover) {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+    margin: 0 20px;
 }
 .footer .footer-bottom .typo {
     font-size: 5vw;
