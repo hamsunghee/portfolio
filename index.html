@@ -9,6 +9,8 @@
 
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/main.css">
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 
   <!-- 인트로 전용 스타일 -->
   <style>
@@ -24,7 +26,8 @@
     .intro_screen {
       position: fixed;
       inset: 0;
-      background: url('img/blur_img.png') no-repeat center center fixed;
+      /*       background: url('img/blur_img.png') no-repeat center center fixed; */
+      background: #000;
       background-size: cover;
       display: flex;
       flex-direction: column;
@@ -150,7 +153,7 @@
     </p>
 
     <div class="glasses_wrap">
-      <img src="img/glass.png" alt="3D glasses" class="glasses_img" />
+      <img src="img/glass2.png" alt="3D glasses" class="glasses_img" />
     </div>
 
     <div class="scroll_hint">SCROLL DOWN TO WEAR</div>
@@ -166,7 +169,7 @@
     <nav>
       <ul>
         <li><a href="#home">HOME</a></li>
-        <li><a href="#Graphic">Graphic</a></li>
+        <li><a href="#graphic">Graphic</a></li>
         <li><a href="#publishing">publishing</a></li>
         <li><a href="#profile">PROFILE</a></li>
         <li><a href="#contact">CONTACT</a></li>
@@ -180,10 +183,27 @@
   </div>
 
   <section class="main" id="home">
-
+    <section class="visual">
+      <div class="inner">
+        <h1 class="mainText">
+          <span><i class="rotate">UX/UI</i></span>
+          <span><i class="rotate">PUBLISHING</i></span>
+        </h1>
+        <h2 class="subText opacity">Creation, production & distribution of podcasts.<br /> <span>In Toulouse. And
+            everywhere else.</span></h2>
+        <div class="logoWrap rotate">
+          <span id="j"><img src="img/1.png" alt=""></span>
+          <span id="y"><img src="img/2.png" alt=""></span>
+          <span id="o"><img src="img/3.png" alt=""></span>
+          <span id="u"><img src="img/4.png" alt=""></span>
+          <span id="n"><img src="img/5.png" alt=""></span>
+          <span id="g"><img src="img/6.png" alt=""></span>
+        </div>
+      </div>
+    </section>
   </section>
 
-  <section class="graphic" id="works">
+  <section class="graphic" id="graphic">
     <div id="gallery">
       <div class="tile">
         <img
@@ -224,13 +244,72 @@
     </div>
   </section>
 
+  <section class="con4">
+    <div class="inner">
+      <div class="mainTextBox">
+        <p class="title a"><i>CREATION</i></p>
+        <p class="title b"><i>PRODUCTION</i></p>
+        <div class="in">
+          <!--           <video class="box" playinline="" autoplay="" loop="" muted="">
+            <source src="https://cdn.sanity.io/files/u6q95fqm/production/c0594d11b2a34d37493ac112d3cb8d1d315a129e.mp4"
+              type="video/mp4">
+          </video> -->
+          <p class="title c"><i>DIFFUSION</i></p>
+        </div>
+      </div>
+      <ul class="listBox">
+        <li class="box a">
+          <h2>CREATION</h2>
+          <h3>1</h3>
+          <div class="text">
+            <h4>Storyboards first.<br>Pixels later.</h4>
+            <p>브랜드와 사용자의 맥락을 이해하고, 와이어프레임과 플로우를 설계해
+              한 편의 영화처럼 자연스러운 사용자 여정을 만듭니다.</p>
+            <p>정보 구조, 시나리오, 인터랙션 방향을 정리해
+              이후 디자인·퍼블리싱 단계의 기준점을 세웁니다.</p>
+          </div>
+        </li>
+
+        <li class="box b">
+          <h2>PRODUCTION</h2>
+          <h3>2</h3>
+          <div class="text">
+            <h4>Design, code,<br>and refine.</h4>
+            <p>Figma에서 설계한 화면을 HTML/CSS/JavaScript로 구현하고,
+              반응형과 접근성을 고려해 실제 사용할 수 있는 인터페이스로 만듭니다.</p>
+            <p>모션과 디테일을 더해, 정적인 컴프가 살아 있는 장면처럼 보이게 합니다.</p>
+          </div>
+        </li>
+
+        <li class="box c">
+          <h2>DIFFUSION</h2>
+          <h3>3</h3>
+          <div class="text">
+            <h4>Launch, measure,<br>iterate.</h4>
+            <p>배포 이후 실제 데이터와 피드백을 기반으로 마이크로 카피, 인터랙션,
+              퍼포먼스를 조정하며 완성도를 높입니다.</p>
+            <p>필요하다면 새로운 씬(기능)을 추가하며, 서비스의 다음 에피소드를 준비합니다.</p>
+          </div>
+        </li>
+      </ul>
+      <!--       <div class="subTextBox">
+        <div class="subText">
+          <p>At Qude, we don't have big or small projects. We only have people, creativity, sharing.</p>
+          <p>Each podcast should be a successison of moments of pleasure. Exceptional moments. Design, production,
+            distribution. And listening.</p>
+        </div>
+      </div> -->
+    </div>
+  </section>
+
+
   <!--section5 -->
   <section class="publishing" id="publishing">
     <div class="left_sidebar">Publishing</div>
     <ul class="project_list">
       <li class="project_row"
         data-bg="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80">
-        <span class="project_title">01 Team Portfolio Project</span>
+        <span class="project_title">01 WEB Team Projects</span>
         <div class="tags">
           <span class="tag">Design</span>
           <span class="tag">Publishing</span>
@@ -238,7 +317,7 @@
       </li>
       <li class="project_row"
         data-bg="https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?auto=format&fit=crop&w=800&q=80">
-        <span class="project_title">02 APP Projects</span>
+        <span class="project_title">02 APP Team Projects</span>
         <div class="tags">
           <span class="tag">Design</span>
           <span class="tag">Publishing</span>
@@ -249,7 +328,7 @@
         <span class="project_title">03 WEB Projects</span>
         <div class="tags">
           <span class="tag">Design</span>
-          <span class="tag">Publishing</span>
+          <span class="tag">prototype</span>
         </div>
       </li>
       <li class="project_row"
@@ -257,7 +336,7 @@
         <span class="project_title">04 WEB Projects</span>
         <div class="tags">
           <span class="tag">Design</span>
-          <span class="tag">Publishing</span>
+          <span class="tag">prototype</span>
         </div>
       </li>
     </ul>
@@ -265,6 +344,202 @@
 
   <div class="hover_bg"></div>
 
+
+  <!--  -->
+
+  <section class="profile" id="profile">
+    <div class="profile_container">
+      <div class="profile_image_wrap">
+        <img src="img/나.png" alt="Profile" class="profile_image">
+        <div class="profile_image_overlay"></div>
+      </div>
+
+      <div class="profile_content">
+        <h2>HAM SUNG HEE</h2>
+        <p class="profile_subtitle">Web Publisher & Designer</p>
+
+        <p class="profile_description">
+          픽셀 하나하나에 의미를 담아 디자인하고, 코드로 생명을 불어넣습니다.
+          사용자 경험을 최우선으로 생각하며, 아름다움과 기능성이 조화를 이루는
+          웹사이트를 만들어갑니다. 끊임없이 배우고 성장하며, 트렌드를 선도하는
+          크리에이티브를 추구합니다.
+        </p>
+
+        <div class="skills_grid">
+          <div class="skill_category">
+            <h3>Design</h3>
+            <div class="skill_tags">
+              <span class="skill_tag">Photoshop</span>
+              <span class="skill_tag">Illustrator</span>
+              <span class="skill_tag">Figma</span>
+            </div>
+          </div>
+
+          <div class="skill_category">
+            <h3>Development</h3>
+            <div class="skill_tags">
+              <span class="skill_tag">HTML5</span>
+              <span class="skill_tag">CSS3</span>
+              <span class="skill_tag">JavaScript</span>
+              <!--               <span class="skill_tag">React</span> -->
+            </div>
+          </div>
+
+          <div class="skill_category">
+            <h3>Tools</h3>
+            <div class="skill_tags">
+              <span class="skill_tag">Git</span>
+              <span class="skill_tag">VS Code</span>
+              <span class="skill_tag">Notion</span>
+            </div>
+          </div>
+
+          <div class="skill_category">
+            <h3>Interests</h3>
+            <div class="skill_tags">
+              <span class="skill_tag">UI/UX</span>
+              <span class="skill_tag">movie</span>
+              <span class="skill_tag">coffee</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!--   <section class="contact" id="contact">
+    <div class="contact_container">
+      <h2>GET IN TOUCH</h2>
+      <p class="contact_subtitle">
+        새로운 프로젝트나 협업 기회에 대해 언제든 연락주세요
+      </p>
+
+      <div class="contact_methods">
+        <a href="mailto:your.email@example.com" class="contact_card">
+          <div class="contact_icon">✉️</div>
+          <h3>Email</h3>
+          <p>rjswjswl77@naver.com</p>
+        </a>
+
+        <a href="tel:+821012345678" class="contact_card">
+          <div class="contact_icon">📱</div>
+          <h3>instagram</h3>
+          <p>@shout_hee</p>
+        </a>
+
+        <a href="https://github.com/yourusername" target="_blank" class="contact_card">
+          <div class="contact_icon">💻</div>
+          <h3>GitHub</h3>
+          <p>https://github.com/hamsunghee</p>
+        </a>
+      </div>
+      <p class="footer_text">
+        © 2025 HAM SUNG HEE. ALL RIGHTS RESERVED.<br>
+        DESIGNED & DEVELOPED WITH PASSION
+      </p>
+    </div>
+  </section> -->
+
+  <footer class="footer">
+    <div class="inner">
+      <div class="contact-typo btn-arrow">
+        <a href="#">
+          <span class="italic">work</span>
+          <span>together</span>
+          <span class="arrow">
+            <i class="xi-arrow-right"></i>
+          </span>
+        </a>
+      </div>
+      <div class="footer-info">
+        <div class="title">
+          <p>[menu]</p>
+        </div>
+        <div class="content">
+          <ul>
+            <li>
+              <div class="btn-arrow">
+                <a href="#" class="cursor-able">
+                  <span>home</span>
+                  <span class="arrow">
+                    <i class="xi-arrow-right"></i>
+                  </span>
+                </a>
+              </div>
+            </li>
+            <li>
+              <div class="btn-arrow">
+                <a href="#" class="cursor-able">
+                  <span>story</span>
+                  <span class="arrow">
+                    <i class="xi-arrow-right"></i>
+                  </span>
+                </a>
+              </div>
+            </li>
+            <li>
+              <div class="btn-arrow">
+                <a href="#" class="cursor-able">
+                  <span>works</span>
+                  <span class="arrow">
+                    <i class="xi-arrow-right"></i>
+                  </span>
+                </a>
+              </div>
+            </li>
+            <li>
+              <div class="btn-arrow">
+                <a href="#" class="cursor-able">
+                  <span>contact</span>
+                  <span class="arrow">
+                    <i class="xi-arrow-right"></i>
+                  </span>
+                </a>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="title">
+          <p>[contact]</p>
+        </div>
+        <div class="content">
+          <ul>
+            <li>
+              <div class="btn-arrow">
+                <a href="mailto:soro@soroweb.co.kr" class="cursor-able">
+                  rjswjswl77@naver.com
+                </a>
+              </div>
+            </li>
+            <li>
+              <div class="btn-arrow">
+                <a href="shout_hee" class="cursor-able">
+                  @shout_hee
+                </a>
+              </div>
+            </li>
+            <li>
+              <a href="#">이력서 보러가기</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="typo">
+          <a href="#">
+            <span>Ham comm.</span>
+          </a>
+        </div>
+        <p class="copy">hamsunghee ⓒ2025</p>
+      </div>
+    </div>
+    <div class="top-btn">
+      <span class="arrow">
+        <i class="xi-arrow-right"></i>
+      </span>
+    </div>
+  </footer>
 
 </body>
 

@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
       intro_screen.classList.add('hidden');
     }, 600);
-
+    window.scrollTo({ top: 0, behavior: 'auto' });
     setTimeout(() => {
       flash_layer.classList.remove('active');
     }, 900);
@@ -90,6 +90,22 @@ hoverTargets.forEach(el => {
   });
 });
 
+  // 01 visual 
+  gsap.timeline({
+    scrollTrigger: {
+      trigger: '.visual',
+      start: '100% 100%',
+      end: "100% 0%",
+      scrub: 1, // smooth scrubbing, takes 1 second to "catch up" to the scrollbar, 숫자가 클수록 애니가 더 부드러워짐 (1-3)
+      // markers: true,
+    }
+  })
+    .to('.logoWrap #j', { x: -150, y: 250, rotate: 20, ease: 'none', duration: 5 }, 0)
+    .to('.logoWrap #y', { x: -30, y: 150, rotate: -10, ease: 'none', duration: 5 }, 0)
+    .to('.logoWrap #o', { x: 0, y: 400, rotate: -10, ease: 'none', duration: 5 }, 0)
+    .to('.logoWrap #u', { x: 50, y: 300, rotate: 10, ease: 'none', duration: 5 }, 0)
+    .to('.logoWrap #n', { x: 100, y: 100, rotate: -10, yease: 'none', duration: 5 }, 0)
+    .to('.logoWrap #g', { x: 50, y: 400, rotate: 20, yease: 'none', duration: 5 }, 0)
 
 
 
@@ -132,4 +148,21 @@ document.querySelectorAll('.project_row').forEach(item => {
     hoverBg.classList.remove('active');
     hoverBg.style.backgroundImage = '';
   });
+});
+
+
+/*  */
+
+// 05 .con4 .listBox .box ScrollTrigger Animation
+gsap.utils.toArray('.con4 .listBox .box').forEach((selector) => {
+  gsap.timeline({
+    scrollTrigger: {
+      trigger: selector,
+      start: '0% 20%',
+      end: '0% 0%',
+      scrub: 1,
+      // markers: true,
+    }
+  })
+    .to(selector, { transform: 'rotateX(-10deg) scale(0.9)', transformOrigin: 'top', filter: 'brightness(0.3)' }, 0)
 });
