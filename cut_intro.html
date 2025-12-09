@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
   <meta charset="UTF-8" />
   <title>Ham Sunghee – Cinematic Portfolio Intro</title>
@@ -36,16 +35,27 @@
     }
 
     .slate-wrap {
+      position: relative;
       display: flex;
       align-items: center;
       gap: 4vw;
     }
 
     .slate-img {
+      position: absolute;
+      left: 0;
+      top: 0;
       width: min(420px, 40vw);
       height: auto;
       transform-origin: left bottom;
       cursor: pointer;
+    }
+
+    .slate-img--open { opacity: 1; }
+    .slate-img--cut  { opacity: 0; }
+
+    .intro-text {
+      margin-left: calc(min(420px, 40vw) + 4vw);
     }
 
     .intro-text .years {
@@ -108,13 +118,13 @@
     }
   </style>
 </head>
-
 <body>
   <!-- 인트로 슬레이트 -->
   <section class="intro-slate">
     <div class="slate-wrap">
-      <!-- 클랩보드 이미지 경로만 네 파일로 교체 -->
-      <img src="img/test01.png" alt="Clapboard" class="slate-img" />
+      <!-- open / cut 두 장 -->
+      <img src="img/open.png" alt="Clapboard Open" class="slate-img slate-img--open" />
+      <img src="img/cut.png"  alt="Clapboard Cut"  class="slate-img slate-img--cut" />
       <div class="intro-text">
         <p class="years">2022 — 2025</p>
         <h1 class="title">PORTFOLIO</h1>
@@ -123,7 +133,7 @@
     <div class="scroll-hint">SCROLL OR CLICK TO CUT</div>
   </section>
 
-  <!-- 메인 콘텐츠 예시 -->
+  <!-- 메인 콘텐츠 -->
   <main class="main-content">
     <section class="hero" id="home">
       <h2>Design is my movie.</h2>
@@ -136,8 +146,9 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      const slate = document.querySelector(".intro-slate");
-      const slateImg = document.querySelector(".slate-img");
+      const slate      = document.querySelector(".intro-slate");
+      const slateOpen  = document.querySelector(".slate-img--open");
+      const slateCut   = document.querySelector(".slate-img--cut");
       let played = false;
       const trigger = 60;
 
@@ -149,14 +160,18 @@
 
         const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-        // 컷 모션
-        tl.to(slateImg, {
+        // 컷 모션 (open 기준)
+        tl.to(slateOpen, {
           rotation: -12,
           duration: 0.12,
           yoyo: true,
           repeat: 1,
           transformOrigin: "left top"
         });
+
+        // open → cut 크로스페이드
+        tl.to(slateOpen, { opacity: 0, duration: 0.3 }, "-=0.02");
+        tl.to(slateCut,  { opacity: 1, duration: 0.3 }, "<");
 
         // 아래로 내려가며 본문 시작
         tl.to(slate, {
@@ -186,5 +201,4 @@
     });
   </script>
 </body>
-
 </html>
