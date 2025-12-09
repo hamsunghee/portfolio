@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: #e3e3db;
+  }
+
+  a,
+  p {
+    text-decoration: none;
+    color: #1f1f1f;
+    font-family: "Suisse Intl";
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.02rem;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    backface-visibility: hidden;
+    /* To maintain image resolution when scaled in */
+  }
+
+  nav,
+  footer {
+    position: absolute;
+    left: 0;
+    width: 100vw;
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 2;
+  }
+
+  nav {
+    top: 0;
+  }
+
+  footer {
+    bottom: 0;
+  }
+
+  .container {
+    position: relative;
+    width: 100vw;
+    height: 100svh;
+    /* small viewport height */
+    overflow: hidden;
+  }
+
+  .gallery-container {
+    position: relative;
+    width: 100%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-style: preserve-3d;
+    perspective: 2000px;
+    will-change: transform;
+    margin-top: 2rem;
+  }
+
+  .gallery {
+    position: relative;
+    width: 600px;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-origin: center;
+    will-change: transform;
+  }
+
+  .card {
+    position: absolute;
+    width: 45px;
+    height: 60px;
+    border-radius: 4px;
+    transform-origin: center;
+    will-change: transform;
+    transform-style: preserve-3d;
+    backface-visibility: visible;
+    /* Default is visible, can be hidden if needed for specific effects */
+    cursor: pointer;
+    overflow: hidden;
+  }
+
+  .title-container {
+    position: fixed;
+    bottom: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 42px;
+    /* or a bit more depending on font size */
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+  }
+
+  .title-container p {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    font-size: 36px;
+    letter-spacing: -0.05rem;
+  }
+
+  .word {
+    position: relative;
+    display: inline-block;
+    will-change: transform;
+  }
+</style>
+
+<body>
+  <div class="container">
+    <div class="gallery-container">
+      <div class="gallery">
+        <!-- Images will be populated by JavaScript -->
+      </div>
+    </div>
+    <div class="title-container">
+      <!-- Title will be populated by JavaScript -->
+    </div>
+  </div>
+  <script>
+    import gsap from "https://esm.sh/gsap";
+    import SplitText from "https://esm.sh/gsap/SplitText";
+
+    const collection = [
+      {
+        title: "Shadow Profile",
+        img:
+          "https://images.pexels.com/photos/3225517/pexels-photo-3225517.jpeg?auto=compress&cs=tinysrgb&w=400"
+      },
+      {
+        title: "Silent Neon",
+        img:
+          "https://images.pexels.com/photos/374870/pexels-photo-374870.jpeg?auto=compress&cs=tinysrgb&w=400"
+      },
+      {
+        title: "Wavelength",
+        img:
+          "https://images.pexels.com/photos/3408744/pexels-photo-3408744.jpeg?auto=compress&cs=tiny"
+      },
+      {
+        title: "Noir Figure",
+        img:
+          "https://images.pexels.com/photos/2387873/pexels-photo-2387873.jpeg?auto=compress&cs=tinysrgb&w=400"
+      },
+      {
+        title: "Midnight Gaze",
+        img:
+          "https://images.pexels.com/photos/1366919/pexels-photo-1366919.jpeg?auto=compress&cs=tinysrgb&w=400"
+      },
+      {
+        title: "Cobalt Contrast",
+        img:
+          "https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&w=400"
+      },
+      {
+        title: "Half-light",
+        img:
+          "https://images.pexels.com/photos/206359/pexels-photo-206359.jpeg?auto=compress&cs=tinysrgb&w=400"
+      },
+      {
+        title: "Scarlet Frame",
+        img:
+          "https://images.pexels.com/photos/691668/pexels-photo-691668.jpeg?auto=compress&cs=tinysrgb&w=400"
+      },
+      {
+        title: "Pale Vision",
+        img:
+          "https://images.pexels.com/photos/1770809/pexels-photo-1770809.jpeg?auto=compress&cs=tinysrgb&w=400"
+      },
+      {
+        title: "Spectral Form",
+        img:
+          "https://images.pexels.com/photos/326055/pexels-photo-326055.jpeg?auto=compress&cs=tinysrgb&w=400"
+      },
+      {
+        title: "Monochrome Motion",
+        img:
+          "https://images.pexels.com/photos/355465/pexels-photo-355465.jpeg?auto=compress&cs=tinysrgb&w=400"
+      },
+      {
+        title: "Platinum Edge",
+        img:
+          "https://images.pexels.com/photos/139829/pexels-photo-139829.jpeg?auto=compress&cs=tinysrgb&w=400"
+      },
+      {
+        title: "Electric Shade",
+        img:
+          "https://images.pexels.com/photos/167964/pexels-photo-167964.jpeg?auto=compress&cs=tinysrgb&w=400"
+      },
+      {
+        title: "Veiled Light",
+        img:
+          "https://images.pexels.com/photos/1412235/pexels-photo-1412235.jpeg?auto=compress&cs=tinysrgb&w=400"
+      },
+      {
+        title: "Frost Signal",
+        img:
+          "https://images.pexels.com/photos/1323550/pexels-photo-1323550.jpeg?auto=compress&cs=tinysrgb&w=400"
+      },
+      {
+        title: "Haze Portrait",
+        img:
+          "https://images.pexels.com/photos/449627/pexels-photo-449627.jpeg?auto=compress&cs=tinysrgb&w=400"
+      },
+      {
+        title: "Glowing Contour",
+        img:
+          "https://images.pexels.com/photos/207983/pexels-photo-207983.jpeg?auto=compress&cs=tinysrgb&w=400"
+      },
+      {
+        title: "Dark Elegance",
+        img:
+          "https://images.pexels.com/photos/1166209/pexels-photo-1166209.jpeg?auto=compress&cs=tiny"
+      },
+      {
+        title: "Ruby Accent",
+        img:
+          "https://images.pexels.com/photos/169193/pexels-photo-169193.jpeg?auto=compress&cs=tiny"
+      },
+      {
+        title: "Clear Gaze",
+        img:
+          "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tiny"
+      }
+    ];
+
+    document.addEventListener("DOMContentLoaded", () => {
+      gsap.registerPlugin(SplitText);
+
+      const gallery = document.querySelector(".gallery");
+      const galleryContainer = document.querySelector(".gallery-container");
+      const titleContainer = document.querySelector(".title-container");
+
+      const cards = [];
+      const transformState = [];
+
+      let currentTitle = null;
+      let isPreviewActive = false;
+      let isTransitioning = false;
+
+      const config = {
+        imageCount: 25,
+        radius: 275,
+        sensitivity: 390,
+        effectFalloff: 200, // Adjusted falloff
+        cardMoveAmount: 40,
+        lerpFactor: 0.1, // Smoother lerp
+        isMobile: window.innerWidth < 1000,
+        cardPerspective: 1000 // Standardized perspective for cards
+      };
+
+      const parallaxState = {
+        targetX: 0,
+        targetY: 0,
+        targetZ: 0,
+        currentX: 0,
+        currentY: 0,
+        currentZ: 0
+      };
+
+      for (let i = 0; i < config.imageCount; i++) {
+        const angle = (i / config.imageCount) * Math.PI * 2;
+        const x = config.radius * Math.cos(angle);
+        const y = config.radius * Math.sin(angle);
+        const cardIndex = i % collection.length;
+
+        const card = document.createElement("div");
+        card.className = "card";
+        card.dataset.index = i;
+        card.dataset.title = collection[cardIndex].title;
+
+        const img = document.createElement("img");
+        img.src = collection[cardIndex].img;
+        card.appendChild(img);
+
+        gsap.set(card, {
+          x,
+          y,
+          rotation: (angle * 180) / Math.PI + 90,
+          transformPerspective: config.cardPerspective,
+          transformOrigin: "center center"
+        });
+
+        gallery.appendChild(card);
+        cards.push(card);
+
+        transformState.push({
+          currentRotation: 0,
+          targetRotation: 0,
+          currentX: 0,
+          targetX: 0,
+          currentY: 0,
+          targetY: 0,
+          currentScale: 1,
+          targetScale: 1,
+          angle
+        });
+
+        card.addEventListener("click", (e) => {
+          if (!isPreviewActive && !isTransitioning) {
+            togglePreview(parseInt(card.dataset.index));
+          }
+          e.stopPropagation();
+        });
+      }
+
+      function togglePreview(index) {
+        isPreviewActive = true;
+        isTransitioning = true;
+
+        // Reset any active hover effects on cards smoothly
+        cards.forEach((card, i) => {
+          const state = transformState[i];
+          gsap.to(card, {
+            x: config.radius * Math.cos(state.angle), // Base X on circle
+            y: config.radius * Math.sin(state.angle), // Base Y on circle
+            rotationY: 0,
+            scale: 1,
+            duration: 0.6, // Quick but smooth reset
+            ease: "sine.out"
+          });
+          // Reset transformState targets as well, currents will follow via lerp if animate() was running
+          // but since it's paused, the tween above handles the visual reset.
+          state.targetRotation = 0;
+          state.currentRotation = 0;
+          state.targetScale = 1;
+          state.currentScale = 1;
+          state.targetX = 0;
+          state.currentX = 0;
+          state.targetY = 0;
+          state.currentY = 0;
+        });
+
+        const cardAngle = transformState[index].angle;
+        const targetPositionAngle = (Math.PI * 3) / 2; // Bottom of the circle
+        let rotationRadians = targetPositionAngle - cardAngle;
+
+        if (rotationRadians > Math.PI) rotationRadians -= Math.PI * 2;
+        else if (rotationRadians < -Math.PI) rotationRadians += Math.PI * 2;
+        const galleryTargetRotation = (rotationRadians * 180) / Math.PI;
+
+        gsap.to(gallery, {
+          scale: config.isMobile ? 2.5 : 4.5, // Adjusted preview scale
+          y: config.isMobile ? config.radius * 2.5 : config.radius * 3.5, // Move gallery down
+          rotation: galleryTargetRotation + 360, // Rotate gallery with a spin
+          duration: 1.8,
+          ease: "expo.inOut",
+          onComplete: () => {
+            isTransitioning = false;
+          }
+        });
+
+        // Animate galleryContainer (parallax wrapper) back to neutral
+        gsap.to(galleryContainer, {
+          rotateX: 0,
+          rotateY: 0,
+          rotateZ: 0,
+          duration: 1.6,
+          ease: "sine.inOut"
+        });
+
+        if (currentTitle) currentTitle.remove(); // Remove old title if any
+        const titleText = cards[index].dataset.title;
+        const p = document.createElement("p");
+        p.textContent = titleText;
+        titleContainer.appendChild(p);
+        currentTitle = p;
+
+        const splitText = new SplitText(p, { type: "words", wordsClass: "word" });
+        gsap.set(splitText.words, { y: "110%" });
+        gsap.to(splitText.words, {
+          y: "0%",
+          duration: 0.85,
+          delay: 0.6, // Sync with gallery animation
+          stagger: 0.07,
+          ease: "expo.out"
+        });
+      }
+
+      function resetGallery() {
+        if (isTransitioning) return;
+        isTransitioning = true;
+
+        if (currentTitle) {
+          const words = currentTitle.querySelectorAll(".word"); // SplitText adds .word by default
+          gsap.to(words, {
+            y: "-110%",
+            duration: 0.7,
+            // delay: 0.1, // Optional delay
+            stagger: { amount: 0.2, from: "end" },
+            ease: "expo.in",
+            onComplete: () => {
+              currentTitle.remove();
+              currentTitle = null;
+            }
+          });
+        }
+
+        let galleryScale = 1;
+        const viewportWidth = window.innerWidth;
+        if (viewportWidth < 768) galleryScale = 0.6;
+        else if (viewportWidth < 1200) galleryScale = 0.8;
+
+        gsap.to(gallery, {
+          scale: galleryScale,
+          y: 0,
+          x: 0,
+          rotation: 0,
+          duration: 2.0,
+          ease: "expo.inOut",
+          delay: 0.1, // Slight delay for title to start animating out
+          onComplete: () => {
+            isPreviewActive = false;
+            isTransitioning = false;
+          }
+        });
+
+        // Reset parallax targets; the animate loop will smoothly lerp current values
+        parallaxState.targetX = 0;
+        parallaxState.targetY = 0;
+        parallaxState.targetZ = 0;
+      }
+
+      function handleResize() {
+        const viewportWidth = window.innerWidth;
+        config.isMobile = viewportWidth < 1000;
+
+        let galleryScale = 1;
+        if (viewportWidth < 768) galleryScale = 0.6;
+        else if (viewportWidth < 1200) galleryScale = 0.8;
+
+        if (!isPreviewActive) {
+          // Only apply base scale if not in preview
+          gsap.set(gallery, { scale: galleryScale });
+        }
+
+        if (!isPreviewActive) {
+          Object.assign(parallaxState, {
+            targetX: 0,
+            targetY: 0,
+            targetZ: 0,
+            currentX: 0,
+            currentY: 0,
+            currentZ: 0
+          });
+          transformState.forEach((state) => {
+            Object.assign(state, {
+              targetRotation: 0,
+              currentRotation: 0,
+              targetScale: 1,
+              currentScale: 1,
+              targetX: 0,
+              currentX: 0,
+              targetY: 0,
+              currentY: 0
+            });
+          });
+          // Refresh card positions if radius or layout logic changes with resize
+          cards.forEach((card, i) => {
+            const angle = transformState[i].angle;
+            const x = config.radius * Math.cos(angle);
+            const y = config.radius * Math.sin(angle);
+            gsap.set(card, { x, y, rotation: (angle * 180) / Math.PI + 90 });
+          });
+        }
+      }
+      window.addEventListener("resize", handleResize);
+      handleResize();
+
+      document.addEventListener("click", () => {
+        if (isPreviewActive && !isTransitioning) {
+          resetGallery();
+        }
+      });
+
+      document.addEventListener("mousemove", (e) => {
+        if (isPreviewActive || isTransitioning || config.isMobile) return;
+
+        const centerX = window.innerWidth / 2;
+        const centerY = window.innerHeight / 2;
+        const percentX = (e.clientX - centerX) / centerX;
+        const percentY = (e.clientY - centerY) / centerY;
+
+        parallaxState.targetY = percentX * 12; // Slightly reduced tilt
+        parallaxState.targetX = -percentY * 12;
+        parallaxState.targetZ = (percentX + percentY) * 3;
+
+        cards.forEach((card, index) => {
+          const rect = card.getBoundingClientRect();
+          const dx = e.clientX - (rect.left + rect.width / 2);
+          const dy = e.clientY - (rect.top + rect.height / 2);
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          const state = transformState[index];
+
+          if (distance < config.sensitivity) {
+            const flipFactor = Math.max(0, 1 - distance / config.effectFalloff);
+            state.targetRotation = 180 * flipFactor;
+            state.targetScale = 1 + 0.25 * flipFactor; // Slightly reduced scale effect
+            state.targetX =
+              config.cardMoveAmount * flipFactor * Math.cos(state.angle);
+            state.targetY =
+              config.cardMoveAmount * flipFactor * Math.sin(state.angle);
+          } else {
+            state.targetRotation = 0;
+            state.targetScale = 1;
+            state.targetX = 0;
+            state.targetY = 0;
+          }
+        });
+      });
+
+      function animate() {
+        if (!isPreviewActive && !isTransitioning) {
+          parallaxState.currentX +=
+            (parallaxState.targetX - parallaxState.currentX) * config.lerpFactor;
+          parallaxState.currentY +=
+            (parallaxState.targetY - parallaxState.currentY) * config.lerpFactor;
+          parallaxState.currentZ +=
+            (parallaxState.targetZ - parallaxState.currentZ) * config.lerpFactor;
+
+          gsap.set(galleryContainer, {
+            rotateX: parallaxState.currentX,
+            rotateY: parallaxState.currentY,
+            rotateZ: parallaxState.currentZ // Using rotateZ
+          });
+
+          cards.forEach((card, index) => {
+            const state = transformState[index];
+            state.currentRotation +=
+              (state.targetRotation - state.currentRotation) * config.lerpFactor;
+            state.currentScale +=
+              (state.targetScale - state.currentScale) * config.lerpFactor;
+            state.currentX += (state.targetX - state.currentX) * config.lerpFactor;
+            state.currentY += (state.targetY - state.currentY) * config.lerpFactor;
+
+            const baseX = config.radius * Math.cos(state.angle);
+            const baseY = config.radius * Math.sin(state.angle);
+
+            gsap.set(card, {
+              x: baseX + state.currentX,
+              y: baseY + state.currentY,
+              rotationY: state.currentRotation,
+              scale: state.currentScale,
+              // Base Z rotation is set at init and on resize, no need to set it every frame unless it changes
+              rotation: (state.angle * 180) / Math.PI + 90,
+              transformPerspective: config.cardPerspective
+            });
+          });
+        }
+      }
+
+      gsap.ticker.add(animate); // Use GSAP's ticker
+    });
+
+  </script>
+</body>
+
+</html>
