@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8" />
   <title>Ham Sunghee – Cinematic Portfolio Intro</title>
@@ -51,8 +52,13 @@
       cursor: pointer;
     }
 
-    .slate-img--open { opacity: 1; }
-    .slate-img--cut  { opacity: 0; }
+    .slate-img--open {
+      opacity: 1;
+    }
+
+    .slate-img--cut {
+      opacity: 0;
+    }
 
     .intro-text {
       margin-left: calc(min(420px, 40vw) + 4vw);
@@ -118,13 +124,14 @@
     }
   </style>
 </head>
+
 <body>
   <!-- 인트로 슬레이트 -->
   <section class="intro-slate">
     <div class="slate-wrap">
       <!-- open / cut 두 장 -->
       <img src="img/open.png" alt="Clapboard Open" class="slate-img slate-img--open" />
-      <img src="img/cut.png"  alt="Clapboard Cut"  class="slate-img slate-img--cut" />
+      <img src="img/cut.png" alt="Clapboard Cut" class="slate-img slate-img--cut" />
       <div class="intro-text">
         <p class="years">2022 — 2025</p>
         <h1 class="title">PORTFOLIO</h1>
@@ -146,9 +153,9 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      const slate      = document.querySelector(".intro-slate");
-      const slateOpen  = document.querySelector(".slate-img--open");
-      const slateCut   = document.querySelector(".slate-img--cut");
+      const slate = document.querySelector(".intro-slate");
+      const slateOpen = document.querySelector(".slate-img--open");
+      const slateCut = document.querySelector(".slate-img--cut");
       let played = false;
       const trigger = 60;
 
@@ -171,7 +178,7 @@
 
         // open → cut 크로스페이드
         tl.to(slateOpen, { opacity: 0, duration: 0.3 }, "-=0.02");
-        tl.to(slateCut,  { opacity: 1, duration: 0.3 }, "<");
+        tl.to(slateCut, { opacity: 1, duration: 0.3 }, "<");
 
         // 아래로 내려가며 본문 시작
         tl.to(slate, {
@@ -201,4 +208,5 @@
     });
   </script>
 </body>
+
 </html>

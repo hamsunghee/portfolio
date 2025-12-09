@@ -3,200 +3,226 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title>3D Glasses Portfolio Intro</title>
+  <title>Client Card Section Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    html,
-    body {
-      height: 100%;
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
 
     body {
-      background: #111;
-      overflow: hidden;
-    }
-
-    #intro-bg {
-      position: fixed;
-      left: 0;
-      top: 0;
-      width: 100vw;
-      height: 100vh;
-      background: url('kaebceo.jpg') center/cover no-repeat;
-      filter: grayscale(1) blur(3px);
-      transition: filter 1s;
-      z-index: 10;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .intro-colorful {
-      filter: none !important;
-      transition: filter 1.5s;
-    }
-
-    #intro-text {
+      background: #050505;
       color: #fff;
-      text-shadow: 0 2px 8px #000;
-      text-align: center;
-      font-size: 2rem;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Pretendard", sans-serif;
+      min-height: 100vh;
+      padding: 60px 5vw;
+    }
+
+    h2.section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
       margin-bottom: 2rem;
     }
 
-    #glasses-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      margin-top: 2rem;
-      transition: transform 0.5s;
+    .c-section.client-card {
+      position: relative;
+      overflow: hidden;
     }
 
-    #glasses-btn img.svg-3d {
-      width: 100px;
-      filter: drop-shadow(0 0 10px #333);
-      transition: transform 0.7s;
-    }
-
-    #glasses-btn.active img.svg-3d {
-      transform: scale(3);
-    }
-
-    #main-content {
-      position: fixed;
-      left: 0;
-      top: 0;
-      width: 100vw;
-      height: 100vh;
-      background: #151d1d;
-      color: #fff;
+    /* 가로로 카드 쌓기 */
+    .o-row.client-card {
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      opacity: 0;
-      transition: opacity 0.7s;
-      z-index: 1;
+      gap: 1.5rem;
+      overflow-x: auto;
+      padding-bottom: 40px;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scroll-padding: 0 19.6em;
     }
 
-    .hidden {
-      display: none;
+    .o-row.client-card::-webkit-scrollbar {
+      height: 6px;
     }
 
-    /* 예시 필름·제목 */
-    .film-strip {
-      margin-top: 120px;
-      margin-bottom: 16px;
-      border-top: 4px dashed #d3cccc;
-      border-bottom: 4px dashed #d3cccc;
-      padding: 22px 0;
-      font-size: 1.3rem;
-      letter-spacing: 1.5px;
-      background: rgba(0, 0, 0, 0.16);
-      width: 70vw;
-      text-align: center;
+    .o-row.client-card::-webkit-scrollbar-track {
+      background: #111;
     }
 
-    .project-poster {
-      width: 220px;
-      height: 120px;
-      background: #2b3543;
-      border-radius: 18px;
-      margin: 20px auto 9px;
-      box-shadow: 0 3px 12px #111;
-      line-height: 120px;
+    .o-row.client-card::-webkit-scrollbar-thumb {
+      background: #444;
+      border-radius: 999px;
     }
 
-    .synopsis {
-      margin-bottom: 22px;
-      font-size: 1rem;
-      opacity: .85;
-    }
-
-    /* 스크린 독점 효과용 */
-    #main-content h2 {
-      font-size: 2.4rem;
-      margin-bottom: 1rem;
-    }
-
-    #main-content .credit {
-      margin-top: 32px;
-      font-size: 1.2rem;
-      opacity: 0.87;
-    }
-
-    #main-content .buttons {
-      margin-top: 38px;
-    }
-
-    #main-content button {
-      background: #f5f5ee;
-      color: #151d1d;
-      border: none;
-      padding: 12px 30px;
-      border-radius: 36px;
-      font-size: 1rem;
-      font-weight: 600;
-      letter-spacing: 1.5px;
+    .c-client-card {
+      position: relative;
+      width: 260px;
+      height: 360px;
+      flex: 0 0 auto;
+      scroll-snap-align: start;
+      will-change: transform;
+      transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1),
+        box-shadow 0.3s ease,
+        filter 0.3s ease;
+      opacity: 1;
       cursor: pointer;
-      margin-right: 16px;
-      box-shadow: 0 2px 8px #0002;
-      transition: background .2s, color .2s;
+      filter: brightness(0.55);
     }
 
-    #main-content button:hover {
-      background: #ffd700;
-      color: #333;
+    .c-img-contain.client-card {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 8px;
+      background: #222;
+    }
+
+    .c-img-contain.client-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* 어둡게 덮는 오버레이 */
+    .c-img-contain.client-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 0%, transparent 0, rgba(0, 0, 0, 0.65) 70%);
+      mix-blend-mode: multiply;
+      opacity: 0.7;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    /* 카드 각도 (데스크탑) */
+    @media (min-width: 992px) {
+      .o-row.client-card .c-client-card:nth-child(1) {
+        transform: rotate(-16deg);
+      }
+
+      .o-row.client-card .c-client-card:nth-child(2) {
+        transform: rotate(-10deg);
+      }
+
+      .o-row.client-card .c-client-card:nth-child(3) {
+        transform: rotate(-5deg);
+      }
+
+      .o-row.client-card .c-client-card:nth-child(4) {
+        transform: rotate(8deg);
+      }
+
+      .o-row.client-card .c-client-card:nth-child(5) {
+        transform: rotate(10deg);
+      }
+
+      .o-row.client-card .c-client-card:nth-child(6) {
+        transform: rotate(14deg);
+        margin-right: 0;
+      }
+    }
+
+    /* 활성 카드 */
+    .o-row.client-card .c-client-card.is-active {
+      transform: translateY(-16px) rotate(-4deg) !important;
+      z-index: 20;
+      filter: brightness(1);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75);
+    }
+
+    .o-row.client-card .c-client-card.is-active .c-img-contain.client-card::before {
+      opacity: 0;
+    }
+
+    /* 반응형에서 scroll-padding 조정 */
+    @media (max-width: 767px) {
+      .o-row.client-card {
+        scroll-padding: 0 13.6em;
+      }
+    }
+
+    @media (max-width: 479px) {
+      .o-row.client-card {
+        scroll-padding: 0 7.75em;
+      }
+    }
+
+    /* 모바일에서 각도는 너무 심하지 않게 */
+    @media (max-width: 991px) {
+      .c-client-card {
+        transform: rotate(-4deg);
+      }
     }
   </style>
 </head>
 
 <body>
-  <div id="intro-bg">
-    <div id="intro-text">
-      Put on your 3D glasses.<br><span style="font-size:1rem;opacity:.7;">지금까지의 작업물을 상영합니다.</span>
+  <section class="c-section client-card" aria-label="Selected client projects">
+    <h2 class="section-title">Selected Client Projects</h2>
+
+    <div class="o-row client-card">
+      <article class="c-client-card">
+        <div class="c-img-contain client-card">
+          <img src="https://images.pexels.com/photos/2064342/pexels-photo-2064342.jpeg" alt="Client project 1" />
+        </div>
+      </article>
+
+      <article class="c-client-card">
+        <div class="c-img-contain client-card">
+          <img src="https://images.pexels.com/photos/2064342/pexels-photo-2064342.jpeg" alt="Client project 2" />
+        </div>
+      </article>
+
+      <article class="c-client-card">
+        <div class="c-img-contain client-card">
+          <img src="https://images.pexels.com/photos/6985292/pexels-photo-6985292.jpeg" alt="Client project 3" />
+        </div>
+      </article>
+
+      <article class="c-client-card">
+        <div class="c-img-contain client-card">
+          <img src="https://images.pexels.com/photos/923192/pexels-photo-923192.jpeg" alt="Client project 4" />
+        </div>
+      </article>
+
+      <article class="c-client-card">
+        <div class="c-img-contain client-card">
+          <img src="https://images.pexels.com/photos/37347/office-freelancer-computer-business-37347.jpeg"
+            alt="Client project 5" />
+        </div>
+      </article>
+
+      <article class="c-client-card">
+        <div class="c-img-contain client-card">
+          <img src="https://images.pexels.com/photos/3861964/pexels-photo-3861964.jpeg" alt="Client project 6" />
+        </div>
+      </article>
     </div>
-    <button id="glasses-btn">
-      <!-- 3D 안경 SVG 예시(경로, 디자인 자유 변경 가능) -->
-      <img class="svg-3d"
-        src="data:image/svg+xml;utf8,<svg width='100' height='40' viewBox='0 0 100 40' fill='none' xmlns='http://www.w3.org/2000/svg'><rect x='12' y='14' width='26' height='15' rx='5' fill='%230afaff'/><rect x='62' y='14' width='26' height='15' rx='5' fill='%23c2002f'/><rect x='10' y='10' width='80' height='22' rx='7' stroke='%23333' stroke-width='4'/></svg>"
-        alt="3D Glasses" />
-    </button>
-  </div>
-  <div id="main-content" class="hidden">
-    <h2>PORTFOLIO 2022 &ndash; 2025</h2>
-    <div class="film-strip">Design is my movie.<br>Every pixel is a frame, every project a new genre.</div>
-    <div class="project-poster">[브랜드리뉴얼]</div>
-    <div class="synopsis">나만의 시그니처 톤을 찾았던 순간</div>
-    <div class="project-poster">[인터랙션 퍼블리싱]</div>
-    <div class="synopsis">사용자 시선을 연출하는 인터랙션 연구</div>
-    <div class="project-poster">[UX 리서치]</div>
-    <div class="synopsis">디자인이 완성되는 스토리텔링 과정</div>
-    <div class="credit">Directed &amp; Coded by Ham Sunghee<br>Every project tells a story — and this is mine.</div>
-    <div class="buttons">
-      <button onclick="window.location.reload()">Rewatch the movie</button>
-      <button>Contact</button>
-    </div>
-  </div>
-  <!-- GSAP CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  </section>
+
   <script>
-    const glassesBtn = document.getElementById('glasses-btn');
-    glassesBtn.addEventListener('click', function () {
-      glassesBtn.classList.add('active');
-      document.getElementById('intro-bg').classList.add('intro-colorful');
-      setTimeout(function () {
-        gsap.to('#intro-bg', {
-          opacity: 0, duration: 1.7, delay: .8, onComplete: function () {
-            document.getElementById('intro-bg').style.display = 'none';
-            document.getElementById('main-content').classList.remove('hidden');
-            gsap.to('#main-content', { opacity: 1, duration: 1.2 });
-          }
-        });
-      }, 800);
+    // 카드 호버/포커스 시 활성 상태 토글
+    const row = document.querySelector('.o-row.client-card');
+    const cards = Array.from(document.querySelectorAll('.c-client-card'));
+
+    function activateCard(card) {
+      cards.forEach(c => c.classList.remove('is-active'));
+      if (card) {
+        card.classList.add('is-active');
+      }
+    }
+
+    cards.forEach(card => {
+      card.addEventListener('mouseenter', () => activateCard(card));
+      card.addEventListener('focusin', () => activateCard(card));
     });
+
+    // 마우스가 영역을 벗어나면 활성 해제
+    row.addEventListener('mouseleave', () => activateCard(null));
   </script>
 </body>
 
