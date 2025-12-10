@@ -79,8 +79,6 @@ document.addEventListener("mousemove", (e) => {
 });
 
 
-
-
 // li, img 영역에 마우스가 들어가면 'grow' 클래스 추가, 나가면 제거
 const hoverTargets = [...document.querySelectorAll("nav ul li"), ...document.querySelectorAll("img")];
 
