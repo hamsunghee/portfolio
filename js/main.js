@@ -172,3 +172,23 @@ AOS.init({
   mirror: true,
   offset: 120
 });
+
+/* top */
+// TOP 버튼
+const btnTop = document.querySelector('.btn_top');
+
+window.addEventListener('scroll', () => {
+  // 300px 이상 스크롤되면 노출
+  if (window.scrollY > 300) {
+    btnTop.classList.add('show');
+  } else {
+    btnTop.classList.remove('show');
+  }
+});
+
+btnTop.addEventListener('click', () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+});
