@@ -25,7 +25,7 @@ body {
     text-align: center;
     z-index: 1000;
     transition: opacity 0.8s ease;
-    font-family: 'Santiago', sans-serif;
+    font-family: 'Playfair Display';
 }
 
 .intro_screen.hidden {
@@ -879,6 +879,8 @@ ul.project_list:hover li:not(:hover) {
     justify-content: center;
     background: linear-gradient(135deg, #000 0%, #000 100%);
     font-family: 'Playfair Display', serif;
+    min-height: 100vh;
+    position: relative;
 }
 
 .profile_container {
@@ -887,7 +889,8 @@ ul.project_list:hover li:not(:hover) {
     display: grid;
     grid-template-columns: 1fr 1.5fr;
     gap: 6rem;
-    align-items: center;
+    align-items: start;
+    padding: 0 2rem;
 }
 
 .profile_image_wrap {
@@ -895,6 +898,7 @@ ul.project_list:hover li:not(:hover) {
     aspect-ratio: 3/4;
     overflow: hidden;
     border-radius: 8px;
+    z-index: 10;
 }
 
 .profile_image {
@@ -920,11 +924,19 @@ ul.project_list:hover li:not(:hover) {
     pointer-events: none;
 }
 
+.profile_content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+}
+
 .profile_content h2 {
     font-size: 4rem;
     font-weight: 300;
     margin-bottom: 1rem;
     letter-spacing: -0.02em;
+    color: #fff;
 }
 
 .profile_subtitle {
@@ -933,6 +945,7 @@ ul.project_list:hover li:not(:hover) {
     margin-bottom: 3rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
+    font-family: 'Pretendard', sans-serif;
 }
 
 .profile_description {
@@ -940,14 +953,16 @@ ul.project_list:hover li:not(:hover) {
     line-height: 1.8;
     color: rgba(255, 255, 255, 0.8);
     margin-bottom: 3rem;
-    font-family: 'Pretendard';
+    font-family: 'Pretendard', sans-serif;
+    max-width: 500px;
+    flex-grow: 1;
 }
 
 .skills_grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
-    margin-top: 3rem;
+    margin-bottom: 2rem;
 }
 
 .skill_category h3 {
@@ -956,6 +971,7 @@ ul.project_list:hover li:not(:hover) {
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.5);
     margin-bottom: 1rem;
+    font-family: 'Pretendard', sans-serif;
 }
 
 .skill_tags {
@@ -971,6 +987,8 @@ ul.project_list:hover li:not(:hover) {
     border-radius: 20px;
     font-size: 0.85rem;
     transition: all 0.3s;
+    color: rgba(255, 255, 255, 0.8);
+    font-family: 'Pretendard', sans-serif;
 }
 
 .skill_tag:hover {
@@ -979,6 +997,149 @@ ul.project_list:hover li:not(:hover) {
     transform: translateY(-2px);
 }
 
+/* Dock - profile_content 안에 배치 */
+.dock {
+    width: 100%;
+    margin-top: auto;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* macOS BigSur Dock 스타일 */
+@font-face {
+    font-family: 'San Francisco';
+    font-weight: 400;
+    src: url('https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff');
+}
+
+@font-face {
+    font-family: 'San Francisco';
+    font-weight: 800;
+    src: url('https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-bold-webfont.woff');
+}
+
+.dock-container {
+    padding: 8px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.dock-container li {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 55px;
+    height: 55px;
+    vertical-align: bottom;
+    transition: 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    transform-origin: 50% 100%;
+    position: relative;
+    margin: 0 3px;
+}
+
+.dock-container li:hover {
+    transform: scale(1.4) translateY(-15px);
+    margin: 0 10px;
+    z-index: 10;
+}
+
+.dock-container li .name {
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    color: rgba(255, 255, 255, 0.95);
+    padding: 10px 14px;
+    font-size: 13px;
+    border-radius: 12px;
+    white-space: nowrap;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateX(-50%) translateY(12px);
+    transition: all 0.3s ease;
+    font-family: 'San Francisco', -apple-system, BlinkMacSystemFont, sans-serif;
+    pointer-events: none;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.dock-container li:hover .name {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.dock-container li .ico {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 14px;
+    transition: all 0.4s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dock-container li:hover .ico {
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+}
+
+.dock-container .li-bin {
+    margin-left: 20px;
+    border-left: 2px solid rgba(255, 255, 255, 0.2);
+    padding-left: 20px;
+}
+
+.dock-container .li-bin .ico {
+    border-radius: 10px;
+}
+
+.profile img.ico {
+    filter: grayscale(100%) contrast(1.1) brightness(1.05);
+    transition: filter 0.6s ease;
+}
+.profile img.ico:hover {
+    filter: none;
+}
+/* 반응형 */
+@media (max-width: 768px) {
+    .profile_container {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        text-align: center;
+        padding: 0 1.5rem;
+    }
+
+    .profile_content h2 {
+        font-size: 2.8rem;
+    }
+
+    .skills_grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .dock-container {
+        height: 60px;
+    }
+
+    .dock-container li {
+        width: 45px;
+        height: 45px;
+    }
+}
 /* CONTACT 섹션 */
 .contact {
     display: flex;
@@ -1158,11 +1319,11 @@ ul.project_list:hover li:not(:hover) {
 
 .footer .contact_typo {
     font-size: 10vw;
-    font-weight: 500;
+    font-weight: 600;
     white-space: nowrap;
     margin: 200px 0 40px;
     letter-spacing: -0.02em;
-    font-family: 'Santiago';
+    font-family: 'Playfair Display';
 }
 
 .footer .footer_info {

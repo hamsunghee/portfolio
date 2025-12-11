@@ -240,6 +240,42 @@ gsap.utils.toArray('.con4 .listBox .box').forEach((selector) => {
     .to(selector, { transform: 'rotateX(-10deg) scale(0.9)', transformOrigin: 'top', filter: 'brightness(0.3)' }, 0)
 });
 
+// macOS Dock 애니메이션 (profile_content 내에서 완벽 동작)
+document.addEventListener('DOMContentLoaded', function () {
+  const icons = document.querySelectorAll(".dock-container .ico");
+
+  const resetIcons = () => {
+    icons.forEach((item) => {
+      item.style.transform = "scale(1) translateY(0px)";
+    });
+  };
+
+  icons.forEach((item, index) => {
+    item.addEventListener("mouseenter", () => focus(index));
+    item.addEventListener("mouseleave", resetIcons);
+  });
+
+  const focus = (index) => {
+    resetIcons();
+
+    const transformations = [
+      { idx: index - 2, scale: 1.1, translateY: 0 },
+      { idx: index - 1, scale: 1.2, translateY: -6 },
+      { idx: index, scale: 1.5, translateY: -15 },
+      { idx: index + 1, scale: 1.2, translateY: -6 },
+      { idx: index + 2, scale: 1.1, translateY: 0 }
+    ];
+
+    transformations.forEach(({ idx, scale, translateY }) => {
+      if (icons[idx]) {
+        icons[idx].style.transform = `scale(${scale}) translateY(${translateY}px)`;
+      }
+    });
+  };
+});
+
+
+
 AOS.init({
   duration: 700,
   easing: 'ease-out',
