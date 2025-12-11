@@ -1004,20 +1004,6 @@ ul.project_list:hover li:not(:hover) {
     padding-top: 2rem;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
-
-/* macOS BigSur Dock 스타일 */
-@font-face {
-    font-family: 'San Francisco';
-    font-weight: 400;
-    src: url('https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff');
-}
-
-@font-face {
-    font-family: 'San Francisco';
-    font-weight: 800;
-    src: url('https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-bold-webfont.woff');
-}
-
 .dock-container {
     padding: 8px;
     width: 100%;
@@ -1033,6 +1019,7 @@ ul.project_list:hover li:not(:hover) {
     -webkit-backdrop-filter: blur(25px);
     border: 1px solid rgba(255, 255, 255, 0.15);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    gap: 5px;
 }
 
 .dock-container li {
@@ -1040,8 +1027,8 @@ ul.project_list:hover li:not(:hover) {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 55px;
-    height: 55px;
+    width: 50px;
+    height: 50px;
     vertical-align: bottom;
     transition: 0.4s cubic-bezier(0.25, 1, 0.5, 1);
     transform-origin: 50% 100%;
@@ -1051,7 +1038,7 @@ ul.project_list:hover li:not(:hover) {
 
 .dock-container li:hover {
     transform: scale(1.4) translateY(-15px);
-    margin: 0 10px;
+    margin: 0 5px;
     z-index: 10;
 }
 
@@ -1109,6 +1096,7 @@ ul.project_list:hover li:not(:hover) {
 .profile img.ico {
     filter: grayscale(100%) contrast(1.1) brightness(1.05);
     transition: filter 0.6s ease;
+    margin: 0px 30px;
 }
 .profile img.ico:hover {
     filter: none;
