@@ -107,34 +107,109 @@ gsap.timeline({
   .to('.logoWrap #e', { x: 100, y: 100, rotate: -10, yease: 'none', duration: 5 }, 0)
   .to('.logoWrap #f', { x: 50, y: 400, rotate: 20, yease: 'none', duration: 5 }, 0)
 
+/* section2  */
+const cardStack = document.getElementById('cardStack');
+const cards = document.querySelectorAll('.project_card');
 
+// 호버 시 주변 카드 어둡게
+cards.forEach(card => {
+  card.addEventListener('mouseenter', function () {
+    if (!this.classList.contains('dragging')) {
+      cardStack.classList.add('hovering');
+    }
+  });
 
-/* section2 */
+  card.addEventListener('mouseleave', function () {
+    if (!this.classList.contains('dragging')) {
+      cardStack.classList.remove('hovering');
+    }
+  });
+});
 
-const gallery = document.getElementById("gallery");
+// 드래그 변수
+let activeCard = null;
+let startX = 0;
+let startY = 0;
+let startCardX = 0;
+let startCardY = 0;
+let currentRotation = 0;
 
-window.onmousemove = e => {
-  const mouseX = e.clientX,
-    mouseY = e.clientY;
+// 마우스/터치 다운
+cards.forEach(card => {
+  card.addEventListener('mousedown', startDrag);
+  card.addEventListener('touchstart', startDrag, { passive: false });
+});
 
-  const xDecimal = mouseX / window.innerWidth,
-    yDecimal = mouseY / window.innerHeight;
+function startDrag(e) {
+  if (e.target.closest('.card_overlay')) return;
 
-  const maxX = gallery.offsetWidth - window.innerWidth,
-    maxY = gallery.offsetHeight - window.innerHeight;
+  e.preventDefault();
 
-  const panX = maxX * xDecimal * -1,
-    panY = maxY * yDecimal * -1;
+  activeCard = this;
+  activeCard.classList.add('dragging');
+  cardStack.classList.remove('hovering');
 
-  gallery.animate({
-    transform: `translate(${panX}px, ${panY}px)`
-  }, {
-    duration: 4000,
-    fill: "forwards",
-    easing: "ease"
-  })
+  const touch = e.type === 'touchstart' ? e.touches[0] : e;
+  startX = touch.clientX;
+  startY = touch.clientY;
+
+  const rect = activeCard.getBoundingClientRect();
+  startCardX = rect.left + rect.width / 2;
+  startCardY = rect.top + rect.height / 2;
+
+  // 현재 회전값 추출
+  const computedStyle = window.getComputedStyle(activeCard);
+  const matrix = new DOMMatrix(computedStyle.transform);
+  currentRotation = Math.atan2(matrix.b, matrix.a) * (180 / Math.PI);
+
+  document.addEventListener('mousemove', drag);
+  document.addEventListener('mouseup', stopDrag);
+  document.addEventListener('touchmove', drag, { passive: false });
+  document.addEventListener('touchend', stopDrag);
 }
 
+function drag(e) {
+  if (!activeCard) return;
+  e.preventDefault();
+
+  const touch = e.type === 'touchmove' ? e.touches[0] : e;
+  const deltaX = touch.clientX - startX;
+  const deltaY = touch.clientY - startY;
+
+  const newX = startCardX + deltaX;
+  const newY = startCardY + deltaY;
+
+  activeCard.style.transform = `translate(-50%, -50%) rotate(${currentRotation}deg)`;
+  activeCard.style.left = `${newX}px`;
+  activeCard.style.top = `${newY}px`;
+}
+
+function stopDrag(e) {
+  if (!activeCard) return;
+
+  activeCard.classList.remove('dragging');
+  activeCard = null;
+
+  document.removeEventListener('mousemove', drag);
+  document.removeEventListener('mouseup', stopDrag);
+  document.removeEventListener('touchmove', drag);
+  document.removeEventListener('touchend', stopDrag);
+}
+// R 키로 모든 카드 리셋
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'r' || e.key === 'R') {
+    cards.forEach(card => {
+      card.style.transition = 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      card.style.transform = '';
+      card.style.left = '';
+      card.style.top = '';
+
+      setTimeout(() => {
+        card.style.transition = '';
+      }, 500);
+    });
+  }
+});
 
 /*section5 mouse */
 const hoverBg = document.querySelector('.hover_bg');
