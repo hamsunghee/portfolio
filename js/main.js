@@ -131,6 +131,83 @@ section2Images.forEach(img => {
 });
 
 
+/* 아이콘 드래그 */
+const dockIcons = document.querySelectorAll('.dock_container .ico');
+const emojiDropTarget = document.getElementById('emoji-profile');
+
+let draggingIcon = null;
+let eatenCount = 0;                 // 몇 개 먹었는지
+const TOTAL_ICONS = 8;              // ✅ 먹어야 하는 아이콘 개수(휴지통 제외)
+const allClearImage = "url('img/선글라스.png')";   // 전부 먹었을 때 이미지
+
+dockIcons.forEach(icon => {
+  icon.addEventListener('dragstart', e => {
+    draggingIcon = icon;
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', 'dock-icon');
+    icon.classList.add('dragging');
+
+    icon.style.opacity = '0.6';
+    icon.style.transform = 'scale(1.2) translateY(-8px)';
+    icon.style.boxShadow = '0 8px 16px rgba(0,0,0,0.35)';
+  });
+
+  icon.addEventListener('dragend', () => {
+    icon.classList.remove('dragging');
+    icon.style.opacity = '1';
+    icon.style.transform = 'scale(1) translateY(0)';
+    icon.style.boxShadow = 'none';
+  });
+});
+
+if (emojiDropTarget) {
+  emojiDropTarget.addEventListener('dragover', e => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    emojiDropTarget.classList.add('drop-active');
+  });
+
+  emojiDropTarget.addEventListener('dragleave', () => {
+    emojiDropTarget.classList.remove('drop-active');
+  });
+
+  emojiDropTarget.addEventListener('drop', e => {
+    e.preventDefault();
+    emojiDropTarget.classList.remove('drop-active');
+
+    if (!draggingIcon) return;
+
+    // 휴지통은 먹지 않음 (ico_bin 클래스 기준)
+    if (draggingIcon.classList.contains('ico_bin')) {
+      draggingIcon = null;
+      return;
+    }
+
+    const previousBg = emojiDropTarget.style.backgroundImage;
+
+    // '냠' 이미지로 변경
+    emojiDropTarget.style.backgroundImage = "url('img/냠.png')";
+
+    setTimeout(() => {
+      eatenCount += 1; // 하나 먹음
+
+      const li = draggingIcon.closest('li');
+      if (li) li.remove();
+
+      if (eatenCount < TOTAL_ICONS) {
+        // 아직 8개 다 안 먹었으면 원래 얼굴
+        emojiDropTarget.style.backgroundImage = previousBg;
+      } else {
+        // 8개 다 먹었을 때 스페셜 이미지
+        emojiDropTarget.style.backgroundImage = allClearImage;
+      }
+
+      draggingIcon = null;
+    }, 600);
+  });
+}
+
+
 
 
 
@@ -270,6 +347,7 @@ document.addEventListener('keydown', (e) => {
     });
   }
 });
+
 
 /*section5 mouse */
 
@@ -414,6 +492,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   updatePublishingSlides();
 });
+
+
 
 
 // 05 .con4 .listBox .box ScrollTrigger Animation
