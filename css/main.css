@@ -714,7 +714,7 @@ section {
     transform-style: preserve-3d;
 }
 .swiper_container {
-    width: 600px;
+    width: 800px;
     height: 400px;
     position: relative;
     transform-style: preserve-3d;
@@ -865,6 +865,20 @@ section {
     color: #000;
 }
 
+/* Project links wrapper: show links side-by-side with gap */
+.project_links {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    z-index: 200;
+}
+.project_links .project_link {
+    position: static;
+}
+
 /* Prev / Next + counter */
 .slide_arrows_component {
     position: absolute;
@@ -901,7 +915,6 @@ section {
     background: rgba(255, 255, 255, 0.1);
     border-color: #fff;
 }
-
 
 /* con4 */
 .con4 .mainTextBox {
@@ -1056,6 +1069,13 @@ section {
     transform: translate(-50%, -50%) scale(1.1);
 }
 
+.emoji_hint {
+    font-size: 1.1rem;
+    color: #888;
+    text-align: center;
+    font-family: 'Pretendard';
+    width: 500px;
+}
 /*  */
 .profile {
     display: flex;

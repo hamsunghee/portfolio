@@ -358,25 +358,29 @@ document.addEventListener('DOMContentLoaded', () => {
       title: '01 WEB Team Projects',
       image: 'img/web.png',
       video: 'img/boj.mp4',
-      link: 'https://hamsunghee.github.io/Beauty-of-Joseon/'
+      link: 'https://hamsunghee.github.io/Beauty-of-Joseon/',
+      plan: 'https://zrr.kr/d4XwAn'
     },
     {
       title: '02 APP Team Projects',
       image: 'img/appmockup.png',
-      video: 'video/app-team.mp4',
-      link: '#'
+      video: 'img/heai.mp4',
+      link: 'https://zrr.kr/FnHXKZ',
+      plan: 'https://zrr.kr/rOAK7f'
     },
     {
       title: '03 WEB Projects',
       image: 'img/bud.png',
       video: 'video/web-single.mp4',
-      link: '#'
+      link: '#',
+      plan: '#'
     },
     {
       title: '04 APP Projects',
       image: 'img/appmockup2.png',
       video: 'img/p_app.mp4',
-      link: '#'
+      link: 'https://zrr.kr/AKILUv',
+      plan: '#'
     }
   ];
 
@@ -387,6 +391,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const titlesList = document.getElementById('publishingTitles');
   const videoEl = document.getElementById('publishingVideo');
   const linkEl = document.getElementById('publishingLink');
+  const planEl = document.getElementById('publishingPlan');
   const bannerTitle = document.getElementById('publishingBannerTitle');
   const currentEl = document.getElementById('publishingCurrent');
   const totalEl = document.getElementById('publishingTotal');
@@ -454,7 +459,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setTimeout(() => {
       videoEl.src = publishingProjects[publishingIndex].video;
-      linkEl.href = publishingProjects[publishingIndex].link;
+      linkEl.href = publishingProjects[publishingIndex].link || '#';
+      if (planEl) planEl.href = publishingProjects[publishingIndex].plan || publishingProjects[publishingIndex].link || '#';
       bannerTitle.textContent = publishingProjects[publishingIndex].title;
       currentEl.textContent = publishingIndex + 1;
       videoComponent.style.opacity = '1';
@@ -492,8 +498,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   updatePublishingSlides();
 });
-
-
 
 
 // 05 .con4 .listBox .box ScrollTrigger Animation
