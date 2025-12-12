@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.addEventListener('scroll', handle_scroll, { passive: true });
 });
-
+/* 
 
 const cursor = document.querySelector(".cursor");
 // 마우스 위치 커서 이동
@@ -89,7 +89,51 @@ hoverTargets.forEach(el => {
   el.addEventListener("mouseleave", () => {
     cursor.classList.remove("grow");
   });
+}); */
+
+const cursor = document.querySelector(".cursor");
+const cursorLabel = document.querySelector(".cursor-label");
+
+// 마우스 위치 커서 이동
+document.addEventListener("mousemove", (e) => {
+  cursor.style.left = e.clientX + "px";
+  cursor.style.top = e.clientY + "px";
 });
+
+// 1) 기본 grow 대상: nav li + 모든 img
+const hoverTargets = [
+  ...document.querySelectorAll("nav ul li"),
+  ...document.querySelectorAll("img")
+];
+
+hoverTargets.forEach(el => {
+  el.addEventListener("mouseenter", () => {
+    cursor.classList.add("grow");
+  });
+  el.addEventListener("mouseleave", () => {
+    cursor.classList.remove("grow");
+  });
+});
+
+// 2) 섹션2(.graphic) 안의 카드 이미지에만 Drag me! 표시
+const section2Images = document.querySelectorAll(
+  /*   ".graphic .project_card", */
+  ".graphic .project_card, .profile .profile_image_wrap"
+);
+
+section2Images.forEach(img => {
+  img.addEventListener("mouseenter", () => {
+    cursor.classList.add("show-drag");
+  });
+  img.addEventListener("mouseleave", () => {
+    cursor.classList.remove("show-drag");
+  });
+});
+
+
+
+
+
 
 // 01 visual 
 gsap.timeline({
@@ -228,17 +272,147 @@ document.addEventListener('keydown', (e) => {
 });
 
 /*section5 mouse */
-const hoverBg = document.querySelector('.hover_bg');
-document.querySelectorAll('.project_row').forEach(item => {
-  item.addEventListener('mouseenter', function () {
-    const bgImg = item.getAttribute('data-bg');
-    hoverBg.style.backgroundImage = `url('${bgImg}')`;
-    hoverBg.classList.add('active');
+
+/* section5: publishing 3D slider */
+document.addEventListener('DOMContentLoaded', () => {
+  const publishingProjects = [
+    {
+      title: '01 WEB Team Projects',
+      image: 'img/web.png',
+      video: 'img/boj.mp4',
+      link: 'https://hamsunghee.github.io/Beauty-of-Joseon/'
+    },
+    {
+      title: '02 APP Team Projects',
+      image: 'img/appmockup.png',
+      video: 'video/app-team.mp4',
+      link: '#'
+    },
+    {
+      title: '03 WEB Projects',
+      image: 'img/bud.png',
+      video: 'video/web-single.mp4',
+      link: '#'
+    },
+    {
+      title: '04 APP Projects',
+      image: 'img/appmockup2.png',
+      video: 'img/p_app.mp4',
+      link: '#'
+    }
+  ];
+
+  let publishingIndex = 0;
+  const container = document.getElementById('publishingSwiper');
+  if (!container) return;
+
+  const titlesList = document.getElementById('publishingTitles');
+  const videoEl = document.getElementById('publishingVideo');
+  const linkEl = document.getElementById('publishingLink');
+  const bannerTitle = document.getElementById('publishingBannerTitle');
+  const currentEl = document.getElementById('publishingCurrent');
+  const totalEl = document.getElementById('publishingTotal');
+
+  totalEl.textContent = publishingProjects.length;
+
+  publishingProjects.forEach((project, index) => {
+    const slide = document.createElement('div');
+    slide.className = 'swiper_slide';
+    slide.innerHTML = `
+      <a href="#" class="project_visual_wrapper">
+        <div class="project_visual_image_move">
+          <div class="project_visual_image" style="background-image: url('${project.image}')"></div>
+        </div>
+        <div class="project_highlight"></div>
+      </a>
+    `;
+    container.appendChild(slide);
+
+    const titleItem = document.createElement('button');
+    titleItem.type = 'button';
+    titleItem.className = 'project_title_link';
+    titleItem.innerHTML = `
+      <div>${project.title}</div>
+      <div class="titles_dot"></div>
+    `;
+    titleItem.addEventListener('click', (e) => {
+      e.preventDefault();
+      goToPublishingSlide(index);
+    });
+    titlesList.appendChild(titleItem);
   });
-  item.addEventListener('mouseleave', function () {
-    hoverBg.classList.remove('active');
-    hoverBg.style.backgroundImage = '';
+
+  const slides = container.querySelectorAll('.swiper_slide');
+  const titles = titlesList.querySelectorAll('.project_title_link');
+  const videoComponent = document.querySelector('.video_component');
+
+  function updatePublishingSlides() {
+    videoComponent.style.opacity = '0.5';
+
+    slides.forEach((slide, index) => {
+      slide.classList.remove('is_active');
+      titles[index].classList.remove('is_active');
+
+      const offset = index - publishingIndex;
+      const absOffset = Math.abs(offset);
+
+      const z = -absOffset * 150;
+      const x = offset * 200;
+      const opacity = 1 - (absOffset * 0.3);
+      const scale = 1 - (absOffset * 0.2);
+
+      gsap.to(slide, {
+        x,
+        z,
+        opacity,
+        scale,
+        duration: 0.6,
+        ease: 'power2.out'
+      });
+    });
+
+    slides[publishingIndex].classList.add('is_active');
+    titles[publishingIndex].classList.add('is_active');
+
+    setTimeout(() => {
+      videoEl.src = publishingProjects[publishingIndex].video;
+      linkEl.href = publishingProjects[publishingIndex].link;
+      bannerTitle.textContent = publishingProjects[publishingIndex].title;
+      currentEl.textContent = publishingIndex + 1;
+      videoComponent.style.opacity = '1';
+    }, 300);
+  }
+
+  function goToPublishingSlide(index) {
+    publishingIndex = index;
+    updatePublishingSlides();
+  }
+
+  function nextPublishingSlide() {
+    publishingIndex = (publishingIndex + 1) % publishingProjects.length;
+    updatePublishingSlides();
+  }
+
+  function prevPublishingSlide() {
+    publishingIndex = (publishingIndex - 1 + publishingProjects.length) % publishingProjects.length;
+    updatePublishingSlides();
+  }
+
+  document.getElementById('publishingNext').addEventListener('click', (e) => {
+    e.preventDefault();
+    nextPublishingSlide();
   });
+  document.getElementById('publishingPrev').addEventListener('click', (e) => {
+    e.preventDefault();
+    prevPublishingSlide();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') nextPublishingSlide();
+    if (e.key === 'ArrowLeft') prevPublishingSlide();
+  });
+
+  updatePublishingSlides();
 });
 
 
@@ -256,39 +430,60 @@ gsap.utils.toArray('.con4 .listBox .box').forEach((selector) => {
     .to(selector, { transform: 'rotateX(-10deg) scale(0.9)', transformOrigin: 'top', filter: 'brightness(0.3)' }, 0)
 });
 
-// macOS Dock 애니메이션 (profile_content 내에서 완벽 동작)
-document.addEventListener('DOMContentLoaded', function () {
-  const icons = document.querySelectorAll(".dock-container .ico");
+// macOS Dock 애니메이션 
 
-  const resetIcons = () => {
-    icons.forEach((item) => {
-      item.style.transform = "scale(1) translateY(0px)";
-    });
-  };
+const faceImages = [
+  'url(/img/정상.png)',
+  'url(/img/수염.png)',
+  'url(/img/브이.png)',
+  'url(/img/헉.png)',
+  'url(/img/쉿.png)',
+  'url(/img/굿.png)'
+];
+let currentIndex = 0;
 
-  icons.forEach((item, index) => {
-    item.addEventListener("mouseenter", () => focus(index));
-    item.addEventListener("mouseleave", resetIcons);
-  });
+const btn = document.getElementById('emoji-profile');
+btn.style.backgroundImage = faceImages[0];  // 초기 설정
 
-  const focus = (index) => {
-    resetIcons();
-
-    const transformations = [
-      { idx: index - 2, scale: 1.1, translateY: 0 },
-      { idx: index - 1, scale: 1.2, translateY: -6 },
-      { idx: index, scale: 1.5, translateY: -15 },
-      { idx: index + 1, scale: 1.2, translateY: -6 },
-      { idx: index + 2, scale: 1.1, translateY: 0 }
-    ];
-
-    transformations.forEach(({ idx, scale, translateY }) => {
-      if (icons[idx]) {
-        icons[idx].style.transform = `scale(${scale}) translateY(${translateY}px)`;
-      }
-    });
-  };
+btn.addEventListener('click', function () {
+  currentIndex = (currentIndex + 1) % faceImages.length;
+  const nextImage = faceImages[currentIndex];
+  console.log('변경:', currentIndex, nextImage);  // 디버깅용
+  this.style.backgroundImage = nextImage;
 });
+
+/*  */
+
+const icons = document.querySelectorAll(".dock_container .ico");
+
+const resetIcons = () => {
+  icons.forEach((item) => {
+    item.style.transform = "scale(1) translateY(0px)";
+  });
+};
+
+icons.forEach((item, index) => {
+  item.addEventListener("mouseenter", () => focus(index));
+  item.addEventListener("mouseleave", resetIcons);
+});
+
+const focus = (index) => {
+  resetIcons();
+
+  const transformations = [
+    { idx: index - 2, scale: 1.1, translateY: 0 },
+    { idx: index - 1, scale: 1.2, translateY: -6 },
+    { idx: index, scale: 1.5, translateY: -15 },
+    { idx: index + 1, scale: 1.2, translateY: -6 },
+    { idx: index + 2, scale: 1.1, translateY: 0 }
+  ];
+
+  transformations.forEach(({ idx, scale, translateY }) => {
+    if (icons[idx]) {
+      icons[idx].style.transform = `scale(${scale}) translateY(${translateY}px)`;
+    }
+  });
+};
 
 
 

@@ -166,7 +166,10 @@
   <div class="flash_layer" aria-hidden="true"></div>
 
   <!-- 여기부터 원래 메인 코드 -->
-  <div class="cursor"></div>
+  <!--   <div class="cursor"></div> -->
+  <div class="cursor">
+    <span class="cursor-label">Drag me!</span>
+  </div>
 
   <header>
     <nav>
@@ -256,7 +259,7 @@
           <div class="corner_handle bottom_left"></div>
           <div class="corner_handle bottom_right"></div>
           <div class="project_card_inner">
-            <img src="" alt="Just Salad">
+            <img src="img/her.png" alt="Just Salad">
             <div class="card_overlay">
               <h3 class="card_title">test</h3>
               <p class="card_description">Playful web experience bringing branding to life</p>
@@ -339,43 +342,55 @@
   </section>
 
   <!--section5 -->
+  <!-- section5: Publishing 3D slider -->
   <section class="publishing" id="publishing">
-    <div class="left_sidebar">PUBLISHING</div>
-    <ul class="project_list">
-      <li class="project_row" data-bg="img/web.png">
-        <span class="project_title">01 WEB Team Projects</span>
-        <div class="tags">
-          <!--           <a href="#" class="tag">Plan</a> -->
-          <a href="#" class="tag">Design</a>
-          <a href="https://hamsunghee.github.io/Beauty-of-Joseon/" class="tag">Publishing</a>
+    <div class="publishing_wrapper">
+      <div class="publishing_main">
+        <div class="hero_component">
+          <div class="swiper_slider_component">
+            <div class="swiper_container" id="publishingSwiper">
+              <!-- JS에서 생성 -->
+            </div>
+          </div>
+
+          <div class="titles_component">
+            <div class="titles_list" id="publishingTitles">
+              <!-- JS에서 생성 -->
+            </div>
+          </div>
+
+          <div class="video_component">
+            <div class="video_embed">
+              <video id="publishingVideo" loop muted autoplay playsinline></video>
+            </div>
+            <a href="#" target="_blank" class="project_link" id="publishingLink">
+              <div>View Project</div>
+            </a>
+          </div>
+
+          <div class="slide_arrows_component">
+            <button class="slide_arrow swiper_prev" id="publishingPrev">
+              <span>Prev</span>
+            </button>
+            <div class="slide_counter">
+              <span class="current" id="publishingCurrent">1</span>
+              <span>/</span>
+              <span id="publishingTotal">4</span>
+            </div>
+            <button class="slide_arrow swiper_next" id="publishingNext">
+              <span>Next</span>
+            </button>
+          </div>
+
+          <div class="banner_component">
+            <div class="banner_heading" id="publishingBannerTitle">Project Title</div>
+          </div>
         </div>
-      </li>
-      <li class="project_row" data-bg="img/appmockup.png">
-        <span class="project_title">02 APP Team Projects</span>
-        <div class="tags">
-          <a href="#" class="tag">Design</a>
-          <a href="#" class="tag">Publishing</a>
-        </div>
-      </li>
-      <li class="project_row" data-bg="img/web.png">
-        <span class="project_title">03 WEB Projects</span>
-        <div class="tags">
-          <a href="#" class="tag">Design</a>
-          <a href="#" class="tag">prototype</a>
-        </div>
-      </li>
-      <li class="project_row" data-bg="img/appmockup2.png">
-        <span class="project_title">04 APP Projects</span>
-        <div class="tags">
-          <a href="#" class="tag">Design</a>
-          <a href="#" class="tag">prototype</a>
-        </div>
-      </li>
-    </ul>
+      </div>
+    </div>
   </section>
 
-  <div class="hover_bg"></div>
-
+  <!-- section con4 -->
 
   <section class="con4">
     <div class="inner">
@@ -439,7 +454,9 @@
   <section class="profile" id="profile">
     <div class="profile_container">
       <div class="profile_image_wrap">
-        <img src="나" alt="HAM SUNG HEE" class="profile_image">
+        <button id="emoji-profile" class="emoji-img-btn"></button>
+        <div class="hover-text">CLICK ME!</div>
+        <!--         <img src="나" alt="HAM SUNG HEE" class="profile_image"> -->
         <div class="profile_image_overlay"></div>
       </div>
 
@@ -492,45 +509,44 @@
           </div>
         </div>
 
-        <!-- Dock이 profile_content 안에 완벽히 통합 -->
         <div class="dock">
-          <ul class="dock-container">
-            <li class="li-1">
-              <div class="name">Finder</div>
-              <img class="ico" src="img/figma.png" alt="Finder">
-            </li>
-            <li class="li-2">
-              <div class="name">Design</div>
-              <img class="ico" src="img/ai.png" alt="Design">
-            </li>
-            <li class="li-3">
+          <ul class="dock_container">
+            <li class="li_1">
               <div class="name">Figma</div>
-              <img class="ico" src="img/ps.png" alt="Design">
+              <img class="ico" src="img/figma.png" alt="figma">
             </li>
-            <li class="li-4">
-              <div class="name">Photoshop</div>
-              <img class="ico" src="img/html.png" alt="Design">
+            <li class="li_2">
+              <div class="name">AI</div>
+              <img class="ico" src="img/ai.png" alt="ai">
             </li>
-            <li class="li-5">
-              <div class="name">Portfolio</div>
-              <img class="ico" src="img/css.png" alt="Design">
+            <li class="li_3">
+              <div class="name">PS</div>
+              <img class="ico" src="img/ps.png" alt="ps">
             </li>
-            <li class="li-6">
-              <div class="name">Projects</div>
-              <img class="ico" src="img/javascript.png" alt="Design">
+            <li class="li_4">
+              <div class="name">HTML</div>
+              <img class="ico" src="img/html.png" alt="html">
             </li>
-            <li class="li-7">
-              <div class="name">UI/UX</div>
-              <img class="ico" src="img/midjourney.png" alt="Design">
+            <li class="li_5">
+              <div class="name">CSS</div>
+              <img class="ico" src="img/css.png" alt="css">
             </li>
-            <li class="li-8">
-              <div class="name">UI/UX</div>
-              <img class="ico" src="img/chatgpt.webp" alt="Design">
+            <li class="li_6">
+              <div class="name">JS</div>
+              <img class="ico" src="img/javascript.png" alt="js">
             </li>
-            <li class="li-9 li-bin">
-              <div class="name">Contact</div>
-              <img class="ico ico-bin" src="https://findicons.com/files/icons/569/longhorn_objects/128/trash.png"
-                alt="Contact">
+            <li class="li_7">
+              <div class="name">Midjourney</div>
+              <img class="ico" src="img/midjourney.png" alt="midjourney">
+            </li>
+            <li class="li_8">
+              <div class="name">Chatgpt</div>
+              <img class="ico" src="img/chatgpt.webp" alt="chatgpt">
+            </li>
+            <li class="li_9 li_bin">
+              <div class="name"></div>
+              <img class="ico ico_bin" src="https://findicons.com/files/icons/569/longhorn_objects/128/trash.png"
+                alt="trash">
             </li>
           </ul>
         </div>
