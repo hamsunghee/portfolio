@@ -118,7 +118,7 @@ hoverTargets.forEach(el => {
 // 2) 섹션2(.graphic) 안의 카드 이미지에만 Drag me! 표시
 const section2Images = document.querySelectorAll(
   /*   ".graphic .project_card", */
-  ".graphic .project_card, .profile .profile_image_wrap"
+  ".graphic .project_card"
 );
 
 section2Images.forEach(img => {
