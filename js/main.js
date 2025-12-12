@@ -500,6 +500,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+
+
 // 05 .con4 .listBox .box ScrollTrigger Animation
 gsap.utils.toArray('.con4 .listBox .box').forEach((selector) => {
   gsap.timeline({
