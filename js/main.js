@@ -126,12 +126,12 @@ cards.forEach(card => {
   });
 });
 
-// 드래그 변수
+// 드래그 변수 (컨테이너 기준 좌표 사용)
 let activeCard = null;
 let startX = 0;
 let startY = 0;
-let startCardX = 0;
-let startCardY = 0;
+let pointerOffsetX = 0;
+let pointerOffsetY = 0;
 let currentRotation = 0;
 
 // 마우스/터치 다운
@@ -154,13 +154,27 @@ function startDrag(e) {
   startY = touch.clientY;
 
   const rect = activeCard.getBoundingClientRect();
-  startCardX = rect.left + rect.width / 2;
-  startCardY = rect.top + rect.height / 2;
+  const containerRect = cardStack.getBoundingClientRect();
 
-  // 현재 회전값 추출
+  // pointer offset inside the card (viewport coords)
+  pointerOffsetX = startX - rect.left;
+  pointerOffsetY = startY - rect.top;
+
+  // compute left/top relative to container
+  const relLeft = rect.left - containerRect.left;
+  const relTop = rect.top - containerRect.top;
+
+  // set pixel left/top relative to container so movement is simple
+  activeCard.style.left = `${relLeft}px`;
+  activeCard.style.top = `${relTop}px`;
+
+  // extract rotation and apply as inline transform around top-left
   const computedStyle = window.getComputedStyle(activeCard);
   const matrix = new DOMMatrix(computedStyle.transform);
   currentRotation = Math.atan2(matrix.b, matrix.a) * (180 / Math.PI);
+  activeCard.style.transform = `rotate(${currentRotation}deg)`;
+  activeCard.style.transformOrigin = '0 0';
+  activeCard.style.transition = 'none';
 
   document.addEventListener('mousemove', drag);
   document.addEventListener('mouseup', stopDrag);
@@ -173,21 +187,23 @@ function drag(e) {
   e.preventDefault();
 
   const touch = e.type === 'touchmove' ? e.touches[0] : e;
-  const deltaX = touch.clientX - startX;
-  const deltaY = touch.clientY - startY;
+  const containerRect = cardStack.getBoundingClientRect();
 
-  const newX = startCardX + deltaX;
-  const newY = startCardY + deltaY;
+  // new position in container coordinates
+  const newLeft = touch.clientX - pointerOffsetX - containerRect.left;
+  const newTop = touch.clientY - pointerOffsetY - containerRect.top;
 
-  activeCard.style.transform = `translate(-50%, -50%) rotate(${currentRotation}deg)`;
-  activeCard.style.left = `${newX}px`;
-  activeCard.style.top = `${newY}px`;
+  activeCard.style.left = `${newLeft}px`;
+  activeCard.style.top = `${newTop}px`;
 }
 
 function stopDrag(e) {
   if (!activeCard) return;
 
   activeCard.classList.remove('dragging');
+  // restore transform origin for hover/stack behavior
+  activeCard.style.transformOrigin = '';
+  activeCard.style.transition = '';
   activeCard = null;
 
   document.removeEventListener('mousemove', drag);
