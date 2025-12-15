@@ -138,7 +138,7 @@ const emojiDropTarget = document.getElementById('emoji-profile');
 let draggingIcon = null;
 let eatenCount = 0;                 // 몇 개 먹었는지
 const TOTAL_ICONS = 8;              // ✅ 먹어야 하는 아이콘 개수(휴지통 제외)
-const allClearImage = "url('img/선글라스.png')";   // 전부 먹었을 때 이미지
+const allClearImage = "url('img/헉.png')";   // 전부 먹었을 때 이미지
 
 dockIcons.forEach(icon => {
   icon.addEventListener('dragstart', e => {
@@ -380,7 +380,7 @@ document.addEventListener('DOMContentLoaded', () => {
       image: 'img/appmockup2.png',
       video: 'img/p_app.mp4',
       link: 'https://zrr.kr/AKILUv',
-      plan: '#'
+      plan: 'https://zrr.kr/LrjOCU'
     }
   ];
 
