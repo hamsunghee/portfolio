@@ -13,134 +13,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-
-  <!-- 인트로 전용 스타일 -->
-  <style>
-    body {
-      /*       background: #000; */
-      color: #fff;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      overflow-x: hidden;
-    }
-
-    /* 인트로 전체 레이어 */
-    .intro_screen {
-      position: fixed;
-      inset: 0;
-      /*       background: url('img/blur_img.png') no-repeat center center fixed; */
-      background: #000;
-      /*     background: url(/img/bg.gif) no-repeat center/cover fixed; */
-      background-size: cover;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      z-index: 1000;
-      transition: opacity 0.8s ease;
-      font-family: 'Playfair Display';
-    }
-
-    .intro_screen.hidden {
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .intro_title {
-      font-size: 5rem;
-      line-height: 1.1;
-      margin-bottom: 0.6rem;
-      filter: blur(4px);
-      opacity: 0.6;
-      transition: filter 0.15s linear, opacity 0.15s linear;
-    }
-
-    .intro_subtitle {
-      font-size: 1rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.6);
-      margin-bottom: 2.5rem;
-      filter: blur(4px);
-      opacity: 0.4;
-      transition: filter 0.15s linear, opacity 0.15s linear;
-    }
-
-    .scroll_hint {
-      font-size: 0.85rem;
-      letter-spacing: 0.22em;
-      color: rgba(255, 255, 255, 0.5);
-      margin-top: 1.4rem;
-      animation: hint_blink 2s ease-in-out infinite;
-      transition: opacity 0.15s linear;
-    }
-
-    @keyframes hint_blink {
-
-      0%,
-      100% {
-        opacity: 0.4;
-      }
-
-      50% {
-        opacity: 1;
-      }
-    }
-
-    .glasses_wrap {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      transform-origin: center center;
-    }
-
-    .glasses_img {
-      width: 140px;
-      height: auto;
-      display: block;
-      position: relative;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%) scale(1);
-      transition: none;
-    }
-
-    .flash_layer {
-      position: fixed;
-      inset: 0;
-      background: #fff;
-      opacity: 0;
-      pointer-events: none;
-      z-index: 1100;
-    }
-
-    .flash_layer.active {
-      animation: flash_effect 0.5s ease-out;
-    }
-
-    @keyframes flash_effect {
-      0% {
-        opacity: 0;
-      }
-
-      25% {
-        opacity: 1;
-      }
-
-      100% {
-        opacity: 0;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .intro_title {
-        font-size: 2rem;
-      }
-    }
-  </style>
-
   <script src="js/main.js" defer></script>
 </head>
 
@@ -554,7 +426,7 @@
             </li>
           </ul>
         </div>
-              <p class="dock_hint">휴지통 클릭 한 번으로 모든 스킬을 먹여 보세요!</p>
+        <p class="dock_hint">휴지통 클릭 한 번으로 모든 스킬을 먹여 보세요!</p>
       </div>
     </div>
   </section>
