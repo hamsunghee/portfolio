@@ -138,7 +138,7 @@ const emojiDropTarget = document.getElementById('emoji-profile');
 let draggingIcon = null;
 let eatenCount = 0;                 // 몇 개 먹었는지
 const TOTAL_ICONS = 8;              // ✅ 먹어야 하는 아이콘 개수(휴지통 제외)
-const allClearImage = "url('img/헉.png')";   // 전부 먹었을 때 이미지
+const allClearImage = "url('img/선글라스.png')";   // 전부 먹었을 때 이미지
 
 dockIcons.forEach(icon => {
   icon.addEventListener('dragstart', e => {
@@ -208,8 +208,43 @@ if (emojiDropTarget) {
 }
 
 
+// 휴지통 한 번에 비우기 + 프로필 이모지 clear 이미지로 변경
+document.addEventListener('DOMContentLoaded', () => {
+  const emojiDropTarget = document.getElementById('emoji-profile');
+  const dockContainer = document.querySelector('.dock_container');
+  const trashIcon = document.querySelector('.dock_container .ico_bin');
 
+  const allClearImage = 'img/선글라스.png';
 
+  if (trashIcon && dockContainer && emojiDropTarget) {
+    trashIcon.style.cursor = 'pointer';
+
+    trashIcon.addEventListener('click', () => {
+      // 1️⃣ 휴지통 제외 모든 아이콘 제거
+      const allItems = dockContainer.querySelectorAll('li');
+      allItems.forEach(li => {
+        if (!li.classList.contains('li_bin')) {
+          li.remove();
+        }
+      });
+
+      // 2️⃣ 프로필 이모지를 clear 이미지로 변경
+      emojiDropTarget.style.backgroundImage = `url(${allClearImage})`;
+
+      // 3️⃣ 프로필 아래 힌트 문구 변경
+      const emojiHint = document.querySelector('.emoji_hint');
+      if (emojiHint) {
+        emojiHint.textContent = '모든 스킬을 흡수 완료!';
+      }
+
+      // 4️⃣ 휴지통 아래 문구 제거
+      const dockHint = document.querySelector('.dock_hint');
+      if (dockHint) {
+        dockHint.remove();
+      }
+    });
+  }
+});
 
 
 // 01 visual 
@@ -365,7 +400,7 @@ document.addEventListener('DOMContentLoaded', () => {
       title: '02 APP Team Projects',
       image: 'img/appmockup.png',
       video: 'img/heai.mp4',
-      link: 'https://zrr.kr/FnHXKZ',
+      link: 'https://zrr.kr/Wwyeky',
       plan: 'https://zrr.kr/Lluggx'
     },
     {
@@ -496,13 +531,41 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   updatePublishingSlides();
+  // 가로 스크롤: 세로 스크롤을 슬라이드 이동으로 매핑
+  const publishingSection = document.getElementById('publishing');
+  if (publishingSection && publishingProjects.length > 1) {
+    const slidesCount = publishingProjects.length;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: publishingSection,
+        start: 'top top',
+        end: () => `+=${window.innerHeight * Math.max(1, slidesCount * 0.15)}`,
+        scrub: 0.05,
+        pin: true,
+        snap: 1 / (slidesCount - 1),
+        onUpdate: self => {
+          const prog = self.progress;
+          const floatIndex = prog * (slidesCount - 1);
+          const newIndex = Math.round(floatIndex);
+          if (newIndex !== publishingIndex) {
+            publishingIndex = newIndex;
+            updatePublishingSlides();
+          }
+        }
+      }
+    });
+  }
 });
 
 
 
 
+
 // 05 .con4 .listBox .box ScrollTrigger Animation
-gsap.utils.toArray('.con4 .listBox .box').forEach((selector) => {
+/* gsap.utils.toArray('.con4 .listBox .box').forEach((selector) => {
   gsap.timeline({
     scrollTrigger: {
       trigger: selector,
@@ -514,6 +577,57 @@ gsap.utils.toArray('.con4 .listBox .box').forEach((selector) => {
   })
     .to(selector, { transform: 'rotateX(-10deg) scale(0.9)', transformOrigin: 'top', filter: 'brightness(0.3)' }, 0)
 });
+
+ */
+gsap.registerPlugin(ScrollTrigger);
+
+// con4 애니메이션 - 초기 상태 보장
+gsap.utils.toArray('.con4 .listBox .box').forEach((box, index) => {
+  //  1. DOM 완전 로딩 후 초기화
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      initBox(box);
+    });
+  } else {
+    initBox(box);
+  }
+
+  function initBox(box) {
+    // 초기화 (CSS무시)
+    gsap.set(box, {
+      rotationX: 0,
+      scale: 1,
+      brightness: 1,
+      filter: 'brightness(1)',
+      transformOrigin: 'top center',
+      force3D: true,
+      clearProps: 'all' // 기존 CSS 속성 완전 삭제
+    });
+
+    //  약간의 딜레이 후 애니메이션 시작
+    setTimeout(() => {
+      gsap.to(box, {
+        rotationX: -10,
+        scale: 0.9,
+        filter: 'brightness(0.3)',
+        scrollTrigger: {
+          trigger: box,
+          start: 'top 30%',
+          end: 'bottom 10%',
+          scrub: 1,
+          /*           snap: 10, */
+          // markers: true,
+          onEnter: () => console.log('Start:', box), // 디버깅
+        }
+      });
+    }, 100 + index * 2500); // 순서대로 50ms씩 지연
+  }
+});
+
+// 4️⃣ 강제 새로고침
+setTimeout(() => ScrollTrigger.refresh(), 500);
+
+
 
 // macOS Dock 애니메이션 
 

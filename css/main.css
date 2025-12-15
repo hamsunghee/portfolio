@@ -377,7 +377,8 @@ section {
     min-height: 100vh;
     padding: 0px 40px;
     position: relative;
-    margin-top: 200px;
+    /*   margin-top: 200px; */
+    padding-top: 400px;
 }
 
 .section_header {
@@ -915,12 +916,12 @@ section {
     transition: all 0.3s ease;
 }
 .slide_arrow:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(8, 8, 8, 0.877);
     border-color: #fff;
 }
 
 /* con4 */
-.con4 .mainTextBox {
+/* .con4 .mainTextBox {
     position: relative;
     padding-top: 100px;
 }
@@ -957,6 +958,7 @@ section {
 .con4 .mainTextBox .in .box {
     max-width: 550px;
 }
+
 
 .con4 .listBox {
     margin: 100px 0;
@@ -1009,21 +1011,8 @@ section {
 .con4 .listBox .box .text p {
     font-weight: 500;
     opacity: 0.7;
-    /*     width: 660px; */
     font-size: 1rem;
 }
-
-/* .con4 .listBox .box:nth-child(1) h3 {
-    color: #ff4f4f;
-}
-.con4 .listBox .box:nth-child(2) h3 {
-    color: #90c3cd;
-}
-
-.con4 .listBox .box:nth-child(3) h3 {
-    color: #47b172;
-}
- */
 
 .con4 .subTextBox {
     display: grid;
@@ -1034,6 +1023,104 @@ section {
     max-width: 600px;
     font-size: 22px;
     grid-column-start: 2;
+} */
+
+.con4 .mainTextBox {
+    position: relative;
+    padding-top: clamp(4rem, 10vh, 100px);
+}
+
+.con4 .mainTextBox .title {
+    font-size: clamp(6rem, 15vw, 120px);
+    line-height: 1;
+    letter-spacing: -5px;
+    font-family: 'Playfair Display', serif;
+}
+
+.con4 .mainTextBox .title i {
+    display: block;
+}
+.con4 .mainTextBox .title.b {
+    text-align: center;
+}
+.con4 .mainTextBox .title.c {
+    align-self: flex-start;
+}
+
+.con4 .mainTextBox .in {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.con4 .listBox {
+    /*     margin: clamp(4rem, 10vh, 10px) 0; */
+    margin: 80px 0;
+    perspective: 1400px;
+    transform-style: preserve-3d;
+}
+
+.con4 .listBox .box {
+    background: #fff;
+    padding: clamp(2rem, 5vw, 50px) clamp(2rem, 5vw, 80px)
+        clamp(2.5rem, 5vw, 60px);
+    margin-bottom: 0px;
+    color: #121212;
+    display: grid;
+    grid-template-columns: 60px auto;
+    border-radius: 10px;
+    filter: brightness(1);
+    will-change: transform, filter;
+    transform-style: preserve-3d;
+    position: relative;
+}
+/* 각 박스를 위로 조금씩 당겨서 겹치게 */
+.con4 .listBox .box + .box {
+    top: -40px;
+}
+
+.con4 .listBox .box + .box + .box {
+    top: -100px;
+}
+.con4 .listBox .box h2 {
+    font-size: clamp(2rem, 6vw, 40px);
+    font-weight: normal;
+    letter-spacing: -2px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #555;
+    grid-column: 1 / 3;
+    margin-bottom: clamp(3rem, 8vh, 100px);
+}
+
+.con4 .listBox .box h3 {
+    font-size: clamp(8rem, 25vw, 300px);
+    font-weight: 900;
+    line-height: 0.9;
+    align-self: flex-end;
+}
+
+.con4 .listBox .box .text {
+    text-align: right;
+    line-height: 1.4;
+}
+
+.con4 .listBox .box .text h4 {
+    font-weight: 600;
+    font-size: clamp(1.5rem, 4vw, 50px);
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.con4 .listBox .box .text p {
+    font-weight: 500;
+    opacity: 0.7;
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    .con4 .listBox .box {
+        grid-template-columns: 1fr;
+        padding: 2rem 1.5rem;
+    }
 }
 
 /* PROFILE 섹션 */
@@ -1227,6 +1314,23 @@ section {
     border: 1px solid rgba(255, 255, 255, 0.15);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     gap: 5px;
+}
+
+/* li_bin 안은 세로 배치 */
+.dock_container .li_bin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 안내 문구 스타일 */
+.dock_hint {
+    margin-top: 20px;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    white-space: nowrap;
+    font-family: 'Pretendard';
 }
 
 .dock_container li {
