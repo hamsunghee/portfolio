@@ -369,18 +369,17 @@ document.addEventListener('DOMContentLoaded', () => {
       plan: 'https://zrr.kr/Lluggx'
     },
     {
-      title: '03 WEB Projects',
-      image: 'img/bud.png',
-      video: 'video/web-single.mp4',
-      link: '#',
-      plan: '#'
-    },
-    {
-      title: '04 APP Projects',
+      /*       title: '03 WEB Projects',
+            image: 'img/bud.png',
+            video: 'video/web-single.mp4',
+            link: '#',
+            plan: '#' */
+      title: '03 APP Projects',
       image: 'img/appmockup2.png',
       video: 'img/p_app.mp4',
       link: 'https://zrr.kr/AKILUv',
       plan: 'https://zrr.kr/LrjOCU'
+
     }
   ];
 
