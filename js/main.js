@@ -366,7 +366,7 @@ document.addEventListener('DOMContentLoaded', () => {
       image: 'img/appmockup.png',
       video: 'img/heai.mp4',
       link: 'https://zrr.kr/FnHXKZ',
-      plan: 'https://zrr.kr/rOAK7f'
+      plan: 'https://zrr.kr/Lluggx'
     },
     {
       title: '03 WEB Projects',
