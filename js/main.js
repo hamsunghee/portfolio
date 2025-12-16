@@ -115,6 +115,16 @@ hoverTargets.forEach(el => {
   });
 });
 
+const navLinks = document.querySelectorAll('header nav a');
+
+navLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    navLinks.forEach(l => l.classList.remove('active'));
+    link.classList.add('active');
+  });
+});
+
+
 // 2) 섹션2(.graphic) 안의 카드 이미지에만 Drag me! 표시
 const section2Images = document.querySelectorAll(
   /*   ".graphic .project_card", */
@@ -138,7 +148,7 @@ const emojiDropTarget = document.getElementById('emoji-profile');
 let draggingIcon = null;
 let eatenCount = 0;                 // 몇 개 먹었는지
 const TOTAL_ICONS = 8;              // ✅ 먹어야 하는 아이콘 개수(휴지통 제외)
-const allClearImage = "url('../img/헉.png')";   // 전부 먹었을 때 이미지
+const allClearImage = "url('../img/herg.png')";   // 전부 먹었을 때 이미지
 
 dockIcons.forEach(icon => {
   icon.addEventListener('dragstart', e => {
@@ -214,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const dockContainer = document.querySelector('.dock_container');
   const trashIcon = document.querySelector('.dock_container .ico_bin');
 
-  const allClearImage = '../img/선글라스.png';
+  const allClearImage = '../img/sun.png';
 
   if (trashIcon && dockContainer && emojiDropTarget) {
     trashIcon.style.cursor = 'pointer';
@@ -385,9 +395,8 @@ document.addEventListener('keydown', (e) => {
 });
 
 
-/*section5 mouse */
 
-/* section5: publishing 3D slider */
+/* section3: publishing 3D slider */
 document.addEventListener('DOMContentLoaded', () => {
   const publishingProjects = [
     {
@@ -633,12 +642,12 @@ setTimeout(() => ScrollTrigger.refresh(), 500);
 // macOS Dock 애니메이션 
 
 const faceImages = [
-  "url('../img/정상.png')",
-  "url('../img/수염.png')",
-  "url('../img/브이.png')",
-  "url('../img/헉.png')",
-  "url('../img/쉿.png')",
-  "url('../img/굿.png')"
+  "url('../img/normal.png')",
+  "url('../img/beard.png')",
+  "url('../img/v.png')",
+  "url('../img/herg.png')",
+  "url('../img/shh.png')",
+  "url('../img/good.png')"
 ];
 let currentIndex = 0;
 
