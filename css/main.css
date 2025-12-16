@@ -391,15 +391,12 @@ section {
 }
 
 /* section2 */
-
 .graphic {
     width: 100%;
     min-height: 100vh;
     padding: 0px 40px;
     position: relative;
     padding-top: 100px;
-    /*   margin-top: 200px; */
-    /*     padding-top: 400px; */
 }
 
 .section_header {
@@ -1413,6 +1410,13 @@ section {
 .profile img.ico:hover {
     filter: none;
 }
+
+.profile img.ico_bin {
+    filter: none; /* 항상 컬러 */
+    margin: 0 30px;
+    transform: translateY(-2px);
+}
+
 /* 반응형 */
 @media (max-width: 768px) {
     .profile_container {
@@ -1440,6 +1444,8 @@ section {
         height: 45px;
     }
 }
+
+
 /* CONTACT 섹션 */
 .contact {
     display: flex;
