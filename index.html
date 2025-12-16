@@ -526,12 +526,31 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script>
-    AOS.init({
-      duration: 700,
-      easing: 'ease-out',
-      once: false,
-      mirror: true,
-      offset: 120
+    // GSAP 등록 후 AOS refresh
+    gsap.registerPlugin(ScrollTrigger);
+
+    // 인트로 애니 후 AOS 재초기화
+    window.addEventListener('load', () => {
+      AOS.init({
+        duration: 700,
+        easing: 'ease-out',
+        once: false,
+        mirror: true,
+        offset: 200,  // 증가시켜 조기 트리거
+        delay: 100
+      });
+
+      // 스크롤 후 강제 refresh
+      setTimeout(() => {
+        AOS.refresh();
+      }, 1000);
+    });
+
+    // 스크롤 이벤트로 AOS refresh (인트로 통과 후)
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > window.innerHeight) {
+        AOS.refresh();
+      }
     });
 
   </script>

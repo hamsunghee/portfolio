@@ -247,6 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+
 // 01 visual 
 gsap.timeline({
   scrollTrigger: {
@@ -400,7 +401,7 @@ document.addEventListener('DOMContentLoaded', () => {
       title: '02 APP Team Projects',
       image: 'img/appmockup.png',
       video: 'img/heai.mp4',
-      link: 'https://zrr.kr/Wwyeky',
+      link: 'https://zrr.kr/diO66f',
       plan: 'https://zrr.kr/Lluggx'
     },
     {
