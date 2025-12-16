@@ -457,7 +457,6 @@ document.addEventListener('DOMContentLoaded', () => {
       plan: '#'
     },
     {
-
       title: '04 APP Projects',
       image: 'img/appmockup2.png',
       video: 'img/p_app.mp4',
