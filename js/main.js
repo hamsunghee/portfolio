@@ -723,3 +723,41 @@ btnTop.addEventListener('click', () => {
     behavior: 'smooth'
   });
 });
+
+//footer
+
+document.addEventListener("DOMContentLoaded", () => {
+  const flyingEls = document.querySelectorAll(".flying-text");
+
+  flyingEls.forEach(el => {
+    const text = el.textContent.trim();
+    el.textContent = "";
+    text.split("").forEach(ch => {
+      const span = document.createElement("span");
+      span.classList.add("char");
+      span.textContent = ch;
+      el.appendChild(span);
+    });
+
+    const chars = el.querySelectorAll(".char");
+
+    gsap.fromTo(chars,
+      {
+        y: 40,
+        opacity: 0,
+        rotateX: -90
+      },
+      {
+        y: 0,
+        opacity: 1,
+        rotateX: 0,
+        stagger: 0.08,
+        duration: 1.2,
+        ease: "back.out(1.7)",
+        repeat: -1,
+        repeatDelay: 1.2,
+        yoyo: true
+      }
+    );
+  });
+});

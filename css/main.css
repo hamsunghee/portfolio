@@ -1534,6 +1534,23 @@ section {
     letter-spacing: 0.05em;
 }
 
+.footer-typo {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 10vw;
+    text-transform: uppercase;
+}
+
+.flying-text {
+    display: inline-block;
+    perspective: 800px;
+}
+
+.flying-text .char {
+    display: inline-block;
+    will-change: transform, opacity;
+}
+
 /* 반응형 */
 @media (max-width: 768px) {
     section {
