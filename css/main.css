@@ -694,46 +694,9 @@ section {
             translateY(50px);
     }
 }
-
-/* section3: publishing 3D slider */
-/* .publishing {
-    width: 100%;
-    min-height: 100vh;
-    position: relative;
-    padding: 0;
-}
-.publishing_wrapper {
-    width: 100%;
-    height: 100vh;
-    position: relative;
-}
-.publishing_main {
-    width: 100%;
-    height: 100vh;
-    position: relative;
-    position: sticky;
-} */
-/* .publishing {
-    width: 100%;
-    min-height: 100vh;
-    position: relative;
-    padding: 0;
-}
-.publishing_wrapper {
-    width: 100%;
-    height: 100vh;
-    position: relative;
-}
-.publishing_main {
-    width: 100%;
-    height: 100vh;
-    position: sticky;
-} */
-/* 섹션 자체를 길게 → 그 안에서만 고정되게 */
 .publishing {
     position: relative;
 }
-
 /* wrapper는 높이 자동 */
 .publishing_wrapper {
     width: 100%;
@@ -816,7 +779,7 @@ section {
     z-index: 10;
 }
 .swiper_slide.is_active .project_visual_image {
-    transform: translateY(0) scale(1) !important;
+    transform: translateY(0) scale(1);
 }
 
 /* Titles */
