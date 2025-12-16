@@ -1126,7 +1126,7 @@ section {
 .emoji-img-btn {
     width: 500px;
     height: 500px;
-    background: url('img/정상.png') center/cover no-repeat;
+    background: url('../img/정상.png') center/cover no-repeat;
     border: none;
     cursor: pointer;
     transition: all 0.3s ease;
