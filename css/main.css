@@ -1445,7 +1445,6 @@ section {
     }
 }
 
-
 /* CONTACT 섹션 */
 .contact {
     display: flex;
@@ -1768,3 +1767,6 @@ section {
         gap: 4rem;
     }
 }
+
+/* 반응형 375*/
+/* 375px 최적화 - 기존 코드 끝에 추가 */

@@ -69,27 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.addEventListener('scroll', handle_scroll, { passive: true });
 });
-/* 
 
-const cursor = document.querySelector(".cursor");
-// 마우스 위치 커서 이동
-document.addEventListener("mousemove", (e) => {
-  cursor.style.left = e.clientX + "px";
-  cursor.style.top = e.clientY + "px";
-});
-
-
-// li, img 영역에 마우스가 들어가면 'grow' 클래스 추가, 나가면 제거
-const hoverTargets = [...document.querySelectorAll("nav ul li"), ...document.querySelectorAll("img")];
-
-hoverTargets.forEach(el => {
-  el.addEventListener("mouseenter", () => {
-    cursor.classList.add("grow");
-  });
-  el.addEventListener("mouseleave", () => {
-    cursor.classList.remove("grow");
-  });
-}); */
 
 const cursor = document.querySelector(".cursor");
 const cursorLabel = document.querySelector(".cursor-label");
@@ -157,6 +137,13 @@ document.addEventListener("DOMContentLoaded", () => {
   onScroll(); // 처음 로드 시 한 번 실행
 });
 
+/* ham menu */
+const navUl = document.querySelector('nav ul');
+document.querySelector('header').addEventListener('click', (e) => {
+  if (window.innerWidth <= 375) {
+    navUl.classList.toggle('active');
+  }
+});
 
 
 // 2) 섹션2(.graphic) 안의 카드 이미지에만 Drag me! 표시
