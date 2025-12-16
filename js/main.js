@@ -633,12 +633,12 @@ setTimeout(() => ScrollTrigger.refresh(), 500);
 // macOS Dock 애니메이션 
 
 const faceImages = [
-  'url(img/정상.png)',
-  'url(img/수염.png)',
-  'url(img/브이.png)',
-  'url(img/헉.png)',
-  'url(img/쉿.png)',
-  'url(img/굿.png)'
+  "url('../img/정상.png')",
+  "url('../img/수염.png')",
+  "url('../img/브이.png')",
+  "url('../img/헉.png')",
+  "url('../img/쉿.png')",
+  "url('../img/굿.png')"
 ];
 let currentIndex = 0;
 
