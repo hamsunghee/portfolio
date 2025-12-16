@@ -196,7 +196,7 @@ if (emojiDropTarget) {
     const previousBg = emojiDropTarget.style.backgroundImage;
 
     // '냠' 이미지로 변경
-    emojiDropTarget.style.backgroundImage = "url('img/냠.png')";
+    emojiDropTarget.style.backgroundImage = "url('../img/eat.png')";
 
     setTimeout(() => {
       eatenCount += 1; // 하나 먹음
