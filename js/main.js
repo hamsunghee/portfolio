@@ -124,6 +124,40 @@ navLinks.forEach(link => {
   });
 });
 
+/* 섹션에 왔을 때 표시 */
+document.addEventListener("DOMContentLoaded", () => {
+  const sections = document.querySelectorAll("section[id]");
+  const navLinks = document.querySelectorAll("header nav a");
+
+  function onScroll() {
+    let currentId = null;
+
+    sections.forEach(section => {
+      const rect = section.getBoundingClientRect();
+      const offset = 150; // 헤더 높이 감안해서 여유
+
+      if (rect.top <= offset && rect.bottom > offset) {
+        currentId = section.id;
+      }
+    });
+
+    if (!currentId) return;
+
+    navLinks.forEach(link => {
+      const hrefId = link.getAttribute("href").replace("#", "");
+      if (hrefId === currentId) {
+        link.classList.add("active");
+      } else {
+        link.classList.remove("active");
+      }
+    });
+  }
+
+  window.addEventListener("scroll", onScroll);
+  onScroll(); // 처음 로드 시 한 번 실행
+});
+
+
 
 // 2) 섹션2(.graphic) 안의 카드 이미지에만 Drag me! 표시
 const section2Images = document.querySelectorAll(
