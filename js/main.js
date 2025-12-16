@@ -401,7 +401,7 @@ document.addEventListener('DOMContentLoaded', () => {
       title: '02 APP Team Projects',
       image: 'img/appmockup.png',
       video: 'img/heai.mp4',
-      link: 'https://zrr.kr/diO66f',
+      link: 'https://zrr.kr/Wwyeky',
       plan: 'https://zrr.kr/Lluggx'
     },
     {
@@ -633,12 +633,12 @@ setTimeout(() => ScrollTrigger.refresh(), 500);
 // macOS Dock 애니메이션 
 
 const faceImages = [
-  'url(/img/정상.png)',
-  'url(/img/수염.png)',
-  'url(/img/브이.png)',
-  'url(/img/헉.png)',
-  'url(/img/쉿.png)',
-  'url(/img/굿.png)'
+  'url(img/정상.png)',
+  'url(img/수염.png)',
+  'url(img/브이.png)',
+  'url(img/헉.png)',
+  'url(img/쉿.png)',
+  'url(img/굿.png)'
 ];
 let currentIndex = 0;
 
