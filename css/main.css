@@ -1,5 +1,4 @@
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
-@import url('https://fonts.cdnfonts.com/css/santiago');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
 body {
@@ -10,7 +9,7 @@ body {
     overflow-x: hidden;
 }
 
-/* 인트로 전체 레이어 */
+/* intro_screen */
 .intro_screen {
     position: fixed;
     inset: 0;
@@ -144,7 +143,6 @@ header {
     align-items: center;
 }
 
-/* nav ul은 가운데 정렬 유지 */
 nav ul {
     display: flex;
     justify-content: center;
@@ -234,7 +232,6 @@ header nav a.active::after {
 
 section {
     min-height: 100vh;
-    /*     padding: 8rem 4rem; */
     position: relative;
 }
 
@@ -242,7 +239,6 @@ section {
 .main {
     width: 100%;
     height: 100vh;
-    /*     background: orange; */
 }
 
 @keyframes floating {
@@ -295,7 +291,7 @@ section {
     z-index: 1000;
 }
 
-/* 안에 들어가는 “Drag me!” 텍스트 */
+/*  “Drag me!”  */
 .cursor-label {
     position: absolute;
     top: 50%;
@@ -315,7 +311,7 @@ section {
     opacity: 1;
 }
 
-/* 섹션2에서 커서 조금 키우고 싶으면 */
+/* 섹션2에서 커서 조금 키우기 */
 .cursor.show-drag {
     transform: translate(-50%, -50%) scale(1.8);
 }
@@ -1116,7 +1112,7 @@ section {
     animation-delay: -1.2s; /* 서로 다른 타이밍으로 반짝 */
 }
 
-/* profile s */
+/* profile */
 .profile {
     display: flex;
     align-items: center;
@@ -1273,7 +1269,7 @@ section {
     align-items: center;
 }
 
-/* 안내 문구 스타일 */
+/* dock_hint */
 .dock_hint {
     margin-top: 20px;
     font-size: 0.8rem;
@@ -1375,7 +1371,7 @@ section {
 }
 
 .profile img.ico_bin {
-    filter: none; /* 항상 컬러 */
+    filter: none;
     margin: 0 30px;
     transform: translateY(-2px);
 }
@@ -1408,7 +1404,7 @@ section {
     }
 }
 
-/* CONTACT 섹션 */
+/* CONTACT */
 .contact {
     display: flex;
     align-items: center;
@@ -1714,13 +1710,13 @@ section {
     }
 
     .dockcontainer {
-        justify-content: flex-start !important;
+        justify-content: flex-start; /* !important */
         overflow-x: auto;
         padding: 1rem;
     }
 
     .con4 .title {
-        font-size: clamp(4rem, 15vw, 6rem) !important;
+        font-size: clamp(4rem, 15vw, 6rem); /*  !important */
     }
 }
 
@@ -1732,4 +1728,3 @@ section {
 }
 
 /* 반응형 375*/
-/* 375px 최적화 - 기존 코드 끝에 추가 */
