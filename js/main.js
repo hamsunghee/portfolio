@@ -1,4 +1,5 @@
 /* 인트로용  */
+
 document.addEventListener('DOMContentLoaded', () => {
   const intro_screen = document.querySelector('.intro_screen');
   const flash_layer = document.querySelector('.flash_layer');
@@ -719,10 +720,6 @@ const focus = (index) => {
   });
 };
 
-/* 휴지통 리셋 */
-
-
-
 
 
 AOS.init({
@@ -734,7 +731,6 @@ AOS.init({
 });
 
 /* top */
-// TOP 버튼
 const btnTop = document.querySelector('.btn_top');
 
 window.addEventListener('scroll', () => {

@@ -442,7 +442,7 @@ section {
     user-select: none;
     will-change: transform;
     filter: brightness(0.3) contrast(1.2); /* 전체 어둡게 */
-    transition: filter 0.4s ease;
+    transition: 0.3s ease;
 }
 
 .project_card.dragging {
@@ -917,7 +917,8 @@ section {
 }
 .slide_arrow {
     color: #fff;
-    background: transparent;
+    /*     background: transparent; */
+    background: #000;
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 25px;
     font-size: 16px;
@@ -958,10 +959,10 @@ section {
 }
 
 .con4 .listBox {
+    width: 1400px;
     margin: 80px auto;
     transform-style: preserve-3d;
-    position: relative;
-    width: 1200px;
+    perspective: 1400px;
 }
 
 .con4 .listBox .box {
@@ -979,11 +980,11 @@ section {
 }
 /* 각 박스를 위로 조금씩 당겨서 겹치게 */
 .con4 .listBox .box + .box {
-    top: -40px;
+    top: -100px;
 }
 
 .con4 .listBox .box + .box + .box {
-    top: -100px;
+    top: -200px;
 }
 .con4 .listBox .box h2 {
     font-size: clamp(2rem, 6vw, 40px);
@@ -1261,6 +1262,7 @@ section {
     border: 1px solid rgba(255, 255, 255, 0.15);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     gap: 5px;
+    transition: 0.5s;
 }
 
 /* li_bin 안은 세로 배치 */
