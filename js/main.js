@@ -1,5 +1,4 @@
 /* 인트로용  */
-
 document.addEventListener('DOMContentLoaded', () => {
   const intro_screen = document.querySelector('.intro_screen');
   const flash_layer = document.querySelector('.flash_layer');
@@ -170,7 +169,7 @@ const emojiDropTarget = document.getElementById('emoji-profile');
 let draggingIcon = null;
 let eatenCount = 0;                 // 몇 개 먹었는지
 const TOTAL_ICONS = 8;              // ✅ 먹어야 하는 아이콘 개수(휴지통 제외)
-const allClearImage = "url('./img/herg.png')";   // 전부 먹었을 때 이미지
+const allClearImage = "url('./img/big.png')";   // 전부 먹었을 때 이미지
 
 dockIcons.forEach(icon => {
   icon.addEventListener('dragstart', e => {
@@ -716,10 +715,11 @@ const focus = (index) => {
   });
 };
  */
+
 /* dock */
 // macOS Dock 애니메이션 + 드래그 + 리셋 (8개 먹기 herg.png + 포크 sun.png)
 document.addEventListener('DOMContentLoaded', () => {
-  // 이모지 변경 기능 (독립 스코프)
+  // 이모지 변경 기능
   (function () {
     const emojiFaceImages = [
       "url('./img/normal.png')",
@@ -729,16 +729,21 @@ document.addEventListener('DOMContentLoaded', () => {
       "url('./img/shh.png')",
       "url('./img/good.png')"
     ];
+
     let emojiCurrentIndex = 0;
     const emojiBtn = document.getElementById('emoji-profile');
-    if (emojiBtn) {
-      emojiBtn.style.backgroundImage = emojiFaceImages[0];
-      emojiBtn.addEventListener('click', () => {
-        emojiCurrentIndex = (emojiCurrentIndex + 1) % emojiFaceImages.length;
-        emojiBtn.style.backgroundImage = emojiFaceImages[emojiCurrentIndex];
-      });
-    }
+
+    if (!emojiBtn) return;
+
+    // 초기 이미지
+    emojiBtn.style.backgroundImage = emojiFaceImages[0];
+
+    emojiBtn.addEventListener('click', () => {
+      emojiCurrentIndex = (emojiCurrentIndex + 1) % emojiFaceImages.length;
+      emojiBtn.style.backgroundImage = emojiFaceImages[emojiCurrentIndex];
+    });
   })();
+});
 
   // dock 전체 기능 초기화
   initDockSystem();
@@ -753,8 +758,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const forkIcon = document.querySelector('.li_bin .ico');
   if (forkIcon) {
     forkIcon.addEventListener('click', handleForkClick);
-  }
-});
+  };
 
 // dock 먹힌 개수 카운터 (전역) - 드래그로 먹은 아이콘 수
 let dockEatenCount = 0;
@@ -844,7 +848,7 @@ function initDockSystem() {
 
           // 8개 다 먹으면 herg.png (영구)
           if (dockEatenCount >= 8) {
-            newDropTarget.style.backgroundImage = "url('./img/herg.png')";
+            newDropTarget.style.backgroundImage = "url('./img/sun.png')";
             console.log('🎉 8개 완전 먹기 완료! herg.png 영구 표시!');
           } else {
             // eat 애니메이션

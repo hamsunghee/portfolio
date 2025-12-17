@@ -1029,7 +1029,7 @@ section {
 }
 
 /* PROFILE section5 */
-.emoji-img-btn {
+/* .emoji-img-btn {
     width: 500px;
     height: 500px;
     background: url('../img/normal.png') center/cover no-repeat;
@@ -1037,7 +1037,16 @@ section {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+} */
+
+.emoji-img-btn {
+    width: 500px;
+    height: 500px;
+    background: transparent center / cover no-repeat;
+    border: none;
+    cursor: pointer;
 }
+
 .emoji-img-btn:active {
     transform: scale(1.1) rotate(5deg);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
