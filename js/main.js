@@ -169,7 +169,7 @@ const emojiDropTarget = document.getElementById('emoji-profile');
 let draggingIcon = null;
 let eatenCount = 0;                 // 몇 개 먹었는지
 const TOTAL_ICONS = 8;              // ✅ 먹어야 하는 아이콘 개수(휴지통 제외)
-const allClearImage = "url('./img/herg.png')";   // 전부 먹었을 때 이미지
+const allClearImage = "url('../img/herg.png')";   // 전부 먹었을 때 이미지
 
 dockIcons.forEach(icon => {
   icon.addEventListener('dragstart', e => {
@@ -217,7 +217,7 @@ if (emojiDropTarget) {
     const previousBg = emojiDropTarget.style.backgroundImage;
 
     // '냠' 이미지로 변경
-    emojiDropTarget.style.backgroundImage = "url('./img/eat.png')";
+    emojiDropTarget.style.backgroundImage = "url('../img/eat.png')";
 
     setTimeout(() => {
       eatenCount += 1; // 하나 먹음
@@ -420,7 +420,6 @@ document.addEventListener('keydown', (e) => {
 
 
 /* section3: publishing 3D slider */
-
 document.addEventListener('DOMContentLoaded', () => {
   const publishingProjects = [
     {
@@ -438,18 +437,19 @@ document.addEventListener('DOMContentLoaded', () => {
       plan: 'https://zrr.kr/Lluggx'
     },
     {
-      title: '03 APP Projects',
+      title: '03 WEB Projects',
+      image: 'img/bud.png',
+      video: 'video/web-single.mp4',
+      link: '#',
+      plan: '#'
+    },
+    {
+      title: '04 APP Projects',
       image: 'img/appmockup2.png',
       video: 'img/p_app.mp4',
       link: 'https://zrr.kr/AKILUv',
       plan: 'https://zrr.kr/bqAJAq'
-    },
-    {
-      title: '04 WEB Projects',
-      image: 'img/k2.png',
-      video: 'img/knotted.mp4',
-      link: 'https://hamsunghee.github.io/Knottedstore/',
-      plan: null
+
     }
   ];
 
@@ -529,14 +529,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
       videoEl.src = publishingProjects[publishingIndex].video;
       linkEl.href = publishingProjects[publishingIndex].link || '#';
-      /*       if (planEl) planEl.href = publishingProjects[publishingIndex].plan || publishingProjects[publishingIndex].link || '#'; */
-      const currentProject = publishingProjects[publishingIndex];
-      if (currentProject.plan) {
-        planEl.href = currentProject.plan;
-        planEl.style.display = 'flex';
-      } else {
-        planEl.style.display = 'none';
-      }
+      if (planEl) planEl.href = publishingProjects[publishingIndex].plan || publishingProjects[publishingIndex].link || '#';
       bannerTitle.textContent = publishingProjects[publishingIndex].title;
       currentEl.textContent = publishingIndex + 1;
       videoComponent.style.opacity = '1';
