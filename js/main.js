@@ -719,6 +719,10 @@ const focus = (index) => {
   });
 };
 
+/* 휴지통 리셋 */
+
+
+
 
 
 AOS.init({

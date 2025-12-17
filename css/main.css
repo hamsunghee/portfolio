@@ -958,10 +958,10 @@ section {
 }
 
 .con4 .listBox {
-    /*     margin: clamp(4rem, 10vh, 10px) 0; */
-    margin: 80px 0;
-    perspective: 1400px;
+    margin: 80px auto;
     transform-style: preserve-3d;
+    position: relative;
+    width: 1200px;
 }
 
 .con4 .listBox .box {
@@ -976,7 +976,6 @@ section {
     filter: brightness(1);
     will-change: transform, filter;
     transform-style: preserve-3d;
-    position: relative;
 }
 /* 각 박스를 위로 조금씩 당겨서 겹치게 */
 .con4 .listBox .box + .box {
@@ -1111,6 +1110,8 @@ section {
 .dock_hint {
     animation-delay: -1.2s; /* 서로 다른 타이밍으로 반짝 */
 }
+
+/* 휴지통 리셋 */
 
 /* profile */
 .profile {
@@ -1247,7 +1248,7 @@ section {
 .dock_container {
     padding: 8px;
     width: 100%;
-    max-width: 600px;
+    /*     max-width: 800px; */
     margin: 0 auto;
     height: 70px;
     display: flex;
