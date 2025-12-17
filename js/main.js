@@ -240,7 +240,7 @@ if (emojiDropTarget) {
 }
 
 
-// 휴지통 한 번에 비우기 + 프로필 이모지 clear 이미지로 변경
+// 포크 한 번에 비우기 + 프로필 이모지 clear 이미지로 변경
 document.addEventListener('DOMContentLoaded', () => {
   const emojiDropTarget = document.getElementById('emoji-profile');
   const dockContainer = document.querySelector('.dock_container');
@@ -252,7 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
     trashIcon.style.cursor = 'pointer';
 
     trashIcon.addEventListener('click', () => {
-      // 1️⃣ 휴지통 제외 모든 아이콘 제거
+      // 포크 제외 모든 아이콘 제거
       const allItems = dockContainer.querySelectorAll('li');
       allItems.forEach(li => {
         if (!li.classList.contains('li_bin')) {
@@ -260,16 +260,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
 
-      // 2️⃣ 프로필 이모지를 clear 이미지로 변경
+      // 프로필 이모지를 clear 이미지로 변경
       emojiDropTarget.style.backgroundImage = `url(${allClearImage})`;
 
-      // 3️⃣ 프로필 아래 힌트 문구 변경
+      //  프로필 아래 힌트 문구 변경
       const emojiHint = document.querySelector('.emoji_hint');
       if (emojiHint) {
         emojiHint.textContent = '모든 스킬을 흡수 완료!';
       }
 
-      // 4️⃣ 휴지통 아래 문구 제거
+      // 아래 문구 제거
       const dockHint = document.querySelector('.dock_hint');
       if (dockHint) {
         dockHint.remove();
@@ -277,8 +277,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
-
-
 
 
 
@@ -578,7 +576,7 @@ document.addEventListener('DOMContentLoaded', () => {
       scrollTrigger: {
         trigger: publishingSection,
         start: 'top top',
-        end: () => `+=${window.innerHeight * Math.max(1, slidesCount * 0.15)}`,
+        end: () => `+=${window.innerHeight * Math.max(1, slidesCount * 0.6)}`,
         scrub: 0.05,
         pin: true,
         snap: 1 / (slidesCount - 1),
@@ -666,8 +664,7 @@ setTimeout(() => ScrollTrigger.refresh(), 500);
 
 
 // macOS Dock 애니메이션 
-
-const faceImages = [
+/* const faceImages = [
   "url('./img/normal.png')",
   "url('./img/beard.png')",
   "url('./img/v.png')",
@@ -678,16 +675,15 @@ const faceImages = [
 let currentIndex = 0;
 
 const btn = document.getElementById('emoji-profile');
-btn.style.backgroundImage = faceImages[0];  // 초기 설정
+btn.style.backgroundImage = faceImages[0]; 
 
 btn.addEventListener('click', function () {
   currentIndex = (currentIndex + 1) % faceImages.length;
   const nextImage = faceImages[currentIndex];
-  console.log('변경:', currentIndex, nextImage);  // 디버깅용
+  console.log('변경:', currentIndex, nextImage);  
   this.style.backgroundImage = nextImage;
 });
 
-/*  */
 
 const icons = document.querySelectorAll(".dock_container .ico");
 
@@ -719,6 +715,232 @@ const focus = (index) => {
     }
   });
 };
+ */
+/* dock */
+// macOS Dock 애니메이션 + 드래그 + 리셋 (8개 먹기 herg.png + 포크 sun.png)
+document.addEventListener('DOMContentLoaded', () => {
+  // 이모지 변경 기능 (독립 스코프)
+  (function () {
+    const emojiFaceImages = [
+      "url('./img/normal.png')",
+      "url('./img/beard.png')",
+      "url('./img/v.png')",
+      "url('./img/herg.png')",
+      "url('./img/shh.png')",
+      "url('./img/good.png')"
+    ];
+    let emojiCurrentIndex = 0;
+    const emojiBtn = document.getElementById('emoji-profile');
+    if (emojiBtn) {
+      emojiBtn.style.backgroundImage = emojiFaceImages[0];
+      emojiBtn.addEventListener('click', () => {
+        emojiCurrentIndex = (emojiCurrentIndex + 1) % emojiFaceImages.length;
+        emojiBtn.style.backgroundImage = emojiFaceImages[emojiCurrentIndex];
+      });
+    }
+  })();
+
+  // dock 전체 기능 초기화
+  initDockSystem();
+
+  // 휴지통 리셋 기능
+  const dockResetBtn = document.querySelector('.reset_btn');
+  if (dockResetBtn) {
+    dockResetBtn.addEventListener('click', resetDockSystem);
+  }
+
+  // 포크 클릭 기능 (sun.png + 스킬만 제거)
+  const forkIcon = document.querySelector('.li_bin .ico');
+  if (forkIcon) {
+    forkIcon.addEventListener('click', handleForkClick);
+  }
+});
+
+// dock 먹힌 개수 카운터 (전역) - 드래그로 먹은 아이콘 수
+let dockEatenCount = 0;
+
+// dock 시스템 초기화
+function initDockSystem() {
+  const dockIcons = document.querySelectorAll('.dock_container .ico:not(.ico_bin)');
+  const dropTarget = document.getElementById('emoji-profile');
+
+  // 1. Hover 애니메이션 (독립 변수)
+  const hoverReset = () => {
+    dockIcons.forEach(icon => {
+      icon.style.transform = 'scale(1) translateY(0px)';
+    });
+  };
+
+  const hoverFocus = (index) => {
+    hoverReset();
+    const hoverTransformations = [
+      { idx: index - 2, scale: 1.1, translateY: 0 },
+      { idx: index - 1, scale: 1.2, translateY: -6 },
+      { idx: index, scale: 1.5, translateY: -15 },
+      { idx: index + 1, scale: 1.2, translateY: -6 },
+      { idx: index + 2, scale: 1.1, translateY: 0 }
+    ];
+    hoverTransformations.forEach(({ idx, scale, translateY }) => {
+      if (dockIcons[idx]) {
+        dockIcons[idx].style.transform = `scale(${scale}) translateY(${translateY}px)`;
+      }
+    });
+  };
+
+  // 기존 이벤트 제거 후 새로 연결 (중복 방지)
+  dockIcons.forEach(icon => {
+    icon.replaceWith(icon.cloneNode(true));
+  });
+
+  const newDockIcons = document.querySelectorAll('.dock_container .ico:not(.ico_bin)');
+
+  newDockIcons.forEach((icon, index) => {
+    icon.draggable = true;
+    icon.addEventListener('mouseenter', () => hoverFocus(index));
+    icon.addEventListener('mouseleave', hoverReset);
+
+    // 드래그 이벤트
+    icon.addEventListener('dragstart', (e) => {
+      e.dataTransfer.effectAllowed = 'move';
+      icon.classList.add('dragging');
+      icon.style.opacity = '0.6';
+      icon.style.transform = 'scale(1.2) translateY(-8px)';
+    });
+
+    icon.addEventListener('dragend', () => {
+      icon.classList.remove('dragging');
+      icon.style.opacity = '1';
+      icon.style.transform = '';
+    });
+  });
+
+  // 2. 드롭 영역 이벤트 (8개 먹기 완전 구현)
+  if (dropTarget) {
+    // 기존 이벤트 제거
+    dropTarget.replaceWith(dropTarget.cloneNode(true));
+    const newDropTarget = document.getElementById('emoji-profile');
+
+    newDropTarget.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      newDropTarget.classList.add('drop-active');
+    });
+
+    newDropTarget.addEventListener('dragleave', () => {
+      newDropTarget.classList.remove('drop-active');
+    });
+
+    newDropTarget.addEventListener('drop', (e) => {
+      e.preventDefault();
+      newDropTarget.classList.remove('drop-active');
+
+      const draggingIcon = document.querySelector('.dragging');
+      if (draggingIcon && !draggingIcon.classList.contains('ico_bin')) {
+        const parentLi = draggingIcon.closest('li');
+        if (parentLi && !parentLi.classList.contains('reset_btn')) {
+          parentLi.remove();
+          dockEatenCount++; // 카운트 증가
+          console.log(`🍖 먹은 개수: ${dockEatenCount}/8`);
+
+          // 8개 다 먹으면 herg.png (영구)
+          if (dockEatenCount >= 8) {
+            newDropTarget.style.backgroundImage = "url('./img/herg.png')";
+            console.log('🎉 8개 완전 먹기 완료! herg.png 영구 표시!');
+          } else {
+            // eat 애니메이션
+            newDropTarget.style.backgroundImage = "url('./img/eat.png')";
+            setTimeout(() => {
+              newDropTarget.style.backgroundImage = "url('./img/normal.png')";
+            }, 600);
+          }
+        }
+      }
+    });
+  }
+}
+
+// 포크 클릭: sun.png + 스킬(li_1~li_8)만 제거, reset_btn 보존
+function handleForkClick() {
+  console.log('🍴 포크 클릭!');
+
+  const dockContainer = document.querySelector('.dock_container');
+  const dropTarget = document.getElementById('emoji-profile');
+
+  // li_1 ~ li_8 만 삭제 (포크 li_bin, reset_btn 은 살려둠)
+  const allItems = dockContainer.querySelectorAll('li');
+  allItems.forEach(li => {
+    if (li.classList.contains('li_1') ||
+      li.classList.contains('li_2') ||
+      li.classList.contains('li_3') ||
+      li.classList.contains('li_4') ||
+      li.classList.contains('li_5') ||
+      li.classList.contains('li_6') ||
+      li.classList.contains('li_7') ||
+      li.classList.contains('li_8')) {
+      li.remove();
+    }
+  });
+
+  // 이모지 sun.png로 변경
+  if (dropTarget) {
+    dropTarget.style.backgroundImage = "url('./img/sun.png')";
+  }
+
+  // 포크로 모두 먹인 상태로 간주
+  dockEatenCount = 8;
+}
+
+// dock 리셋 시스템
+function resetDockSystem() {
+  console.log('🔄 휴지통 리셋 실행!');
+
+  const dockContainer = document.querySelector('.dock_container');
+  const dropTarget = document.getElementById('emoji-profile');
+
+  // 1. li_bin(포크), reset_btn 제외하고 삭제
+  const allItems = dockContainer.querySelectorAll('li');
+  allItems.forEach(li => {
+    if (!li.classList.contains('li_bin') && !li.classList.contains('reset_btn')) {
+      li.remove();
+    }
+  });
+
+  // 2. 원본 8개 ico 재생성
+  const resetIconsData = [
+    { class: 'li_1', name: 'Figma', img: 'img/figma.png', alt: 'figma' },
+    { class: 'li_2', name: 'AI', img: 'img/ai.png', alt: 'ai' },
+    { class: 'li_3', name: 'PS', img: 'img/ps.png', alt: 'ps' },
+    { class: 'li_4', name: 'HTML', img: 'img/html.png', alt: 'html' },
+    { class: 'li_5', name: 'CSS', img: 'img/css.png', alt: 'css' },
+    { class: 'li_6', name: 'JS', img: 'img/javascript.png', alt: 'js' },
+    { class: 'li_7', name: 'Midjourney', img: 'img/midjourney.png', alt: 'midjourney' },
+    { class: 'li_8', name: 'Chatgpt', img: 'img/chatgpt.webp', alt: 'chatgpt' }
+  ];
+
+  const forkIcon = dockContainer.querySelector('.li_bin');
+  resetIconsData.forEach(iconData => {
+    const newLi = document.createElement('li');
+    newLi.className = iconData.class;
+    newLi.innerHTML = `
+            <div class="name">${iconData.name}</div>
+            <img class="ico" src="${iconData.img}" alt="${iconData.alt}" draggable="true">
+        `;
+    dockContainer.insertBefore(newLi, forkIcon);
+  });
+
+  // 3. 상태 초기화
+  dockEatenCount = 0;
+  if (dropTarget) {
+    dropTarget.style.backgroundImage = "url('./img/normal.png')";
+  }
+
+  // 4. 기능 재연결
+  setTimeout(initDockSystem, 150);
+  console.log('✅ dock 완전 리셋 완료!');
+}
+
+// 초기 실행
+initDockSystem();
 
 
 
@@ -748,6 +970,7 @@ btnTop.addEventListener('click', () => {
     behavior: 'smooth'
   });
 });
+
 
 //footer
 

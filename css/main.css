@@ -1028,7 +1028,7 @@ section {
     }
 }
 
-/* PROFILE 섹션 */
+/* PROFILE section5 */
 .emoji-img-btn {
     width: 500px;
     height: 500px;
@@ -1158,11 +1158,6 @@ section {
 .profile_image_overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-        180deg,
-        transparent 0%,
-        rgba(0, 0, 0, 0.3) 100%
-    );
     pointer-events: none;
 }
 
@@ -1247,9 +1242,8 @@ section {
 }
 
 .dock_container {
-    padding: 8px;
-    width: 100%;
     /*     max-width: 800px; */
+    padding: 8px;
     margin: 0 auto;
     height: 70px;
     display: flex;
@@ -1261,7 +1255,7 @@ section {
     -webkit-backdrop-filter: blur(25px);
     border: 1px solid rgba(255, 255, 255, 0.15);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    gap: 5px;
+    gap: 3px;
     transition: 0.5s;
 }
 
@@ -1298,7 +1292,7 @@ section {
 
 /* hover에서 scale/translate 제거하고 z-index, margin만 */
 .dock_container li:hover {
-    margin: 0 5px;
+    margin: 0 10px;
     z-index: 10;
 }
 
@@ -1343,7 +1337,9 @@ section {
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
 }
 
-.dock_container .li_bin {
+/* .dock_container .li_bin {
+} */
+.dock_container .reset_btn {
     margin-left: 20px;
     border-left: 2px solid rgba(255, 255, 255, 0.2);
     padding-left: 20px;
