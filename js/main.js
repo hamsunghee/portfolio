@@ -426,7 +426,7 @@ document.addEventListener('DOMContentLoaded', () => {
       video: 'img/boj.mp4',
       link: 'https://hamsunghee.github.io/Beauty-of-Joseon/',
       plan: 'https://zrr.kr/d4XwAn',
-      description: '한국 전통 미학과 현대적 UX를 하나의 흐름으로 연결해, 글로벌 사용자를 위한 K-뷰티 브랜드 ‘조선미녀’의 프리미엄 웹 경험을 재정의한 리뉴얼 프로젝트입니다.'
+      description: '한국 전통 미학과 현대적 UX를 하나의 흐름으로 연결해, 글로벌 사용자를 위한 K-뷰티 브랜드 ‘조선미녀’의 프리미엄 웹 경험을 재정의한 리뉴얼한 팀 프로젝트입니다.'
     },
     {
       title: '02 APP Team Projects',
@@ -434,7 +434,7 @@ document.addEventListener('DOMContentLoaded', () => {
       video: 'img/heai.mp4',
       link: 'https://zrr.kr/Wwyeky',
       plan: 'https://zrr.kr/Lluggx',
-      description: '팀 프로젝트로, 모바일 앱 환경을 고려한 UI/UX 디자인과 프로토타이핑을 진행했습니다.'
+      description: '루틴 실패 후에도 다시 시작할 수 있도록 돕는 AI 루틴 파트너 기반 운동,감정 통합 앱입니다. 회복 중심 UX와 상호작용을 통해 사용자의 루틴 지속과 감정 몰입을 강화합니다.'
     },
     {
 
@@ -442,16 +442,15 @@ document.addEventListener('DOMContentLoaded', () => {
       image: 'img/k2.png',
       video: 'img/knotted.mp4',
       link: '#',
-      plan: '#',
-      description: '개인 프로젝트로 진행한 웹 사이트입니다. 반응형 웹 디자인과 인터랙티브한 요소를 구현했습니다.'
+      description: '노티드 리뉴얼 웹 사이트입니다. 기존 노티드의 아이덴티티를 담아 반응형 웹 디자인과 인터랙티브한 요소를 구현했습니다.'
     },
     {
       title: '04 Flash fit Projects',
-      image: 'img/appmockup2.png',
+      image: 'img/p_app.png',
       video: 'img/p_app.mp4',
       link: 'https://zrr.kr/AKILUv',
       plan: 'https://zrr.kr/bqAJAq',
-      description: '개인 프로젝트로, 사용자 중심의 앱 인터페이스를 설계하고 디자인했습니다.'
+      description: '올인원 패션, 사용자 중심의 앱 인터페이스를 설계하고 디자인했습니다.'
     },
     {
       title: '05 BUD Projects',
@@ -548,7 +547,14 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
       videoEl.src = publishingProjects[publishingIndex].video;
       linkEl.href = publishingProjects[publishingIndex].link || '#';
-      if (planEl) planEl.href = publishingProjects[publishingIndex].plan || publishingProjects[publishingIndex].link || '#';
+      if (planEl) {
+        if (publishingProjects[publishingIndex].plan) {
+          planEl.style.display = '';
+          planEl.href = publishingProjects[publishingIndex].plan;
+        } else {
+          planEl.style.display = 'none';
+        }
+      }
       bannerTitle.textContent = publishingProjects[publishingIndex].title;
       if (descriptionEl) descriptionEl.textContent = publishingProjects[publishingIndex].description || '';
       currentEl.textContent = publishingIndex + 1;
