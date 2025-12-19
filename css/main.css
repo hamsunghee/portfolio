@@ -61,6 +61,7 @@ body {
 }
 
 @keyframes hint_blink {
+
     0%,
     100% {
         opacity: 0.4;
@@ -242,6 +243,7 @@ section {
 }
 
 @keyframes floating {
+
     0%,
     100% {
         transform: translateY(0);
@@ -441,7 +443,8 @@ section {
     top: 50%;
     user-select: none;
     will-change: transform;
-    filter: brightness(0.3) contrast(1.2); /* 전체 어둡게 */
+    filter: brightness(0.3) contrast(1.2);
+    /* 전체 어둡게 */
     transition: 0.3s ease;
 }
 
@@ -526,76 +529,64 @@ section {
 
 /* 지그재그 배치 */
 .project_card:nth-child(1) {
-    transform: translate(-50%, -50%) rotate(-8deg) translateX(-500px)
-        translateY(-80px);
+    transform: translate(-50%, -50%) rotate(-8deg) translateX(-500px) translateY(-80px);
     z-index: 1;
 }
 
 .project_card:nth-child(2) {
-    transform: translate(-50%, -50%) rotate(-5deg) translateX(-300px)
-        translateY(60px);
+    transform: translate(-50%, -50%) rotate(-5deg) translateX(-300px) translateY(60px);
     z-index: 2;
 }
 
 .project_card:nth-child(3) {
-    transform: translate(-50%, -50%) rotate(-2deg) translateX(-100px)
-        translateY(-60px);
+    transform: translate(-50%, -50%) rotate(-2deg) translateX(-100px) translateY(-60px);
     z-index: 3;
 }
 
 .project_card:nth-child(4) {
-    transform: translate(-50%, -50%) rotate(2deg) translateX(100px)
-        translateY(60px);
+    transform: translate(-50%, -50%) rotate(2deg) translateX(100px) translateY(60px);
     z-index: 4;
 }
 
 .project_card:nth-child(5) {
-    transform: translate(-50%, -50%) rotate(5deg) translateX(300px)
-        translateY(-60px);
+    transform: translate(-50%, -50%) rotate(5deg) translateX(300px) translateY(-60px);
     z-index: 5;
 }
 
 .project_card:nth-child(6) {
-    transform: translate(-50%, -50%) rotate(8deg) translateX(500px)
-        translateY(80px);
+    transform: translate(-50%, -50%) rotate(8deg) translateX(500px) translateY(80px);
     z-index: 6;
 }
 
 /* 호버 효과 - 왼쪽 카드들 */
 .project_card:nth-child(1):hover:not(.dragging) {
-    transform: translate(-50%, -50%) rotate(-8deg) translateX(-550px)
-        translateY(-80px) scale(1.05);
+    transform: translate(-50%, -50%) rotate(-8deg) translateX(-550px) translateY(-80px) scale(1.05);
     z-index: 20;
 }
 
 .project_card:nth-child(2):hover:not(.dragging) {
-    transform: translate(-50%, -50%) rotate(-5deg) translateX(-350px)
-        translateY(60px) scale(1.05);
+    transform: translate(-50%, -50%) rotate(-5deg) translateX(-350px) translateY(60px) scale(1.05);
     z-index: 20;
 }
 
 .project_card:nth-child(3):hover:not(.dragging) {
-    transform: translate(-50%, -50%) rotate(-2deg) translateX(-150px)
-        translateY(-60px) scale(1.05);
+    transform: translate(-50%, -50%) rotate(-2deg) translateX(-150px) translateY(-60px) scale(1.05);
     z-index: 20;
 }
 
 /* 호버 효과 - 오른쪽 카드들 */
 .project_card:nth-child(4):hover:not(.dragging) {
-    transform: translate(-50%, -50%) rotate(2deg) translateX(150px)
-        translateY(60px) scale(1.05);
+    transform: translate(-50%, -50%) rotate(2deg) translateX(150px) translateY(60px) scale(1.05);
     z-index: 20;
 }
 
 .project_card:nth-child(5):hover:not(.dragging) {
-    transform: translate(-50%, -50%) rotate(5deg) translateX(350px)
-        translateY(-60px) scale(1.05);
+    transform: translate(-50%, -50%) rotate(5deg) translateX(350px) translateY(-60px) scale(1.05);
     z-index: 20;
 }
 
 .project_card:nth-child(6):hover:not(.dragging) {
-    transform: translate(-50%, -50%) rotate(8deg) translateX(550px)
-        translateY(80px) scale(1.05);
+    transform: translate(-50%, -50%) rotate(8deg) translateX(550px) translateY(80px) scale(1.05);
     z-index: 20;
 }
 
@@ -661,38 +652,34 @@ section {
     }
 
     .project_card:nth-child(1) {
-        transform: translate(-50%, -50%) rotate(-10deg) translateX(-250px)
-            translateY(-50px);
+        transform: translate(-50%, -50%) rotate(-10deg) translateX(-250px) translateY(-50px);
     }
 
     .project_card:nth-child(2) {
-        transform: translate(-50%, -50%) rotate(-7deg) translateX(-150px)
-            translateY(40px);
+        transform: translate(-50%, -50%) rotate(-7deg) translateX(-150px) translateY(40px);
     }
 
     .project_card:nth-child(3) {
-        transform: translate(-50%, -50%) rotate(-4deg) translateX(-50px)
-            translateY(-40px);
+        transform: translate(-50%, -50%) rotate(-4deg) translateX(-50px) translateY(-40px);
     }
 
     .project_card:nth-child(4) {
-        transform: translate(-50%, -50%) rotate(4deg) translateX(50px)
-            translateY(40px);
+        transform: translate(-50%, -50%) rotate(4deg) translateX(50px) translateY(40px);
     }
 
     .project_card:nth-child(5) {
-        transform: translate(-50%, -50%) rotate(7deg) translateX(150px)
-            translateY(-40px);
+        transform: translate(-50%, -50%) rotate(7deg) translateX(150px) translateY(-40px);
     }
 
     .project_card:nth-child(6) {
-        transform: translate(-50%, -50%) rotate(10deg) translateX(250px)
-            translateY(50px);
+        transform: translate(-50%, -50%) rotate(10deg) translateX(250px) translateY(50px);
     }
 }
+
 .publishing {
     position: relative;
 }
+
 /* wrapper는 높이 자동 */
 .publishing_wrapper {
     width: 100%;
@@ -715,6 +702,7 @@ section {
     justify-content: center;
     perspective: 2000px;
 }
+
 .swiper_slider_component {
     position: absolute;
     width: 100%;
@@ -725,12 +713,14 @@ section {
     transform: rotateX(26deg) rotateY(-46deg) rotateZ(17deg);
     transform-style: preserve-3d;
 }
+
 .swiper_container {
     width: 800px;
     height: 400px;
     position: relative;
     transform-style: preserve-3d;
 }
+
 .swiper_slide {
     position: absolute;
     width: 100%;
@@ -738,6 +728,7 @@ section {
     transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     transform-style: preserve-3d;
 }
+
 .project_visual_wrapper {
     width: 100%;
     height: 100%;
@@ -748,11 +739,13 @@ section {
     cursor: pointer;
     transform: translateY(-2rem);
 }
+
 .project_visual_image_move {
     width: 100%;
     height: 100%;
     overflow: hidden;
 }
+
 .project_visual_image {
     width: 100%;
     height: 100%;
@@ -761,6 +754,7 @@ section {
     transform: translateY(2rem) scale(1.2);
     transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 .project_highlight {
     position: absolute;
     inset: 0;
@@ -768,12 +762,15 @@ section {
     transition: opacity 0.3s ease;
     pointer-events: none;
 }
+
 .project_visual_wrapper:hover .project_highlight {
     opacity: 1;
 }
+
 .swiper_slide.is_active {
     z-index: 10;
 }
+
 .swiper_slide.is_active .project_visual_image {
     transform: translateY(0) scale(1);
 }
@@ -786,11 +783,13 @@ section {
     transform: translateY(-50%);
     z-index: 100;
 }
+
 .titles_list {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
+
 .project_title_link {
     display: flex;
     align-items: center;
@@ -805,12 +804,48 @@ section {
     transition: 0.25s ease, color 0.25s ease, border-color 0.25s ease,
         transform 0.25s ease;
 }
+
 .project_title_link:hover {
     background: #ffffff15;
 }
+
 .project_title_link.is_active {
     color: #fff;
 }
+
+/* Banner Component */
+.banner_component {
+    position: absolute;
+    /*     bottom: 120px; */
+    top: 120px;
+    right: 100px;
+    text-align: right;
+    z-index: 100;
+    max-width: 400px;
+    pointer-events: none;
+/*     background: red; */
+    /* 드래그 방해 안 되게 */
+}
+
+.banner_heading {
+    font-size: 3rem;
+    font-weight: 900;
+    line-height: 1.1;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.banner_description {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.5;
+    font-weight: 400;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    white-space: pre-line;
+    /* 줄바꿈 허용 */
+}
+
 .titles_dot {
     width: 8px;
     height: 8px;
@@ -820,11 +855,13 @@ section {
 }
 
 @keyframes dot-pulse {
+
     0%,
     100% {
         opacity: 1;
         transform: scale(1);
     }
+
     50% {
         opacity: 0.3;
         transform: scale(1.2);
@@ -850,15 +887,18 @@ section {
     z-index: 100;
     transition: opacity 0.3s ease;
 }
+
 .video_embed {
     width: 100%;
     height: 100%;
 }
+
 .video_embed video {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
+
 .project_link {
     position: absolute;
     bottom: 20px;
@@ -872,6 +912,7 @@ section {
     backdrop-filter: blur(10px);
     transition: 0.5s ease;
 }
+
 .project_link:hover {
     background: #fff;
     color: #000;
@@ -887,6 +928,7 @@ section {
     align-items: center;
     z-index: 200;
 }
+
 .project_links .project_link {
     position: static;
 }
@@ -904,6 +946,7 @@ section {
     gap: 30px;
     z-index: 100;
 }
+
 .slide_counter {
     font-size: 18px;
     font-weight: bold;
@@ -911,10 +954,12 @@ section {
     text-align: center;
     color: #777;
 }
+
 .slide_counter .current {
     color: #fff;
     font-size: 24px;
 }
+
 .slide_arrow {
     color: #fff;
     /*     background: transparent; */
@@ -926,6 +971,7 @@ section {
     cursor: pointer;
     transition: all 0.3s ease;
 }
+
 .slide_arrow:hover {
     background: rgba(8, 8, 8, 0.877);
     border-color: #fff;
@@ -946,9 +992,11 @@ section {
 .con4 .mainTextBox .title i {
     display: block;
 }
+
 .con4 .mainTextBox .title.b {
     text-align: center;
 }
+
 .con4 .mainTextBox .title.c {
     align-self: flex-start;
 }
@@ -967,8 +1015,7 @@ section {
 
 .con4 .listBox .box {
     background: #fff;
-    padding: clamp(2rem, 5vw, 50px) clamp(2rem, 5vw, 80px)
-        clamp(2.5rem, 5vw, 60px);
+    padding: clamp(2rem, 5vw, 50px) clamp(2rem, 5vw, 80px) clamp(2.5rem, 5vw, 60px);
     margin-bottom: 0px;
     color: #121212;
     display: grid;
@@ -978,14 +1025,16 @@ section {
     will-change: transform, filter;
     transform-style: preserve-3d;
 }
+
 /* 각 박스를 위로 조금씩 당겨서 겹치게 */
-.con4 .listBox .box + .box {
+.con4 .listBox .box+.box {
     top: -100px;
 }
 
-.con4 .listBox .box + .box + .box {
+.con4 .listBox .box+.box+.box {
     top: -200px;
 }
+
 .con4 .listBox .box h2 {
     font-size: clamp(2rem, 6vw, 40px);
     font-weight: normal;
@@ -1068,7 +1117,7 @@ section {
     z-index: 3;
 }
 
-.emoji-img-btn:hover + .hover-text {
+.emoji-img-btn:hover+.hover-text {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1.1);
 }
@@ -1094,22 +1143,26 @@ section {
 }
 
 @keyframes brightGlow {
+
     0%,
     100% {
         text-shadow: 0 0 10px rgba(255, 255, 255, 0.6),
             0 0 20px rgba(13, 153, 255, 0.4), 0 0 30px rgba(13, 153, 255, 0.2);
         transform: translateY(0) scale(1);
     }
+
     25% {
         text-shadow: 0 0 15px rgba(255, 255, 255, 0.8),
             0 0 25px rgba(13, 153, 255, 0.6), 0 0 40px rgba(13, 153, 255, 0.3);
         transform: translateY(-2px) scale(1.03);
     }
+
     50% {
         text-shadow: 0 0 20px rgba(255, 255, 255, 1),
             0 0 35px rgba(13, 153, 255, 0.8), 0 0 50px rgba(13, 153, 255, 0.4);
         transform: translateY(-3px) scale(1.05);
     }
+
     75% {
         text-shadow: 0 0 15px rgba(255, 255, 255, 0.8),
             0 0 25px rgba(13, 153, 255, 0.6), 0 0 40px rgba(13, 153, 255, 0.3);
@@ -1118,7 +1171,8 @@ section {
 }
 
 .dock_hint {
-    animation-delay: -1.2s; /* 서로 다른 타이밍으로 반짝 */
+    animation-delay: -1.2s;
+    /* 서로 다른 타이밍으로 반짝 */
 }
 
 /* 휴지통 리셋 */
@@ -1188,7 +1242,7 @@ section {
 .profile_subtitle {
     font-size: 1.2rem;
     color: rgba(255, 255, 255, 0.6);
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     font-family: 'Pretendard', sans-serif;
@@ -1363,6 +1417,7 @@ section {
     .dock_container {
         height: 60px;
     }
+
     .dock_container li {
         width: 45px;
         height: 45px;
@@ -1374,6 +1429,7 @@ section {
     transition: filter 0.6s ease;
     margin: 0px 30px;
 }
+
 .profile img.ico:hover {
     filter: none;
 }
@@ -1425,11 +1481,9 @@ section {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(
-        circle at 50% 50%,
-        rgba(255, 255, 255, 0.03) 0%,
-        transparent 70%
-    );
+    background: radial-gradient(circle at 50% 50%,
+            rgba(255, 255, 255, 0.03) 0%,
+            transparent 70%);
     pointer-events: none;
 }
 
@@ -1571,24 +1625,24 @@ section {
     }
 }
 
-.profile_content > *,
-.contact_container > * {
+.profile_content>*,
+.contact_container>* {
     animation: fadeInUp 0.8s ease backwards;
 }
 
-.profile_content > *:nth-child(1) {
+.profile_content>*:nth-child(1) {
     animation-delay: 0.1s;
 }
 
-.profile_content > *:nth-child(2) {
+.profile_content>*:nth-child(2) {
     animation-delay: 0.2s;
 }
 
-.profile_content > *:nth-child(3) {
+.profile_content>*:nth-child(3) {
     animation-delay: 0.3s;
 }
 
-.profile_content > *:nth-child(4) {
+.profile_content>*:nth-child(4) {
     animation-delay: 0.4s;
 }
 
@@ -1712,19 +1766,22 @@ section {
     background: #fff;
     color: #000;
 }
+
 @media (max-width: 480px) {
     section {
         padding: 2rem 1rem;
     }
 
     .dockcontainer {
-        justify-content: flex-start; /* !important */
+        justify-content: flex-start;
+        /* !important */
         overflow-x: auto;
         padding: 1rem;
     }
 
     .con4 .title {
-        font-size: clamp(4rem, 15vw, 6rem); /*  !important */
+        font-size: clamp(4rem, 15vw, 6rem);
+        /*  !important */
     }
 }
 

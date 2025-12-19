@@ -425,30 +425,42 @@ document.addEventListener('DOMContentLoaded', () => {
       image: 'img/web.png',
       video: 'img/boj.mp4',
       link: 'https://hamsunghee.github.io/Beauty-of-Joseon/',
-      plan: 'https://zrr.kr/d4XwAn'
+      plan: 'https://zrr.kr/d4XwAn',
+      description: '한국 전통 미학과 현대적 UX를 하나의 흐름으로 연결해, 글로벌 사용자를 위한 K-뷰티 브랜드 ‘조선미녀’의 프리미엄 웹 경험을 재정의한 리뉴얼 프로젝트입니다.'
     },
     {
       title: '02 APP Team Projects',
       image: 'img/appmockup.png',
       video: 'img/heai.mp4',
       link: 'https://zrr.kr/Wwyeky',
-      plan: 'https://zrr.kr/Lluggx'
+      plan: 'https://zrr.kr/Lluggx',
+      description: '팀 프로젝트로, 모바일 앱 환경을 고려한 UI/UX 디자인과 프로토타이핑을 진행했습니다.'
     },
     {
-      title: '03 WEB Projects',
-      image: 'img/bud.png',
-      video: 'video/web-single.mp4',
+
+      title: '03 Knotted Projects',
+      image: 'img/k2.png',
+      video: 'img/knotted.mp4',
       link: '#',
-      plan: '#'
+      plan: '#',
+      description: '개인 프로젝트로 진행한 웹 사이트입니다. 반응형 웹 디자인과 인터랙티브한 요소를 구현했습니다.'
     },
     {
-      title: '04 APP Projects',
+      title: '04 Flash fit Projects',
       image: 'img/appmockup2.png',
       video: 'img/p_app.mp4',
       link: 'https://zrr.kr/AKILUv',
-      plan: 'https://zrr.kr/bqAJAq'
-
-    }
+      plan: 'https://zrr.kr/bqAJAq',
+      description: '개인 프로젝트로, 사용자 중심의 앱 인터페이스를 설계하고 디자인했습니다.'
+    },
+    {
+      title: '05 BUD Projects',
+      image: 'img/bud.png',
+      video: 'video/web-single.mp4',
+      link: 'https://zrr.kr/txcUXW',
+      plan: '#',
+      description: '개인 프로젝트로 진행한 웹 사이트입니다. 반응형 웹 디자인과 인터랙티브한 요소를 구현했습니다.'
+    },
   ];
 
   let publishingIndex = 0;
@@ -460,6 +472,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const linkEl = document.getElementById('publishingLink');
   const planEl = document.getElementById('publishingPlan');
   const bannerTitle = document.getElementById('publishingBannerTitle');
+  const descriptionEl = document.getElementById('publishingDescription');
   const currentEl = document.getElementById('publishingCurrent');
   const totalEl = document.getElementById('publishingTotal');
 
@@ -503,7 +516,15 @@ document.addEventListener('DOMContentLoaded', () => {
       slide.classList.remove('is_active');
       titles[index].classList.remove('is_active');
 
-      const offset = index - publishingIndex;
+      let offset = index - publishingIndex;
+      const totalSlides = slides.length;
+
+      // Looping logic: find shortest path
+      if (offset > totalSlides / 2) {
+        offset -= totalSlides;
+      } else if (offset < -totalSlides / 2) {
+        offset += totalSlides;
+      }
       const absOffset = Math.abs(offset);
 
       const z = -absOffset * 150;
@@ -529,6 +550,7 @@ document.addEventListener('DOMContentLoaded', () => {
       linkEl.href = publishingProjects[publishingIndex].link || '#';
       if (planEl) planEl.href = publishingProjects[publishingIndex].plan || publishingProjects[publishingIndex].link || '#';
       bannerTitle.textContent = publishingProjects[publishingIndex].title;
+      if (descriptionEl) descriptionEl.textContent = publishingProjects[publishingIndex].description || '';
       currentEl.textContent = publishingIndex + 1;
       videoComponent.style.opacity = '1';
     }, 300);
