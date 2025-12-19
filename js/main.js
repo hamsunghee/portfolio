@@ -265,7 +265,7 @@ document.addEventListener('DOMContentLoaded', () => {
       //  프로필 아래 힌트 문구 변경
       const emojiHint = document.querySelector('.emoji_hint');
       if (emojiHint) {
-        emojiHint.textContent = '모든 스킬을 흡수 완료!';
+        emojiHint.textContent = '모든 스킬 흡수 완료!';
       }
 
       // 아래 문구 제거
@@ -745,20 +745,20 @@ document.addEventListener('DOMContentLoaded', () => {
   })();
 });
 
-  // dock 전체 기능 초기화
-  initDockSystem();
+// dock 전체 기능 초기화
+initDockSystem();
 
-  // 휴지통 리셋 기능
-  const dockResetBtn = document.querySelector('.reset_btn');
-  if (dockResetBtn) {
-    dockResetBtn.addEventListener('click', resetDockSystem);
-  }
+// 휴지통 리셋 기능
+const dockResetBtn = document.querySelector('.reset_btn');
+if (dockResetBtn) {
+  dockResetBtn.addEventListener('click', resetDockSystem);
+}
 
-  // 포크 클릭 기능 (sun.png + 스킬만 제거)
-  const forkIcon = document.querySelector('.li_bin .ico');
-  if (forkIcon) {
-    forkIcon.addEventListener('click', handleForkClick);
-  };
+// 포크 클릭 기능 (sun.png + 스킬만 제거)
+const forkIcon = document.querySelector('.li_bin .ico');
+if (forkIcon) {
+  forkIcon.addEventListener('click', handleForkClick);
+};
 
 // dock 먹힌 개수 카운터 (전역) - 드래그로 먹은 아이콘 수
 let dockEatenCount = 0;
