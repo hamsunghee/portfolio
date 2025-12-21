@@ -823,7 +823,7 @@ section {
     z-index: 100;
     max-width: 400px;
     pointer-events: none;
-/*     background: red; */
+    /*     background: red; */
     /* 드래그 방해 안 되게 */
 }
 
@@ -937,7 +937,7 @@ section {
 .slide_arrows_component {
     position: absolute;
     bottom: 420px;
-    right: 51%;
+    right: 50%;
     /*     bottom: 50px; */
     /*     left: 50%; */
     transform: translateX(-50%);

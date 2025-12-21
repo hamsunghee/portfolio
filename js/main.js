@@ -426,7 +426,7 @@ document.addEventListener('DOMContentLoaded', () => {
       video: 'img/boj.mp4',
       link: 'https://hamsunghee.github.io/Beauty-of-Joseon/',
       plan: 'https://zrr.kr/d4XwAn',
-      description: '한국 전통 미학과 현대적 UX를 하나의 흐름으로 연결해, 글로벌 사용자를 위한 K-뷰티 브랜드 ‘조선미녀’의 프리미엄 웹 경험을 재정의한 리뉴얼한 팀 프로젝트입니다.'
+      description: '한국 전통 미학과 현대적 UX를 결합해 글로벌 사용자를 위한 K-뷰티 브랜드 경험을 재정의하여 브랜드 경험과 구매 전환율 향상을 목표로 한 UX/UI 리뉴얼 팀 프로젝트 입니다.'
     },
     {
       title: '02 APP Team Projects',
@@ -434,15 +434,15 @@ document.addEventListener('DOMContentLoaded', () => {
       video: 'img/heai.mp4',
       link: 'https://zrr.kr/Wwyeky',
       plan: 'https://zrr.kr/Lluggx',
-      description: '루틴 실패 후에도 다시 시작할 수 있도록 돕는 AI 루틴 파트너 기반 운동,감정 통합 앱입니다. 회복 중심 UX와 상호작용을 통해 사용자의 루틴 지속과 감정 몰입을 강화합니다.'
+      description: '루틴 실패 이후에도 다시 시작할 수 있도록 돕는 AI 루틴 파트너 기반의 운동·감정 통합 앱으로, 회복 중심 UX와 상호작용 설계를 통해 사용자의 루틴 지속성과 감정적 몰입을 강화한 팀 프로젝트입니다.'
     },
     {
 
       title: '03 Knotted Projects',
       image: 'img/k2.png',
       video: 'img/knotted.mp4',
-      link: '#',
-      description: '노티드 리뉴얼 웹 사이트입니다. 기존 노티드의 아이덴티티를 담아 반응형 웹 디자인과 인터랙티브한 요소를 구현했습니다.'
+      link: '#https://hamsunghee.github.io/Knottedstore/',
+      description: '기존 노티드의 브랜드 아이덴티티를 유지하면서 웹 사용성 관점에서 구조를 개선한 리뉴얼한 반응형 레이아웃과 인터랙티브 요소를 구현해 디바이스 환경에 관계없이 몰입감 있는 브랜드 경험을 제공한 프로젝트 입니다.'
     },
     {
       title: '04 Flash fit Projects',
@@ -450,15 +450,15 @@ document.addEventListener('DOMContentLoaded', () => {
       video: 'img/p_app.mp4',
       link: 'https://zrr.kr/AKILUv',
       plan: 'https://zrr.kr/bqAJAq',
-      description: '올인원 패션, 사용자 중심의 앱 인터페이스를 설계하고 디자인했습니다.'
+      description: '쇼핑, 스타일링, 리셀로 분절된 패션 경험을 AI 체형 기반 추천으로 연결해, 사용자의 선택 피로를 줄이고 구매와 순환 거래를 자연스럽게 유도한 통합 패션 플랫폼 입니다.'
     },
     {
       title: '05 BUD Projects',
       image: 'img/bud.png',
       video: 'video/web-single.mp4',
       link: 'https://zrr.kr/txcUXW',
-      plan: '#',
-      description: '개인 프로젝트로 진행한 웹 사이트입니다. 반응형 웹 디자인과 인터랙티브한 요소를 구현했습니다.'
+      /*    plan: '#', */
+      description: '버드와이저 브랜드 감성과 음악·이벤트 콘텐츠를 결합해, 탐색 동선을 최소화하고 체험형 UX로 체류 시간·CTA 클릭률을 개선한 웹 리뉴얼 프로젝트 입니다'
     },
   ];
 
@@ -499,7 +499,13 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
     titleItem.addEventListener('click', (e) => {
       e.preventDefault();
-      goToPublishingSlide(index);
+      if (index === publishingIndex) {
+        if (project.link && project.link !== '#') {
+          window.open(project.link, '_blank');
+        }
+      } else {
+        goToPublishingSlide(index);
+      }
     });
     titlesList.appendChild(titleItem);
   });
