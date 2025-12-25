@@ -265,7 +265,7 @@ document.addEventListener('DOMContentLoaded', () => {
       //  프로필 아래 힌트 문구 변경
       const emojiHint = document.querySelector('.emoji_hint');
       if (emojiHint) {
-        emojiHint.textContent = '모든 스킬을 흡수 완료!';
+        emojiHint.textContent = '모든 스킬 흡수 완료!';
       }
 
       // 아래 문구 제거
@@ -425,30 +425,41 @@ document.addEventListener('DOMContentLoaded', () => {
       image: 'img/web.png',
       video: 'img/boj.mp4',
       link: 'https://hamsunghee.github.io/Beauty-of-Joseon/',
-      plan: 'https://zrr.kr/d4XwAn'
+      plan: 'https://zrr.kr/d4XwAn',
+      description: '한국 전통 미학과 현대적 UX를 결합해 글로벌 사용자를 위한 K-뷰티 브랜드 경험을 재정의하여 브랜드 경험과 구매 전환율 향상을 목표로 한 UX/UI 리뉴얼 팀 프로젝트 입니다.'
     },
     {
       title: '02 APP Team Projects',
       image: 'img/appmockup.png',
       video: 'img/heai.mp4',
       link: 'https://zrr.kr/Wwyeky',
-      plan: 'https://zrr.kr/Lluggx'
+      plan: 'https://zrr.kr/Lluggx',
+      description: '루틴 실패 이후에도 다시 시작할 수 있도록 돕는 AI 루틴 파트너 기반의 운동·감정 통합 앱으로, 회복 중심 UX와 상호작용 설계를 통해 사용자의 루틴 지속성과 감정적 몰입을 강화한 팀 프로젝트입니다.'
     },
     {
-      title: '03 WEB Projects',
-      image: 'img/bud.png',
-      video: 'video/web-single.mp4',
-      link: '#',
-      plan: '#'
+
+      title: '03 Knotted Projects',
+      image: 'img/k2.png',
+      video: 'img/knotted.mp4',
+      link: '#https://hamsunghee.github.io/Knottedstore/',
+      description: '기존 노티드의 브랜드 아이덴티티를 유지하면서 웹 사용성 관점에서 구조를 개선한 리뉴얼한 반응형 레이아웃과 인터랙티브 요소를 구현해 디바이스 환경에 관계없이 몰입감 있는 브랜드 경험을 제공한 프로젝트 입니다.'
     },
     {
-      title: '04 APP Projects',
-      image: 'img/appmockup2.png',
+      title: '04 Flash fit Projects',
+      image: 'img/p_app.png',
       video: 'img/p_app.mp4',
       link: 'https://zrr.kr/AKILUv',
-      plan: 'https://zrr.kr/bqAJAq'
-
-    }
+      plan: 'https://zrr.kr/bqAJAq',
+      description: '쇼핑, 스타일링, 리셀로 분절된 패션 경험을 AI 체형 기반 추천으로 연결해, 사용자의 선택 피로를 줄이고 구매와 순환 거래를 자연스럽게 유도한 통합 패션 플랫폼 입니다.'
+    },
+    {
+      title: '05 BUD Projects',
+      image: 'img/bud.png',
+      video: 'img/bud.mp4',
+      link: 'https://zrr.kr/txcUXW',
+      /*    plan: '#', */
+      description: '버드와이저 브랜드 감성과 음악·이벤트 콘텐츠를 결합해, 탐색 동선을 최소화하고 체험형 UX로 체류 시간·CTA 클릭률을 개선한 웹 리뉴얼 프로젝트 입니다'
+    },
   ];
 
   let publishingIndex = 0;
@@ -460,6 +471,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const linkEl = document.getElementById('publishingLink');
   const planEl = document.getElementById('publishingPlan');
   const bannerTitle = document.getElementById('publishingBannerTitle');
+  const descriptionEl = document.getElementById('publishingDescription');
   const currentEl = document.getElementById('publishingCurrent');
   const totalEl = document.getElementById('publishingTotal');
 
@@ -487,7 +499,13 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
     titleItem.addEventListener('click', (e) => {
       e.preventDefault();
-      goToPublishingSlide(index);
+      if (index === publishingIndex) {
+        if (project.link && project.link !== '#') {
+          window.open(project.link, '_blank');
+        }
+      } else {
+        goToPublishingSlide(index);
+      }
     });
     titlesList.appendChild(titleItem);
   });
@@ -503,7 +521,15 @@ document.addEventListener('DOMContentLoaded', () => {
       slide.classList.remove('is_active');
       titles[index].classList.remove('is_active');
 
-      const offset = index - publishingIndex;
+      let offset = index - publishingIndex;
+      const totalSlides = slides.length;
+
+      // Looping logic: find shortest path
+      if (offset > totalSlides / 2) {
+        offset -= totalSlides;
+      } else if (offset < -totalSlides / 2) {
+        offset += totalSlides;
+      }
       const absOffset = Math.abs(offset);
 
       const z = -absOffset * 150;
@@ -527,8 +553,16 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
       videoEl.src = publishingProjects[publishingIndex].video;
       linkEl.href = publishingProjects[publishingIndex].link || '#';
-      if (planEl) planEl.href = publishingProjects[publishingIndex].plan || publishingProjects[publishingIndex].link || '#';
+      if (planEl) {
+        if (publishingProjects[publishingIndex].plan) {
+          planEl.style.display = '';
+          planEl.href = publishingProjects[publishingIndex].plan;
+        } else {
+          planEl.style.display = 'none';
+        }
+      }
       bannerTitle.textContent = publishingProjects[publishingIndex].title;
+      if (descriptionEl) descriptionEl.textContent = publishingProjects[publishingIndex].description || '';
       currentEl.textContent = publishingIndex + 1;
       videoComponent.style.opacity = '1';
     }, 300);
@@ -745,20 +779,20 @@ document.addEventListener('DOMContentLoaded', () => {
   })();
 });
 
-  // dock 전체 기능 초기화
-  initDockSystem();
+// dock 전체 기능 초기화
+initDockSystem();
 
-  // 휴지통 리셋 기능
-  const dockResetBtn = document.querySelector('.reset_btn');
-  if (dockResetBtn) {
-    dockResetBtn.addEventListener('click', resetDockSystem);
-  }
+// 휴지통 리셋 기능
+const dockResetBtn = document.querySelector('.reset_btn');
+if (dockResetBtn) {
+  dockResetBtn.addEventListener('click', resetDockSystem);
+}
 
-  // 포크 클릭 기능 (sun.png + 스킬만 제거)
-  const forkIcon = document.querySelector('.li_bin .ico');
-  if (forkIcon) {
-    forkIcon.addEventListener('click', handleForkClick);
-  };
+// 포크 클릭 기능 (sun.png + 스킬만 제거)
+const forkIcon = document.querySelector('.li_bin .ico');
+if (forkIcon) {
+  forkIcon.addEventListener('click', handleForkClick);
+};
 
 // dock 먹힌 개수 카운터 (전역) - 드래그로 먹은 아이콘 수
 let dockEatenCount = 0;
