@@ -442,7 +442,7 @@ document.addEventListener('DOMContentLoaded', () => {
       image: 'img/k2.png',
       video: 'img/knotted.mp4',
       link: '#https://hamsunghee.github.io/Knottedstore/',
-      description: '기존 노티드의 브랜드 아이덴티티를 유지하면서 웹 사용성 관점에서 구조를 개선한 리뉴얼한 반응형 레이아웃과 인터랙티브 요소를 구현해 디바이스 환경에 관계없이 몰입감 있는 브랜드 경험을 제공한 프로젝트 입니다.'
+      description: '기존 노티드의 브랜드 아이덴티티를 유지하면서 웹 사용성 관점에서 구조를 개선한 반응형 레이아웃과 인터랙티브 요소를 구현해 디바이스 환경에 관계없이 몰입감 있는 브랜드 경험을 제공한 프로젝트 입니다.'
     },
     {
       title: '04 Flash fit Projects',
@@ -456,7 +456,7 @@ document.addEventListener('DOMContentLoaded', () => {
       title: '05 BUD Projects',
       image: 'img/bud.png',
       video: 'img/bud.mp4',
-      link: 'https://zrr.kr/txcUXW',
+      link: 'https://zrr.kr/hc0WQ4',
       /*    plan: '#', */
       description: '버드와이저 브랜드 감성과 음악·이벤트 콘텐츠를 결합해, 탐색 동선을 최소화하고 체험형 UX로 체류 시간·CTA 클릭률을 개선한 웹 리뉴얼 프로젝트 입니다'
     },
