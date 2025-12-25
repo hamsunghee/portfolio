@@ -457,7 +457,7 @@ document.addEventListener('DOMContentLoaded', () => {
       image: 'img/bud.png',
       video: 'img/bud.mp4',
       link: 'https://zrr.kr/hc0WQ4',
-      /*    plan: '#', */
+      plan: 'https://zrr.kr/OKcPVE',
       description: '버드와이저 브랜드 감성과 음악·이벤트 콘텐츠를 결합해, 탐색 동선을 최소화하고 체험형 UX로 체류 시간·CTA 클릭률을 개선한 웹 리뉴얼 프로젝트 입니다'
     },
   ];
