@@ -433,7 +433,7 @@ document.addEventListener('DOMContentLoaded', () => {
       image: 'img/appmockup.png',
       video: 'img/heai.mp4',
       link: 'https://zrr.kr/Wwyeky',
-      plan: 'https://zrr.kr/Lluggx',
+      plan: 'https://zrr.kr/DhY3WD',
       description: '루틴 실패 이후에도 다시 시작할 수 있도록 돕는 AI 루틴 파트너 기반의 운동·감정 통합 앱으로, 회복 중심 UX와 상호작용 설계를 통해 사용자의 루틴 지속성과 감정적 몰입을 강화한 팀 프로젝트입니다.'
     },
     {
