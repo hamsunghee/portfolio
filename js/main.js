@@ -454,7 +454,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     {
       title: '05 BUD Projects',
-      image: 'img/bud.png',
+      image: 'img/bud2.png',
       video: 'img/bud.mp4',
       link: 'https://zrr.kr/hc0WQ4',
       plan: 'https://zrr.kr/OKcPVE',
