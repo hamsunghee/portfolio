@@ -441,7 +441,7 @@ document.addEventListener('DOMContentLoaded', () => {
       title: '03 Knotted Projects',
       image: 'img/k2.png',
       video: 'img/knotted.mp4',
-      link: '#https://hamsunghee.github.io/Knottedstore/',
+      link: 'https://hamsunghee.github.io/Knottedstore/',
       description: '기존 노티드의 브랜드 아이덴티티를 유지하면서 웹 사용성 관점에서 구조를 개선한 반응형 레이아웃과 인터랙티브 요소를 구현해 디바이스 환경에 관계없이 몰입감 있는 브랜드 경험을 제공한 프로젝트 입니다.'
     },
     {
